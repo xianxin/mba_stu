@@ -50,3 +50,11 @@ function getCookieVal(offset) {
   if (endstr == -1) endstr = document.cookie.length;
   return unescape(document.cookie.substring(offset, endstr));
 }
+
+/* welcome text in header.html (hder_r) */
+function showWelcomeText () {
+  var name = GetCookie("name");
+  var welcome = "未登录考生显示这段文本";
+  if (name) welcome = "欢迎<span>" + getCookie("name") + "</span>, 今天是 : <span>" + new Date().Format('yyyy年MM月dd日') + "</span> | <a href='#'>安全退出</a>"
+  $("hder_r p").html(welcome);
+}
