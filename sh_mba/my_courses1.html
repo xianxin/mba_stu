@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>MBA选课-页切</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/easydialog.css" rel="stylesheet" type="text/css" />
+<script src="js/easydialog.min.js"></script>
+<script src="js/jquery.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript">
+ function show(num){
+ 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
+	for(i=0;i<lis.length;i++){
+		lis[i].className = '';
+		document.getElementById('con'+(i+1)).style.display = 'none';
+	}
+	document.getElementById('tit'+num).className = 'current';
+	document.getElementById('con'+num).style.display = 'block';
+ }
+</script>
+
+</head>
+<body>
+<div class="hder">
+  <div class="hder_top">
+    <div class="hder_l">
+      <a href="#" title="上海交通大学" class="fl" style="margin-right:10px; display:inline;">
+        <img src="images/logo.png" width="303" height="48">
+      </a>
+      <span class="fl">
+        学生系统
+      </span>
+    </div>
+    <div class="hder_r">
+      <p>
+          欢迎 <span>李晓京</span>，今天是：<span>2014年4月12日</span> |
+          <a href="#">安全退出</a>   
+      </p>
+    </div>
+  </div>
+  <div class="hder_nav">
+  	<div class="nav">
+ <table class="f4 nav_table" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="nav_list"><a class="nav_a" href="#">首页</a></div></td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">我的课程</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2"><a href="#" class="nav_a2">培养计划</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">我的课表</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">MBA选课</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">课程/学籍<br />
+申请调整</a></li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">我的事务</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">活动预告</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">常用文档</a></div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">个人中心</a></div>
+    </td>
+  </tr>
+ </table>
+</div>
+<script src="js/public.js" language="javascript" type="text/javascript"></script>
+  </div>
+</div>
+
+<div class="s_main">
+  <div class="s_main_l">
+  	<div class="crumbs">
+      <p>
+        <a href="#" title="">首页</a>&nbsp;>
+        <a href="#" title="">我的课程</a>&nbsp;>
+        <a href="#" title="">MBA选课</a>&nbsp;>
+      </p>
+    </div>
+    <div class="sider">
+      <ul>
+        <li style="border-top:3px solid #dadbdd;"><a href="#" title="">培养计划</a></li>
+        <li><a href="#" title="">我的课程</a></li>
+        <li><a href="#" title="" class="current">MBA选课</a></li>
+        <li><a href="#" title="">课程/学籍申请调整</a></li>
+      </ul>
+    </div>
+    <div class="sml_kb">
+      <ul>
+      	<li><a href="#" title="" id="sml_kb_cv">我的课表</a></li>
+        <li><a href="#" title="">培养计划</a></li>
+        <li><a href="#" title="">MBA选课</a></li>
+        <li><a href="#" title="">社会活动填报</a></li>
+        <li><a href="#" title="">常用文档</a></li>
+        <li><a href="#" title="">通讯录</a></li>
+        <div class="clear"></div>
+      </ul>
+    </div>
+    <div class="sml_down">
+      <a href="#" title="">
+        <img src="images/sider_4.jpg" width="242" height="219">
+      </a>
+    </div>
+  </div>
+  <div class="s_main_r">
+    <div id="yq_xxk">
+        <ul>
+          <li id="tit1" onclick="show(1)" class="current"><div class="xxk1">MBA选课说明</div></li>
+          <li id="tit2" onclick="show(2)"><div class="xxk2">选课点数使用情况</div></li>
+          <li id="tit3" onclick="show(3)"><div class="xxk2">进行选课</div></li>
+          <li id="tit4" onclick="show(4)"><div class="xxk2">选上课程</div></li>
+          <div class="clear"></div>
+        </ul>
+    </div>
+    
+    <div id="con1" class="tem" style="display:block;">
+      <div class="s_marin_r_xksm">
+      	<h2>选课原则：</h2>
+        <p>    学生应参照本专业《教学计划》，以教务处下发的《2003-2004学年第一学期（秋季）选课手册》及《班级课表》为依据，在有关教师的指导下，提出选修课程。</p>
+        <p>     凡《选课手册》中开设的校定、院系定必修课均为学生在修读血液过程中必须修读并取得规定学分的课程，其学分不得以选修课学分代替；限选课必须修满教学计划规定的学分数并且其学分不得以任选课学分代替；任选课须修满教学计划规定的学分数并不得以其替代其他课程的学分。</p>
+        <p> 各年级学生应优先选择本年级课程，在此基础上考虑跨年纪选修问题。</p>
+        <p> 选课时必须遵循必修课优先的原则，首先保证选修必修课，而后限定选修课，再后为任意选修课。</p>
+        <p> 学生每学期选修课程学分总数以30学分为最高限。</p>
+        <p> 全校任选课（素质教育课）原则上不可以跨年级选修，并且每学期最多可以选两门，系统将不定期删除不符合选修规定的学生。</p>
+        <p> 由于下学期文科学生将进驻新校区，所以同学们在选课时应注意区分课程开设所在校区，一定要选择自己所在校区开设的课程，只有标明为两个校区公选课的课程才可以跨校区选修</p>
+        </div>
+        <div class="s_marin_r_xksm">
+      	<h2>选课方法：</h2>
+        <p>    学生应参照本专业《教学计划》，以教务处下发的《2003-2004学年第一学期（秋季）选课手册》及《班级课表》为依据，在有关教师的指导下，提出选修课程。</p>
+        <p>     凡《选课手册》中开设的校定、院系定必修课均为学生在修读血液过程中必须修读并取得规定学分的课程，其学分不得以选修课学分代替；限选课必须修满教学计划规定的学分数并且其学分不得以任选课学分代替；任选课须修满教学计划规定的学分数并不得以其替代其他课程的学分。</p>
+        <p> 各年级学生应优先选择本年级课程，在此基础上考虑跨年纪选修问题。</p>
+        <p> 选课时必须遵循必修课优先的原则，首先保证选修必修课，而后限定选修课，再后为任意选修课。</p>
+        <p> 学生每学期选修课程学分总数以30学分为最高限。</p>
+        <p> 全校任选课（素质教育课）原则上不可以跨年级选修，并且每学期最多可以选两门，系统将不定期删除不符合选修规定的学生。</p>
+        <p> 由于下学期文科学生将进驻新校区，所以同学们在选课时应注意区分课程开设所在校区，一定要选择自己所在校区开设的课程，只有标明为两个校区公选课的课程才可以跨校区选修</p>
+      </div>
+      
+    </div>
+    <div id="con2" class="tem">
+      <div class="s_mr_courses_tab">
+      <table width="738" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="76" height="70"><em class="xkdssy">序号</em></td>
+            <td width="165"><em class="xkdssy">日期时间</em></td>
+            <td width="110"><em class="xkdssy">添加/扣减</em></td>
+            <td width="84"><em class="xkdssy">数量</em></td>
+            <td width="300"><em class="xkdssy">使用原有说明</em></td>
+          </tr>
+          <tr>
+            <td height="60">1</td>
+            <td>2014/04/04 12:00</td>
+            <td>添加</td>
+            <td>150</td>
+            <td>管理员添加</td>
+          </tr>
+          <tr>
+            <td height="60">2</td>
+            <td>2014/04/04 12:00</td>
+            <td>扣减</td>
+            <td>150</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="60">3</td>
+            <td>2014/04/04 12:00</td>
+            <td>扣减</td>
+            <td>100</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="60">4</td>
+            <td>2014/04/04 12:00</td>
+            <td>添加</td>
+            <td>200</td>
+            <td>&nbsp;</td>
+          </tr>
+      </table>
+      </div>
+    </div>
+    <div id="con3" class="tem">
+     <div class="qbds"> 
+      <table width="736" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="60" height="30">&nbsp;</td>
+            <td width="150">全部点数：</td>
+            <td width="12">2500</td>
+            <td width="80"></td>
+            <td width="80">&nbsp;</td>
+            <td width="150">选修课需修学分：</td>
+            <td width="60">2500</td>
+            <td width="114">&nbsp;</td>
+            <td width="30">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="30">&nbsp;</td>
+            <td>全部点数：</td>
+            <td>2500</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>选修课需修学分：</td>
+            <td>2500</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="30">&nbsp;</td>
+            <td>全部点数：</td>
+            <td>2500</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>选修课需修学分：</td>
+            <td>2500</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+      </div>  
+      <div class="s_mr_courses">
+      <h2>选修课程/Elective courses</h2>
+      <div class="s_mr_courses_tab">
+      	<table width="738" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="85" height="110"><i class="qbds_zt">选取/修改<br>Select/Modify</i></td>
+            <td width="120"><i class="qbds_zt">点数/状态<br>投选时间<br>Points/Status<br>
+Submitted time</i></td>
+            <td width="114"><i class="qbds_zt">投选/<br>选上/<br>限选人数<br>Number of Bidders/<br> Winners/<br> Maximum</i></td>
+            <td width="60"><i class="qbds_zt">排名<br>My  Rank</i></td>
+            <td width="60"><i class="qbds_zt">课程名称<br>课程类型<br>Course<br>Name</i></td>
+            <td width="54"><i class="qbds_zt">授课教师<br>Teacher</i></td>
+            <td width="43"><i class="qbds_zt">学分数<br>Credit</i></td>
+            <td width="200"><i class="qbds_zt">上课时间＆地点<br>Time＆Classroo</i>m</td>
+          </tr>
+          <tr>
+            <td height="70"><div class="s_mr_ct_selct"><a href="javascript:void(0)" class="run" id="demoBtn1">选择<br>select</a></div></td>
+            <td>&nbsp;</td>
+            <td>2/0/100</td>
+            <td>&nbsp;</td>
+            <td>商务英语</td>
+            <td><a href="#" title="" class="skjs">李莉</a></td>
+            <td>1</td>
+            <td>Wk01~17(Mon) 15:10~17:00<br>Wk01~17(Mon) 15:10~17:00<br>Wk01~17(Mon) 15:10~17:00</td>
+          </tr>
+          <tr>
+            <td height="70"><div class="s_mr_ct_selct"><a href="javascript:void(0)">选择<br>select</a></div></td>
+            <td>&nbsp;</td>
+            <td>2/0/100</td>
+            <td>&nbsp;</td>
+            <td>哲学哲学<br>哲学</td>
+            <td><a href="#" title="" class="skjs">Macle</a></td>
+            <td>2</td>
+            <td>Wk01~17(Mon) 15:10~17:00<br>Wk01~17(Mon) 15:10~17:00</td>
+          </tr>
+          <tr>
+            <td height="95"><div class="s_mr_ct_selct"><a href="javascript:void(0)" class="run" id="demoBtn2">修改<br>modify</a></div></td>
+            <td>110 ps/ Occupicd<br>2013-12-26   10:42:24</td>
+            <td>2/0/100</td>
+            <td>&nbsp;</td>
+            <td>哲学与人</td>
+            <td>&nbsp;</td>
+            <td>3</td>
+            <td>Wk01~17(Mon) 15:10~17:00</td>
+          </tr>
+        </table>
+		</div>
+      </div>
+    </div>
+    <div id="con4" class="tem">
+      <div class="qbds"> 
+      <table width="736" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="60" height="30">&nbsp;</td>
+            <td width="150">全部点数：</td>
+            <td width="12">2500</td>
+            <td width="80"></td>
+            <td width="80">&nbsp;</td>
+            <td width="150">选修课需修学分：</td>
+            <td width="60">2500</td>
+            <td width="114">&nbsp;</td>
+            <td width="30">&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="30">&nbsp;</td>
+            <td>全部点数：</td>
+            <td>2500</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>选修课需修学分：</td>
+            <td>2500</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td height="30">&nbsp;</td>
+            <td>全部点数：</td>
+            <td>2500</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>选修课需修学分：</td>
+            <td>2500</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table>
+      </div>
+      <div class="s_mr_courses">
+      <h2>选修课程/Elective courses</h2>
+      <div class="s_mr_courses_tab">
+      	<table width="738" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="158" height="106"><i class="qbds_zt">点数/状态<br>投选时间<br>Points/Status</i><br>
+Submitted time</td>
+            <td width="126"><i class="qbds_zt">投选/<br>选上/<br>限选人数<br>Number of Bidders/<br> Winners/<br> Maximum</i></td>
+            <td width="62"><i class="qbds_zt">排名<br>My  Rank</i></td>
+            <td width="68"><i class="qbds_zt">课程名称<br>课程类型<br>Course<br>Name</i></td>
+            <td width="58"><i class="qbds_zt">授课教师<br>Teacher</i></td>
+            <td width="45"><i class="qbds_zt">学分数<br>Credit</i></td>
+            <td width="208"><i class="qbds_zt">上课时间＆地点<br>Time＆Classroom</i></td>
+          </tr>
+          <tr>
+            
+            <td height="70">110 ps/ Occupicd<br>2013-12-26   10:42:24</td>
+            <td>2/0/100</td>
+            <td>23</td>
+            <td>商务英语</td>
+            <td><a href="#" title="" class="skjs">李莉</a></td>
+            <td>1</td>
+            <td>Wk01~17(Mon) 15:10~17:00<br>Wk01~17(Mon) 15:10~17:00<br>Wk01~17(Mon) 15:10~17:00</td>
+          </tr>
+          <tr>
+            <td height="70">110 ps/ Occupicd<br>2013-12-26   10:42:24</td>
+            <td>2/0/100</td>
+            <td>5</td>
+            <td>哲学哲学<br>哲学</td>
+            <td><a href="#" title="" class="skjs">Macle</a></td>
+            <td>2</td>
+            <td>Wk01~17(Mon) 15:10~17:00<br>Wk01~17(Mon) 15:10~17:00</td>
+          </tr>
+          <tr>
+            <td height="98">110 ps/ Occupicd<br>2013-12-26   10:42:24</td>
+            <td>2/0/100</td>
+            <td>66</td>
+            <td>哲学与人</td>
+            <td><a href="#" title="" class="skjs">王世民</a></td>
+            <td>3</td>
+            <td>Wk01~17(Mon) 15:10~17:00</td>
+          </tr>
+        </table>
+
+      </div>
+    </div>
+    </div>
+
+    
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="dialog_pop" id="imgBox" style="display:none;">
+    <div class="ctstab_mar">
+      <table width="326" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="11" height="40">&nbsp;</td>
+        <td width="78" align="right">课程名:</td>
+        <td width="22">&nbsp;</td>
+        <td width="198">哲学与人生</td>
+        <td width="17">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="40">&nbsp;</td>
+        <td align="right">投点数:</td>
+        <td>&nbsp;</td>
+        <td><input type="text" value="" class="ctstab_mar_ipt"></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="60">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>
+        <div class="easyDialog_footer">
+            <a href="#" id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">取消</a>
+        </div> 
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    </div>
+</div>
+<div class="dialog_pop" id="imgBox2" style="display:none;">
+    <div class="ctstab_mar">
+      <table width="326" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="11" height="40">&nbsp;</td>
+        <td width="78" align="right">课程名:</td>
+        <td width="22">&nbsp;</td>
+        <td width="198">哲学与人生</td>
+        <td width="17">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="40">&nbsp;</td>
+        <td align="right">投点数:</td>
+        <td>&nbsp;</td>
+        <td><input type="text" value="200" class="ctstab_mar_ipt2"></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="60">&nbsp;</td>
+        <td colspan="4">
+          <div class="easyDialog_footer dialog_an">
+            <a href="#" id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">返回</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">撤销</a>
+          </div>        
+        </td>
+        </tr>
+    </table>
+    </div>
+</div>
+<script>
+
+var $ = function(){
+	return document.getElementById(arguments[0]);
+};
+
+var btnFn = function( e ){
+	alert( e.target );
+	return false;
+};
+
+$('demoBtn1').onclick = function(){
+	easyDialog.open({
+		container : 'imgBox',
+			yesFn : btnFn,
+			noFn : true,
+		fixed : false
+	});
+};
+$('demoBtn2').onclick = function(){
+	easyDialog.open({		
+		container : 'imgBox2',
+			yesFn : btnFn,
+			noFn : true,
+		fixed : false
+	});
+};
+
+
+
+/*jquery('demoBtn3').onclick = function(){
+	easyDialog.open({
+		container : 'imgBox',
+		autoClose : 9999999,
+		fixed :true,
+		
+	});
+};*/
+</script>
+
+
+
+
+<footer></footer>
+</body>
+</html>

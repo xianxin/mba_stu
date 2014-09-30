@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>交通大学</title>
+<link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.css" />
+<link rel="stylesheet" href="css/jquery.mobile-1.3.2.css" />
+<link rel="stylesheet" href="css/fullcalendar.css" />
+<link rel="stylesheet" media="screen,projection" href="css/ui.totop.css">
+<link rel="stylesheet" href="css/main.css"/>
+</head>
+<body class="emba">
+  <div data-role="page" id="calview">
+  
+    <div data-role="content" id="cald">
+      <!--<div class="toolbar clearfix">
+        <div data-role="controlgroup" data-type="horizontal" class="calendarDisplay">
+         <label data-type="teach">
+			教学安排			
+				<select name="slider2" id="mobile-switch" data-role="slider">
+				  <option value="off">隐藏</option>
+				  <option value="on" selected="">显示</option>
+				</select>			  
+          </label>
+          <label data-type="act">
+			活动安排
+				<select name="slider2" id="mobile-switch" data-role="slider">
+				  <option value="off">隐藏</option>
+				  <option value="on" selected="">显示</option>
+				</select>
+          </label>
+        </div>
+        <div class="viewsettings">
+          <div data-role="controlgroup" data-type="horizontal" class="view-switch">
+          
+					<select id="searchId" class="search-type" name="searchType" id="searchId">
+						<option value="1">日历视图</option>
+						<option value="2">列表视图</option>                
+					</select>
+
+				
+          </div>
+          <div data-role="controlgroup" data-type="horizontal">
+            <a href="#webcall://"  data-role="button" data-icon="forward" data-iconpos="left">导出日历</a>
+			 <a href="#dialogmsg"  data-rel="dialog" data-role="button" data-theme="b">手机日历同步</a>
+          </div>
+        </div>
+      </div>-->
+      <div class="cal-actions">
+        <div class="left-button cal-control">
+          <a href="#" id="teachCalPrev" class="prev" data-role="button" data-icon="arrow-l" data-iconpos="left"  data-inline="true" data-theme="c"></a>
+        </div>
+        <div class="right-button cal-control">
+          <a href="#" id="teachCalNext" class="next" data-role="button" data-icon="arrow-r" data-iconpos="right"  data-inline="true"></a>
+        </div>
+        <div id="cal-teach"></div>
+      </div>
+    </div>
+    <div class="action-section"></div>
+  </div>
+  <div data-role="page" id="listview">
+    
+    <div data-role="content" id="cald">
+       <div class="clearfix toolbar">
+        <div data-role="controlgroup" data-type="horizontal" class="calendarDisplay">
+          <label data-type="teach">
+			教学安排			
+				<select name="slider2" id="mobile-switch" data-role="slider">
+				  <option value="off">隐藏</option>
+				  <option value="on" selected="">显示</option>
+				</select>			  
+          </label>
+          <label data-type="act">
+			活动安排
+				<select name="slider2" id="mobile-switch" data-role="slider">
+				  <option value="off">隐藏</option>
+				  <option value="on" selected="">显示</option>
+				</select>
+          </label>
+        </div>
+        <div class="viewsettings">
+          <div data-role="controlgroup" data-type="horizontal" class="view-switch">
+            <select id="searchId" class="search-type" name="searchType" id="searchId">
+				<option value="1">日历视图</option>
+				<option value="2">列表视图</option>                
+			</select>
+          </div>
+          <div data-role="controlgroup" data-type="horizontal">
+            <a href="webcall://"  data-role="button" data-icon="forward" data-iconpos="left">导出日历</a>
+          </div>
+        </div>
+      </div>
+      <div id="cal-act">
+      <form>
+        <fieldset id="monthList">
+          <!-- <input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+          <label for="radio-choice-h-2a">1月</label> -->
+        </fieldset></form>
+        <ul data-role="listview" data-inset="true" data-divider-theme="d" data-count-theme="c" id="eventList">
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div data-role="page" id="frame">
+    <div data-role="header" data-id="foo1" data-position="fixed">
+    <a href="#" data-rel="back" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="a" data-inline="true"></a>
+      <div data-role="navbar" data-iconpos="left">
+        <div style="line-height:40px;text-align:center">活动</div>
+      </div>
+      <!-- /navbar -->
+    </div>
+    <div data-role="content" class="content" id="extPage">
+
+    </div>
+  </div>
+  
+   
+<div data-role="page" id="dialogmsg">
+  <div data-role="header">
+		<a href="#"  data-rel="back" data-role="button" data-icon="back"  data-inline="true">返回</a>
+		<h3>手机日历同步</h3>
+  </div>
+  <div data-role="content">
+		<img src="css/images/twoCode.jpg" />
+		<p>
+			如果是iPhone手机，请直接扫描以下二维码同步教学日历到手机。如果是android手机，请点击<a href="" target="_blank">这里</a>查看详细操作步骤。	
+		</p>	
+  </div>
+</div>
+
+  
+  
+  <script src="js/libs/jquery-1.10.2.min.js"></script>
+  <script src="js/libs/jquery.mobile-1.3.2.min.js"></script>
+  <script src="js/libs/fullcalendar.js"></script>
+  <script src="js/libs/underscore-min.js"></script>
+  <script src="js/libs/jquery.ui.totop.js"></script>
+  <script src="js/home/home.js"></script>
+  <script src="js/find/find.js"></script>
+  
+</body>
+</html>
