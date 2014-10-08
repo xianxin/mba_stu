@@ -360,11 +360,11 @@ a.fc-event span.fc-event-time{
 }
 
 .left-button{
-  left : 25%;
+  left : 38%;
 }
 
 .right-button{
-  right : 25%;
+  right : 38%;
 }
 
 .left-button .ui-btn-inner,
@@ -604,7 +604,7 @@ li.ui-block-a a.ui-btn-active,li.ui-block-b a.ui-btn-active,li.ui-block-c a.ui-b
 .fc-header-title h2{		/*日历头部按钮——2103 09*/
 	font-family:"微软雅黑";
 	text-shadow:none;
-	font-size:25px;
+	font-size:30px;
 	font-weight:lighter;
 	color:#fa7f00;
 	}
@@ -650,14 +650,14 @@ a.fc-event{box-shadow:none;background:none}
 	background:url(images/zy.jpg) no-repeat -15px top;
     margin: 0;
 	}
-  .right-button a.ui-btn-hover-c{background-position: -188px -102px ;}
+
 /*左右箭头背景*/
 .left-button .ui-btn-inner,.right-button .ui-btn-inner{
 	display:none;
 	}
 /*日历线条*/
 .fc-border-separate th, .fc-view-month .fc-border-separate td {
-	border-width: 1px 0 0 1px;
+	border-width: 1px 0 0 1px; width:144px; height:148px;
 	
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #FFF), to( #FFF)); /* Saf4+, Chrome */
     background-image: -webkit-linear-gradient( #FFF, #FFF/*{c-bdown-background-end}*/); /* Chrome 10+, Saf5.1+ */
@@ -1389,7 +1389,7 @@ p{padding: 0;margin: 0;}
 .content-primary div.ui-btn-inner .ui-icon{background-color: #db3d3d;border-radius: 18px;}
 .ui-btn{background: none;}
 /*************日历,源样式在fullcalendar.cs**********/
-.fc-grid .fc-day-number{color:#fa7f00;}
+.fc-grid .fc-day-number{color:#fa7f00; font-size:18px; font-family:Arial, Helvetica, sans-serif;}
 /*.fc-border-separate th:nth-child(1)  .fc-day-number, .fc-border-separate td:nth-child(1)  .fc-day-number{float:left;} */
 .fc-grid .fc-day-number{text-shadow:none;}
 .ui-controlgroup-horizontal .ui-checkbox .ui-btn-inner, .ui-controlgroup-horizontal .ui-radio .ui-btn-inner{padding: 0.3em 20px 0em 30px;}

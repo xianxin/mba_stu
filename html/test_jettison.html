@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script src="http://www.w3school.com.cn/jquery/jquery-1.11.1.min.js"></script>
+		<title>测试Jettison</title>
+		<style>
+			p{margin: 7px;}
+		</style>
+	</head>
+	
+	<body>
+		<p style="margin: 10px 20px;">正在测试 Jettison ... </p>
+		
+		<p id="int"></p>
+		<p id="double"></p>
+		<p id="plain"></p>
+		<p id="quote"></p>
+		<p id="date"></p>
+		<p id="date_time"></p>
+		
+		<script>
+			$.ajax({
+				type:"get",
+				url:"http://202.120.24.169:9060/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.ISCRIPT_TEST_JETTISON",
+				async:true,
+				success:function(data){
+					/* no access allow origin */
+				},
+				error:function(err){
+					data = {"number_int_string":"123","number_double_string":"456","string_plain":"This is a test string with Chinese word - 我是中国人。","string_quoted":"This is a test string with quotes '中国好声音-单引号' ,\"美国好声音-双引号\"","date_now":"2014-09-30","datetime_now":"2014-09-30 14:15:44","number_double":456,"number_int":123};
+					
+					var i = parseInt(data['number_int']);
+					var d = parseFloat(data['number_double']);
+					var p = data['string_plain'];
+					var q = data['string_quoted'];
+					var t = new Date(data['date_now'].replace('-','/'));;
+					var dt = new Date(data['datetime_now'].replace('-','/'));
+					
+					document.getElementById("int").innerHTML = i;
+					document.getElementById("double").innerHTML = d;
+					document.getElementById("plain").innerHTML = p;
+					document.getElementById("quote").innerHTML = q;
+					document.getElementById("date").innerHTML = t;
+					document.getElementById("date_time").innerHTML = dt;
+					
+				}
+			});
+		</script>
+	</body>
+</html>

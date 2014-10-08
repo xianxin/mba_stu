@@ -12,49 +12,38 @@ a:hover{color:#F03E34; text-decoration:none;}
 img{ border:0px;}
 
 .header{ width:100%; height:125px; padding-top:65px;}
-.login_head{ width:630px; height:72px; margin:0 auto; overflow:hidden;}
-.login_head a{float:left;}
-.login_head span{ line-height:72px; font-size:40px; color:#fb9327; overflow:hidden; display:block; float:left; margin-left:20px; display:inline;}
+.login_head{ width:621px; height:72px; margin:0 auto; overflow:hidden;}
+.cont{ width:1000px; height:667px; font-size:1px; border-top:4px solid #ea6c24; border-bottom:2px solid #ea6c24; margin:0 auto; position:relative;}
 
-.cont{ width:1600px; height:588px; font-size:1px; border-top:4px solid #ea6c24; border-bottom:2px solid #ea6c24; margin:0 auto; position:relative;}
-
-.cont .cont_bg{ width:1600px; font-size:1px; border:0; margin:0 auto; padding:0;}
+.cont .cont_bg{ width:1000px; font-size:1px; border:0; margin:0 auto; padding:0;}
 .cont_bg img{ border:0; font-size:1px; margin:0; padding:0; display:block;}
 
-.cont_dlk{ width:443px; height:370px; background:#FFF; border-top:3px solid #ea6c24; position:absolute; left:576px; top:110px;}
-.cont_tab{ width:300px; margin:30px auto 0;}
+.cont_dlk{ width:443px; height:370px; background:#FFF; border-top:3px solid #ea6c24; position:absolute; left:282px; top:110px;}
+.cont_tab{ width:300px; margin:20px auto 0;}
 .cont_tab .cont_tab_ipt1{ width:240px; border:1px solid #cccccc; background:url(../images/login_3.jpg) no-repeat 9px center; padding:16px 10px 16px 50px; font-size:14px; color:#cccccc;}
 .cont_tab .cont_tab_ipt2{ width:240px; border:1px solid #cccccc; background:url(../images/login_2.jpg) no-repeat 9px center; padding:16px 10px 16px 50px; font-size:14px; color:#cccccc;}
 .cont_tab .cont_tab_yzm{ width:140px; border:1px solid #cccccc; padding:16px 10px 16px 5px; font-size:14px; color:#cccccc; float:left; display:inline;}
 .cont_tab_yzmtp{ margin-left:30px; padding-top:6px;  float:left; display:inline;}
-
 .cont_tab_dl{ width:302px; height:47px; background:#fa7f00; border-top:1px solid #fcb266; line-height:47px; font-size:18px; text-align:center;  font-family:"微软雅黑";}
 .cont_tab_dl a{ color:#FFF; display:block; letter-spacing:1em;}
 .cont_tab_dl a:hover{ color:#F03E34;}
-.cont_tab_ts{ color:#000; font-size:14px; color:#5a5a5a;}
+.cont_tab_ts{ color:#000; font-size:14px; color:#fa7f00;}
 .wjmm_box{ width:300px; float:left;}
 .wjmm{ color:#5a5a5a; display:block;  font-size:14px; border-bottom:1px solid #5a5a5a; display:block;}
-
-
 .footer{ width:100%; height:214px; background:#eeeeee;}
-
 .ft_box{ width:1000px; margin:0 auto;}
-.ft_box_l{ width:730px; padding-top:20px; float:left;}
+.ft_box_l{ width:1000px; padding-top:20px; float:left;}
 .ft_box_l h2{ height:40px; line-height:40px; font-size:12px; font-family:"微软雅黑"; font-weight:700;}
 
 .bzzx{ display:block; margin-bottom:30px;}
 .bzzx a{ color:#5a5a5a; font-size:12px; font-family:"微软雅黑";}
 .bzzx .bzzx1{ color:#fa7f00;}
 
-
-
-.ft_list{ width:730px; height:24px; display:block;}
-
+.ft_list{ width:1000px; height:24px; display:block;}
+.ft_list ul{ width:730px; float:left; display:block;}
 .ft_list li{ float:left; background:url(../images/login_6.jpg) no-repeat right center; color:#5a5a5a; font-size:12px; font-family:"微软雅黑"; padding:0 2px; padding:0 8px; }
-
 .bqsy{color:#5a5a5a; font-size:12px; font-family:"微软雅黑";}
-
-.ft_box_r{ width:270px; float:left; padding-top:114px;}
+.ft_box_r{ width:270px; float:right; padding-top:6px;}
 
 
 

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>MBA选课</title>
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/easydialog.css" rel="stylesheet" type="text/css" />
+		<script src="js/easydialog.min.js"></script>
+		<script src="js/jquery.js" language="javascript" type="text/javascript"></script>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script
+		<script src="js/public.js" language="javascript" type="text/javascript"></script>
+		<script type="text/javascript">
+			function show(num){
+			 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
+				for(i=0;i<lis.length;i++){
+					lis[i].className = '';
+					document.getElementById('con'+(i+1)).style.display = 'none';
+				}
+				document.getElementById('tit'+num).className = 'current';
+				document.getElementById('con'+num).style.display = 'block';
+			 }
+		</script>
+	</head>
+
+	<body>
+		<div class="hder"></div>
+		<script type="text/javascript">
+			$(".hder").load("./header.html",function(){ showWelcomeText(); });
+		</script>
+		<div class="s_main">
+			<div class="s_main_l"></div>
+			<script type="text/javascript">
+				$(".s_main_l").load("./leftMenu.html", function(){ /* setCurrent(); */ });
+			</script>
+			<div class="s_main_r">
+				<div id="yq_xxk">
+					<ul>
+						<li id="tit1" onclick="show(1)" class="current">
+							<div class="xxk1">MBA选课说明</div>
+						</li>
+						<li id="tit2" onclick="show(2)">
+							<div class="xxk2">选课点数使用情况</div>
+						</li>
+						<li id="tit3" onclick="show(3)">
+							<div class="xxk2">进行选课</div>
+						</li>
+						<li id="tit4" onclick="show(4)">
+							<div class="xxk2">选上课程</div>
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+
+				<div id="con1" class="tem" style="display:block;"></div>
+				<script type="text/javascript">
+					$("#con1").load("./summary.txt");
+				</script>
+
+				<div id="con2" class="tem">
+					<div class="s_mr_courses_tab">
+						<table width="738" border="0" cellpadding="0" cellspacing="0" id="point_status_table">
+							<tr>
+								<td width="76" height="70"><em class="xkdssy">序号</em></td>
+								<td width="165"><em class="xkdssy">日期时间</em></td>
+								<td width="110"><em class="xkdssy">添加/扣减</em></td>
+								<td width="84"><em class="xkdssy">数量</em></td>
+								<td width="300"><em class="xkdssy">使用原有说明</em></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<script type="text/javascript">
+					// let's wait 3 sec
+					// test whether 'all-load' will delay the show up
+					// the answer is yes !!
+					var start = new Date().getTime();
+					while(true){
+						if (new Date().getTime() - start > 3000) break;
+					}
+					function pointUpdatedTime(dt){
+						if (!dt) return "";
+						var d = new Date(dt);
+						if (!d) return "";
+						return d.Format("yyyy/MM/dd HH:mm") || "";
+					}
+					$.ajax({
+						type:"get",
+						url:"./pointStatus.txt",
+						async:true,
+						success:function(data){
+							eval("data="+data);
+							var tr_html;
+							for (var i = 0; i < data.length; i ++){
+								tr_html = "<tr><td>" + data[i]["No"] + "</td><td>" + pointUpdatedTime(data[i]["DateTime"]) + "</td><td>" + data[i]["Operation"] + "</td><td>" + data[i]["Count"] + "</td><td>" + data[i]["Description"] + "</td></tr>";
+							
+								$("#point_status_table tr:last").after(tr_html);
+							}
+						},
+						error:function(err){
+							alert('抱歉, 无法获取点数使用情况 ...');
+						}
+					});
+				</script>
+				<div id="con3" class="tem">
+					<div class="qbds">
+						<table width="736" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="60" height="30">&nbsp;</td>
+								<td width="150">全部点数：</td>
+								<td width="12">2500</td>
+								<td width="80"></td>
+								<td width="80">&nbsp;</td>
+								<td width="150">选修课需修学分：</td>
+								<td width="60">2500</td>
+								<td width="114">&nbsp;</td>
+								<td width="30">&nbsp;</td>
+							</tr>
+							<tr>
+								<td height="30">&nbsp;</td>
+								<td>全部点数：</td>
+								<td>2500</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>选修课需修学分：</td>
+								<td>2500</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td height="30">&nbsp;</td>
+								<td>全部点数：</td>
+								<td>2500</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>选修课需修学分：</td>
+								<td>2500</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+					<div class="s_mr_courses">
+						<h2>选修课程/Elective courses</h2>
+						<div class="s_mr_courses_tab">
+							<table width="738" border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td width="85" height="110"><i class="qbds_zt">选取/修改<br>Select/Modify</i>
+									</td>
+									<td width="120"><i class="qbds_zt">点数/状态<br>投选时间<br>Points/Status<br>
+
+Submitted time</i>
+									</td>
+									<td width="114"><i class="qbds_zt">投选/<br>选上/<br>限选人数<br>Number of Bidders/<br> Winners/<br> Maximum</i>
+									</td>
+									<td width="60"><i class="qbds_zt">排名<br>My  Rank</i>
+									</td>
+									<td width="60"><i class="qbds_zt">课程名称<br>课程类型<br>Course<br>Name</i>
+									</td>
+									<td width="54"><i class="qbds_zt">授课教师<br>Teacher</i>
+									</td>
+									<td width="43"><i class="qbds_zt">学分数<br>Credit</i>
+									</td>
+									<td width="200"><i class="qbds_zt">上课时间＆地点<br>Time＆Classroo</i>m</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div id="con4" class="tem">
+					<div class="qbds">
+						<table width="736" border="0" cellpadding="0" cellspacing="0">
+							<tr>
+								<td width="60" height="30">&nbsp;</td>
+								<td width="150">全部点数：</td>
+								<td width="12">2500</td>
+								<td width="80"></td>
+								<td width="80">&nbsp;</td>
+								<td width="150">选修课需修学分：</td>
+								<td width="60">2500</td>
+								<td width="114">&nbsp;</td>
+								<td width="30">&nbsp;</td>
+							</tr>
+							<tr>
+								<td height="30">&nbsp;</td>
+								<td>全部点数：</td>
+								<td>2500</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>选修课需修学分：</td>
+								<td>2500</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr>
+								<td height="30">&nbsp;</td>
+								<td>全部点数：</td>
+								<td>2500</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>选修课需修学分：</td>
+								<td>2500</td>
+								<td>&nbsp;</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+					</div>
+					<div class="s_mr_courses">
+						<h2>选修课程/Elective courses</h2>
+						<div class="s_mr_courses_tab">
+							<table width="738" border="0" cellpadding="0" cellspacing="0">
+								<tr>
+									<td width="158" height="106"><i class="qbds_zt">点数/状态<br>投选时间<br>Points/Status</i>
+										<br>Submitted time</td>
+									<td width="126"><i class="qbds_zt">投选/<br>选上/<br>限选人数<br>Number of Bidders/<br> Winners/<br> Maximum</i>
+									</td>
+									<td width="62"><i class="qbds_zt">排名<br>My  Rank</i>
+									</td>
+									<td width="68"><i class="qbds_zt">课程名称<br>课程类型<br>Course<br>Name</i>
+									</td>
+									<td width="58"><i class="qbds_zt">授课教师<br>Teacher</i>
+									</td>
+									<td width="45"><i class="qbds_zt">学分数<br>Credit</i>
+									</td>
+									<td width="208"><i class="qbds_zt">上课时间＆地点<br>Time＆Classroom</i>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+
+		<div class="dialog_pop" id="imgBox" style="display:none;">
+			<div class="ctstab_mar">
+				<table width="326" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td width="11" height="40">&nbsp;</td>
+						<td width="78" align="right">课程名:</td>
+						<td width="22">&nbsp;</td>
+						<td width="198">哲学与人生</td>
+						<td width="17">&nbsp;</td>
+					</tr>
+					<tr>
+						<td height="40">&nbsp;</td>
+						<td align="right">投点数:</td>
+						<td>&nbsp;</td>
+						<td>
+							<input type="text" value="" class="ctstab_mar_ipt">
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td height="60">&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>&nbsp;</td>
+						<td>
+							<div class="easyDialog_footer">
+								<a href="#" id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
+								<a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">取消</a>
+							</div>
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="dialog_pop" id="imgBox2" style="display:none;">
+			<div class="ctstab_mar">
+				<table width="326" border="0" cellpadding="0" cellspacing="0">
+					<tr>
+						<td width="11" height="40">&nbsp;</td>
+						<td width="78" align="right">课程名:</td>
+						<td width="22">&nbsp;</td>
+						<td width="198">哲学与人生</td>
+						<td width="17">&nbsp;</td>
+					</tr>
+					<tr>
+						<td height="40">&nbsp;</td>
+						<td align="right">投点数:</td>
+						<td>&nbsp;</td>
+						<td>
+							<input type="text" value="200" class="ctstab_mar_ipt2">
+						</td>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<td height="60">&nbsp;</td>
+						<td colspan="4">
+							<div class="easyDialog_footer dialog_an">
+								<a href="#" id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
+								<a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">返回</a>
+								<a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">撤销</a>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<script>
+			var $ = function(){
+				return document.getElementById(arguments[0]);
+			};
+			
+			var btnFn = function( e ){
+				alert( e.target );
+				return false;
+			};
+			
+			$('demoBtn1').onclick = function(){
+				easyDialog.open({
+					container : 'imgBox',
+						yesFn : btnFn,
+						noFn : true,
+					fixed : false
+				});
+			};
+			$('demoBtn2').onclick = function(){
+				easyDialog.open({		
+					container : 'imgBox2',
+						yesFn : btnFn,
+						noFn : true,
+					fixed : false
+				});
+			};
+
+			var tab_loaded = [true, false, false, false];
+		</script>
+
+		<footer></footer>
+	</body>
+
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人中心-通讯录</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.js" language="javascript" type="text/javascript"></script>
+<script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	/*============================
+	@author:flc
+	@time:2014-02-11 18:16:09
+	@qq:3407725
+	============================*/
+	$(".select").each(function(){
+		var s=$(this);
+		var z=parseInt(s.css("z-index"));
+		var dt=$(this).children("dt");
+		var dd=$(this).children("dd");
+		var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};   //展开效果
+		var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};    //关闭效果
+		dt.click(function(){dd.is(":hidden")?_show():_hide();});
+		dd.find("a").click(function(){dt.html($(this).html());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
+		$("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});
+	})
+})
+</script>
+</head>
+<body>
+<div class="hder">
+  <div class="hder_top">
+    <div class="hder_l">
+      <a href="#" title="上海交通大学" class="fl" style="margin-right:10px; display:inline;">
+        <img src="images/logo.png" width="303" height="48">
+      </a>
+      <span class="fl">
+        学生系统
+      </span>
+    </div>
+    <div class="hder_r">
+      <p>
+          欢迎 <span>李晓京</span>，今天是：<span>2014年4月12日</span> |
+          <a href="#">安全退出</a>   
+      </p>
+    </div>
+  </div>
+  <div class="hder_nav">
+  	<div class="nav">
+ <table class="f4 nav_table" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="nav_list"><a class="nav_a" href="#">首页</a></div></td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">我的课程</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">培养计划</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2 nav_carent">我的课表</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">MBA选课</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">课程/学籍申请调整</li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">我的事务</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">活动预告</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">常用文档</a></div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">个人中心</a></div>
+    </td>
+  </tr>
+ </table>
+</div>
+<script src="js/public.js" language="javascript" type="text/javascript"></script>
+  </div>
+</div>
+
+<div class="s_main">
+  <div class="s_main_l">
+  	<div class="crumbs">
+      <p>
+        <a href="#" title="">首页</a>&nbsp;>
+        <a href="#" title="">个人中心</a>&nbsp;>
+        <a href="#" title="">通讯录</a>
+      </p>
+    </div>
+    <div class="sider">
+      <ul>
+        <li style="border-top:3px solid #dadbdd;"><a href="#" title="">个人信息修改</a></li>
+        <li><a href="#" title="" class="current">通讯录</a></li>
+        <li><a href="#" title="">密码修改</a></li>
+      </ul>
+    </div>
+    <div class="sml_kb">
+      <ul>
+      	<li><a href="#" title="">我的课表</a></li>
+        <li><a href="#" title="" id="sml_kb_cv">培养计划</a></li>
+        <li><a href="#" title="">MBA选课</a></li>
+        <li><a href="#" title="">社会活动填报</a></li>
+        <li><a href="#" title="">常用文档</a></li>
+        <li><a href="#" title="">通讯录</a></li>
+        <div class="clear"></div>
+      </ul>
+    </div>
+    <div class="sml_down">
+      <a href="#" title="">
+        <img src="images/sider_4.jpg" width="242" height="219">
+      </a>
+    </div>
+  </div>
+  <div class="s_main_r">
+	<div class="address">
+      <div class="address_tit">
+        <h2>通讯录</h2>
+      </div>
+      <div class="address_seach">
+        <div class="address_seach_top">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="52" height="36" align="center">姓名</td>
+                <td width="130">
+                  <input type="text" name="" value="" class="address_ipt">
+                </td>
+                <td width="52">&nbsp;</td>
+                <td width="82" align="center">公司名称</td>
+                <td>&nbsp;</td>
+                <td width="130">
+                  <input type="text" name="" value="" class="address_ipt">
+                </td>
+                <td width="45">&nbsp;</td>
+                <td width="96" align="right">公司经营范围</td>
+                <td width="16">&nbsp;</td>
+                <td>
+                  <input type="text" name="" value="" class="address_ipt">
+                </td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="52" height="36" align="center">国籍</td>
+                <td width="130">
+                  <input type="text" name="" value="" class="address_ipt">
+                </td>
+                <td width="52">&nbsp;</td>
+                <td width="82" align="center">常驻城市</td>
+                <td>&nbsp;</td>
+                <td width="130">
+                  <input type="text" name="" value="" class="address_ipt">
+                </td>
+                <td width="45">&nbsp;</td>
+                <td width="96" align="right">公司性质</td>
+                <td width="16">&nbsp;</td>
+                <td>
+                  <dl class="select">
+                    <dt>下拉</dt>
+                    <dd>
+                        <ul>
+                            <li><a href="#">12131</a></li>
+                            <li><a href="#">下拉2</a></li>
+                            <li><a href="#">下拉3</a></li>
+                            <li><a href="#">下拉4</a></li>
+                            <li><a href="#">下拉5</a></li>
+                            <li><a href="#">下拉6</a></li>
+                        </ul>
+                    </dd>
+                </dl>
+                </td>
+                <td>&nbsp;</td>
+              </tr>
+              
+            </table>
+
+        </div>
+        <div class="address_seach_ss">          
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="20"></td>
+              <td width="112">
+                <label>
+                <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_0">
+                本班同学</label>
+              </td>
+              <td width="112">
+                <label>
+                <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_1">
+                本年级同学</label>
+              </td>
+              <td width="112">
+                <label>
+                <input type="radio" name="RadioGroup1" value="单选" id="RadioGroup1_2">
+                所有在校生</label>
+              </td>
+              <td width="310">&nbsp;</td>
+              <td><a href="#" title="" class="address_seach_ss_an" >搜索</a></td>
+            </tr>
+          </table>
+        </div>
+        <div class="address_seach_biaog">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td height="20">姓名</td>
+              <td>班级</td>
+              <td>手机</td>
+              <td>电子邮箱</td>
+              <td>国籍</td>
+              <td>常驻城市</td>
+              <td>公司名称</td>
+              <td>部门</td>
+              <td>职务</td>
+              <td>公司性质</td>
+              <td>公司经营范围</td>
+            </tr>
+            <tr>
+              <td height="50">欧阳立东</td>
+              <td>M123</td>
+              <td>18622222222</td>
+              <td>1111111111<br>
+              @qq.com</td>
+              <td>意大利</td>
+              <td>兰州</td>
+              <td>兰州蓝翔科技<br>
+              发展有限公司</td>
+              <td>事业部</td>
+              <td>经理</td>
+              <td>文化产业</td>
+              <td>文化产业文化<br>
+                产业文化产业<br>
+              文化产业</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr><tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="20">&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            </tr>
+          </table>
+
+        </div>
+      </div>
+      <div class="notic_fanye">
+        <span class="disabled">上一页</span>
+        <a href="#?page=1" class="current">1</a>
+        <a href="#?page=2">2</a>
+        <a href="#?page=3">3</a>...
+        <span class="disabled">下一页</span>
+        <span class="disabled">末&nbsp;页</span>
+      </div>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="dialog_pop" id="imgBox" style="display:none;">
+    <div class="ctstab_mar">
+      <table width="326" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="11" height="40">&nbsp;</td>
+        <td width="78" align="right">课程名:</td>
+        <td width="22">&nbsp;</td>
+        <td width="198">哲学与人生</td>
+        <td width="17">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="40">&nbsp;</td>
+        <td align="right">投点数:</td>
+        <td>&nbsp;</td>
+        <td><input type="text" value="" class="ctstab_mar_ipt"></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="60">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>
+        <div class="easyDialog_footer">
+            <a href="#" id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">取消</a>
+        </div> 
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    </div>
+</div>
+<div class="dialog_pop" id="imgBox2" style="display:none;">
+    <div class="ctstab_mar">
+      <table width="326" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="11" height="40">&nbsp;</td>
+        <td width="78" align="right">课程名:</td>
+        <td width="22">&nbsp;</td>
+        <td width="198">哲学与人生</td>
+        <td width="17">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="40">&nbsp;</td>
+        <td align="right">投点数:</td>
+        <td>&nbsp;</td>
+        <td><input type="text" value="200" class="ctstab_mar_ipt2"></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="60">&nbsp;</td>
+        <td colspan="4">
+          <div class="easyDialog_footer dialog_an">
+            <a href="#" id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">返回</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">撤销</a>
+          </div>        
+        </td>
+        </tr>
+    </table>
+    </div>
+</div>
+
+<div class="footer">
+	<div class="ft_box">
+      <div class="ft_box_l">
+        <h2>帮助中心:</h2>
+        <p class="bzzx"><a href="#" title="" class="bzzx1">可以注册多个账号么？</a>/ <a href="#" title="">填写信息需要使用中文还是英文？ </a>/ <a href="#" title="">密码忘记后如何找回？ </a>/ <a href="#" title="">系统显示乱码或出错怎么办？</a></p>
+        <div class="ft_list">
+          <ul>
+            <li style="margin-left:-8px;"><a href="#" title="">关羽安泰</a></li>
+            <li><a href="#" title="">网站地图</a></li>
+            <li><a href="#" title="">友情链接</a></li>
+            <li><a href="#" title="">帮助中心</a></li>
+            <li style="background:none;"><a href="#" title="">联系我们</a></li>
+          </ul>
+          <a href="#" title="" class="ft_box_r">
+            <img src="images/login_5.jpg" width="238" height="50">
+          </a>
+        </div>
+        <p class="bqsy">Copyright 2011-2014 © 上海交通大学安泰经济与管理学院</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+</div>
+</body>
+</html>

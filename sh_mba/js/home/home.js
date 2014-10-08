@@ -168,9 +168,9 @@ $(document).on('ready', function() {
       } else {
         $('#cal-teach').empty();
         initCal('#cal-teach', {
-          month : 'yyyy MMMM（教学日历）', // September 2009
-          week : "MMM d{ '&#8212;'[ MMM] d}（教学日历）", // Sep 7 - 13 2009
-          day : 'yyyy, MMM d, dddd（教学日历）'
+          month : 'MMMM', // September 2009
+          week : "MMM d{ '&#8212;'[ MMM] d}", // Sep 7 - 13 2009
+          day : 'MMM d, dddd'
         });
       }
     });

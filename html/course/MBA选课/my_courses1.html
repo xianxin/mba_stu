@@ -47,17 +47,18 @@
     <td>
     <div class="nav_list"><a class="nav_a" href="#">我的课程</a>
      <ul class="nav_ul2">
-      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">培养计划</a></li>
-      <li class="nav_li2"><a href="#" class="nav_a2 nav_carent">我的课表</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">培养计划</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">我的课表</a></li>
       <li class="nav_li2"><a href="#" class="nav_a2">MBA选课</a></li>
-      <li class="nav_li2"><a href="#" class="nav_a2">课程/学籍申请调整</li>
+      <li class="nav_li2"><a href="#" class="nav_a2">课程/学籍<br />
+申请调整</a></li>
      </ul>
     </div>
     </td>
     <td>
     <div class="nav_list"><a class="nav_a" href="#">我的事务</a>
      <ul class="nav_ul2">
-      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
       <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
       <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
      </ul>
@@ -66,7 +67,7 @@
     <td>
     <div class="nav_list"><a class="nav_a" href="#">活动预告</a>
      <ul class="nav_ul2">
-      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
       <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
       <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
      </ul>
@@ -91,7 +92,7 @@
       <p>
         <a href="#" title="">首页</a>&nbsp;>
         <a href="#" title="">我的课程</a>&nbsp;>
-        <a href="#" title="">MBA选课</a>
+        <a href="#" title="">MBA选课</a>&nbsp;>
       </p>
     </div>
     <div class="sider">
@@ -433,32 +434,9 @@ Submitted time</td>
     </table>
     </div>
 </div>
-
-<div class="footer">
-	<div class="ft_box">
-      <div class="ft_box_l">
-        <h2>帮助中心:</h2>
-        <p class="bzzx"><a href="#" title="" class="bzzx1">可以注册多个账号么？</a>/ <a href="#" title="">填写信息需要使用中文还是英文？ </a>/ <a href="#" title="">密码忘记后如何找回？ </a>/ <a href="#" title="">系统显示乱码或出错怎么办？</a></p>
-        <div class="ft_list">
-          <ul>
-            <li style="margin-left:-8px;"><a href="#" title="">关羽安泰</a></li>
-            <li><a href="#" title="">网站地图</a></li>
-            <li><a href="#" title="">友情链接</a></li>
-            <li><a href="#" title="">帮助中心</a></li>
-            <li style="background:none;"><a href="#" title="">联系我们</a></li>
-          </ul>
-          <a href="#" title="" class="ft_box_r">
-            <img src="images/login_5.jpg" width="238" height="50">
-          </a>
-        </div>
-        <p class="bqsy">Copyright 2011-2014 © 上海交通大学安泰经济与管理学院</p>
-      </div>
-      <div class="clear"></div>
-    </div>
-</div>
 <script>
 
-var jquery = function(){
+var $ = function(){
 	return document.getElementById(arguments[0]);
 };
 
@@ -467,7 +445,7 @@ var btnFn = function( e ){
 	return false;
 };
 
-jquery('demoBtn1').onclick = function(){
+$('demoBtn1').onclick = function(){
 	easyDialog.open({
 		container : 'imgBox',
 			yesFn : btnFn,
@@ -475,7 +453,7 @@ jquery('demoBtn1').onclick = function(){
 		fixed : false
 	});
 };
-jquery('demoBtn2').onclick = function(){
+$('demoBtn2').onclick = function(){
 	easyDialog.open({		
 		container : 'imgBox2',
 			yesFn : btnFn,
@@ -495,5 +473,10 @@ jquery('demoBtn2').onclick = function(){
 	});
 };*/
 </script>
+
+
+
+
+<footer></footer>
 </body>
 </html>

@@ -1,0 +1,1 @@
+1. TEST : MBA相关功能 - MBA教务管理 - MBA选课管理 - 选课结果 [TZ_XK_JIEG_VW 以开课号和选课方案 可以知道选课点数和是否选上] TZ_XX_C_S_TBL(学生选课结果信息表=>选课点数和选课状态) TZ_STU_EXTD_TBL(学生基本信息扩展表=>学号) TZ_STU_DQZT_TBL(学生当前状态表=>上课班级)
