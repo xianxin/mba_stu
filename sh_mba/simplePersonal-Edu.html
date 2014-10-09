@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html ng-app='PersonalInfoApp'>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>个人中心-信息修改</title>
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<script src="js/jquery.js" language="javascript" type="text/javascript"></script>
+		<script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript">
+			function show(num) {
+				var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
+				for (i = 0; i < lis.length; i++) {
+					lis[i].className = '';
+					document.getElementById('con' + (i + 1)).style.display = 'none';
+				}
+				document.getElementById('tit' + num).className = 'current';
+				document.getElementById('con' + num).style.display = 'block';
+			}
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				/*============================
+				@author:flc
+				@time:2014-02-11 18:16:09
+				@qq:3407725
+				============================*/
+				$(".select_two").each(function() {
+					var s = $(this);
+					var z = parseInt(s.css("z-index"));
+					var dt = $(this).children("dt");
+					var dd = $(this).children("dd");
+					var _show = function() {
+						dd.slideDown(200);
+						dt.addClass("cur");
+						s.css("z-index", z + 1);
+					}; //展开效果
+					var _hide = function() {
+						dd.slideUp(200);
+						dt.removeClass("cur");
+						s.css("z-index", z);
+					}; //关闭效果
+					dt.click(function() {
+						dd.is(":hidden") ? _show() : _hide();
+					});
+					dd.find("a").click(function() {
+						dt.html($(this).html());
+						_hide();
+					}); //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
+					$("body").click(function(i) {
+						!$(i.target).parents(".select_two").first().is(s) ? _hide() : "";
+					});
+				})
+			})
+		</script>
+		<script type="text/javascript">
+			$(function() {
+				/*============================
+				@author:flc
+				@time:2014-02-11 18:16:09
+				@qq:3407725
+				============================*/
+				$(".select_three").each(function() {
+					var s = $(this);
+					var z = parseInt(s.css("z-index"));
+					var dt = $(this).children("dt");
+					var dd = $(this).children("dd");
+					var _show = function() {
+						dd.slideDown(200);
+						dt.addClass("cur");
+						s.css("z-index", z + 1);
+					}; //展开效果
+					var _hide = function() {
+						dd.slideUp(200);
+						dt.removeClass("cur");
+						s.css("z-index", z);
+					}; //关闭效果
+					dt.click(function() {
+						dd.is(":hidden") ? _show() : _hide();
+					});
+					dd.find("a").click(function() {
+						dt.html($(this).html());
+						_hide();
+					}); //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
+					$("body").click(function(i) {
+						!$(i.target).parents(".select_three").first().is(s) ? _hide() : "";
+					});
+				})
+			})
+		</script>
+	</head>
+
+	<body>
+		<div class="hder">
+			<div class="hder_top">
+				<div class="hder_l">
+					<a href title="上海交通大学" class="fl" style="margin-right:10px; display:inline;">
+						<img src="images/logo.png" width="303" height="48">
+					</a>
+					<span class="fl">学生系统</span>
+				</div>
+				<div class="hder_r">
+					<p>
+						欢迎 <span>李晓京</span>，今天是：<span>2014年4月12日</span> |
+						<a href>安全退出</a> 
+					</p>
+				</div>
+			</div>
+			<div class="hder_nav">
+				<script src="js/public.js" language="javascript" type="text/javascript"></script>
+			</div>
+		</div>
+
+		<div class="s_main">
+			<div class="s_main_l">
+				<div class="crumbs">
+					<p>
+						<a href title="">首页</a>&nbsp;>
+						<a href title="">个人中心</a>&nbsp;>
+						<a href title="">个人信息修改</a>
+					</p>
+				</div>
+				<div class="sider">
+					<ul>
+						<li style="border-top:3px solid #dadbdd;"><a href title="" class="current">个人信息修改</a>
+						</li>
+						<li><a href title="">通讯录</a>
+						</li>
+						<li><a href title="">密码修改</a>
+						</li>
+					</ul>
+				</div>
+				<div class="sml_kb">
+					<ul>
+						<li><a href title="">我的课表</a>
+						</li>
+						<li><a href title="" id="sml_kb_cv">培养计划</a>
+						</li>
+						<li><a href title="">MBA选课</a>
+						</li>
+						<li><a href title="">社会活动填报</a>
+						</li>
+						<li><a href title="">常用文档</a>
+						</li>
+						<li><a href title="">通讯录</a>
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+				<div class="sml_down">
+					<a href title="">
+						<img src="images/sider_4.jpg" width="242" height="219">
+					</a>
+				</div>
+			</div>
+			<div class="s_main_r" ng-controller='PersonalInfoController'>
+				<div class="personal">
+					<h2>个人信息修改</h2>
+					<div class="personal_tit">
+						<div class="personal_tit_left">
+							<img src="images/personal_1.jpg" width="147" height="181">	<span><img src="images/personal_2.png" width="19" height="21"></span>
+						</div>
+						<div class="personal_tit_right">
+							<table width="556" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="36">姓名：<span>王立凯</span>
+									</td>
+								</tr>
+								<tr>
+									<td height="36">班级：<span>15-12-6</span>
+									</td>
+								</tr>
+								<tr>
+									<td height="36">学号：<span>2014-52452636</span>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+				<div id="yq_xxk">
+					<ul>
+						<li id="tit1" onclick="show(1)" class="current">
+							<div class="xxk1">基本信息</div>
+						</li>
+						<li id="tit2" onclick="show(2)">
+							<div class="xxk2">联系信息</div>
+						</li>
+						<li id="tit3" onclick="show(3)">
+							<div class="xxk2">教育背景</div>
+						</li>
+						<li id="tit4" onclick="show(4)">
+							<div class="xxk2">工作经历</div>
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+
+				<div id="con1" class="tem" style="display:block;"></div>
+				<div id="con2" class="tem"></div>
+				<div id="con3" class="tem" ng-controller='EducationBackgroundController'>
+					<div class="personal_time">
+						<div class="personal_time_list" ng-repeat='eduBg in eduBgLst'>
+							<span class="personal_time_left">
+								<i>{{eduBg.entryDate}}-{{eduBg.graduationDate}}：</i>
+								<a href title="" name="">{{eduBg.graduationCollege}}</a>|
+								<a href title="" name="">{{eduBg.major}}</a>|
+								<a href title="" name="">{{eduBg.diploma}}</a>|
+								<a href title="" name="">{{eduBg.degree}}</a>
+							</span>
+							<span class="personal_time_right">
+								<a href title="" class="personal_time_right_an" ng-click='_editEduBg($index);'>编辑</a>
+								<a href title="" class="personal_time_right_an" ng-click='_removeEduBg($index);'>删除</a>
+							</span>
+						</div>
+					</div>
+					
+					
+					<table width="736" border="0" cellspacing="0" cellpadding="0" class="personal_list">
+						<tr>
+							<td width="116" height="34" align="right">入学时间</td>
+							<td width="22">&nbsp;</td>
+							<td align="left" width="226">
+								<dl class="select_two">
+									<dt>下拉</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in scpOptions'><a href>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</td>
+							<td width="224">&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="34">毕业时间</td>
+							<td>&nbsp;</td>
+							<td align="left">
+								<dl class="select_two">
+									<dt>下拉</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in scpOptions'><a href>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="34">毕业院校</td>
+							<td>&nbsp;</td>
+							<td align="left">
+								<dl class="select_two">
+									<dt>下拉</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in scpOptions'><a href>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</td>
+							<td>&nbsp;</td>
+							<td>
+								<dl class="select_three">
+									<dt>本年级同学可见</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in scpOptions'><a href>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</td>
+						</tr>
+						<tr>
+							<td align="right" height="34">专业</td>
+							<td>&nbsp;</td>
+							<td align="left">
+								<dl class="select_two">
+									<dt>下拉</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in scpOptions'><a href>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</td>
+							<td>&nbsp;</td>
+							<td>
+								<dl class="select_three">
+									<dt>本年级同学可见</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in scpOptions'><a href>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="34">获得学历</td>
+							<td>&nbsp;</td>
+							<td align="left">
+								<input type="text" name="" ng-model="editEduBg.diploma" class="personal_ipt">
+							</td>
+							<td>&nbsp;</td>
+							<td>
+								<dl class="select_three">
+									<dt>本年级同学可见</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in scpOptions'><a href>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</td>
+						</tr>
+						<tr>
+							<td align="right" height="34">获得学位</td>
+							<td>&nbsp;</td>
+							<td align="left">
+								<input type="text" name="" ng-model="editEduBg.degree" class="personal_ipt">
+							</td>
+							<td>&nbsp;</td>
+							<td>
+								<dl class="select_three">
+									<dt>本年级同学可见</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in scpOptions'><a href='javascript:return false;'>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+							</td>
+						</tr>
+						<tr>
+							<td align="right" height="60">&nbsp;</td>
+							<td>&nbsp;</td>
+							<td align="left">&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="left"><a href title="" class="personal_bc2" ng-show='!editStateNew && dataReady' ng-click='_cancelEduBg()'>取消修改</a></td>
+							<td></td>
+							<td></td>
+							<td align="left">
+								<a href title="" class="personal_bc2" ng-show='editStateNew && dataReady' ng-click='_addEduBg()'>添加</a>
+								<a href title="" class="personal_bc2" ng-show='!editStateNew && dataReady' ng-click='_confirmEduBg()'>确认修改</a>
+							</td>
+							<td align="left"><a href title="" class="personal_bc2" ng-show='dataReady'>保存</a></td>
+						</tr>
+					</table>
+				</div>
+				<div id="con4" class="tem">
+					4
+				</div>
+
+
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+
+		<div class="footer">
+			<div class="ft_box">
+				<div class="ft_box_l">
+					<h2>帮助中心:</h2>
+					<p class="bzzx"><a href title="" class="bzzx1">可以注册多个账号么？</a>/ <a href title="">填写信息需要使用中文还是英文？ </a>/ <a href title="">密码忘记后如何找回？ </a>/ <a href title="">系统显示乱码或出错怎么办？</a>
+					</p>
+					<div class="ft_list">
+						<ul>
+							<li style="margin-left:-8px;"><a href title="">关羽安泰</a>
+							</li>
+							<li><a href title="">网站地图</a>
+							</li>
+							<li><a href title="">友情链接</a>
+							</li>
+							<li><a href title="">帮助中心</a>
+							</li>
+							<li style="background:none;"><a href title="">联系我们</a>
+							</li>
+						</ul>
+						<a href title="" class="ft_box_r">
+							<img src="images/login_5.jpg" width="238" height="50">
+						</a>
+					</div>
+					<p class="bqsy">Copyright 2011-2014 © 上海交通大学安泰经济与管理学院</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
+		<script>
+			var test_local = true;
+		
+			var PersonalInfoAppModule = angular.module('PersonalInfoApp',[]);
+			var PersonalInfoData;
+			var fakedObject = {
+				studentID: '5090379149',
+				studentName: 'xian xing',
+				className: 'ruan gong wu ban',
+				studentFace: '',
+				sex: 'm',
+				nationality: '中国',
+				identityNo: '5090379149',
+				identityNoScope: 'all',
+				bankAccountNo: '123456',
+				bankAccountNoScope: 'none',
+				bankName: 'Bank Of China',
+				bankNameScope: 'none',
+				
+				educationBackground: [
+					{
+						entryDate:'2005/09',
+						graduationDate:'2007/09',
+						graduationCollege:'北京交通大学',graduationCollegeScope:'下拉3',
+						major:'Computer Science',majorScope:'下拉2',
+						diploma:'本科',diplomaScope:'12131',
+						degree:'学士学位',degreeScope:'下拉6'
+					},
+					{
+						entryDate:'2005/09',
+						graduationDate:'2007/09',
+						graduationCollege:'上海交通大学',graduationCollegeScope:'下拉3',
+						major:'Software Engineering',majorScope:'下拉2',
+						diploma:'本科',diplomaScope:'12131',
+						degree:'学士学位',degreeScope:'下拉6'}
+				]};
+			
+			// factory to http post request for personal info data
+			PersonalInfoAppModule.factory('PersonalInfoInterface',function($http){				
+				var _ = {};
+				_.getPersonalInfo = function(callback){
+					PersonalInfoData = undefined;
+					// return $http.post('/psc/ACEMTST/....',{params:{}});
+					
+					$http.post('/psc/ACEMTST/....',{params:{}
+					}).success(function(data,status,headers,config){
+						PersonalInfoData = data;
+						callback();
+					}).error(function(data,status,headers,config){
+						if (test_local){
+							PersonalInfoData = fakedObject;
+							callback();
+						} else {
+							alert('无法获取个人信息！（错误码：'+status+')');
+						}
+					});
+				}
+				return _;
+			});
+			
+			PersonalInfoAppModule.controller(
+				'PersonalInfoController',
+				function ($scope, PersonalInfoInterface){
+					PersonalInfoData = undefined;
+					PersonalInfoInterface.getPersonalInfo(function(){
+						$scope.$broadcast('dataReady');
+					});
+				}
+			);
+			
+			PersonalInfoAppModule.controller(
+				'EducationBackgroundController',
+				function ($scope, PersonalInfoInterface) {
+					// 教育背景列表
+					var eduBgLst = {};
+					$scope.eduBgLst = eduBgLst;
+
+					// 当parent controller 获取数据完成时候 会发出广播
+					$scope.$on('dataReady',function(){
+						if (PersonalInfoData && PersonalInfoData.educationBackground){
+							eduBgLst = PersonalInfoData.educationBackground;
+							$scope.eduBgLst = eduBgLst;
+							$scope.dataReady = true;
+						}
+					});
+					
+					
+					// 添加模式 or 编辑模式
+					var editStateNew = true;
+					var editIndex = -1;
+					
+					// 编辑教育背景对象
+					var emptyEduBg = {
+						entryDate:'',
+						graduationDate:'',
+						graduationCollege:'',graduationCollegeScope:'',
+						major:'',majorScope:'',
+						diploma:'',diplomaScope:'',
+						degree:'',degreeScope:''
+					};
+					
+					var editEduBg = $.extend(true, {}, emptyEduBg);
+					
+					// TODO: 入学时间 毕业时间 毕业院校不应该使用下拉列表
+					var scpOptions = ['12131','下拉2','下拉3','下拉4','下拉5','下拉6'];
+					
+					$scope.scpOptions = scpOptions;
+					$scope.editEduBg = editEduBg;
+					$scope.editStateNew = editStateNew;
+					$scope.editIndex = editIndex;
+					$scope.emptyEduBg = emptyEduBg;
+					$scope.dataReady = false;
+					
+					/* functions */
+					$scope._addEduBg = function(){
+						var clonedEduBg = $.extend(true, {}, $scope.editEduBg);
+						$scope.eduBgLst.push(clonedEduBg);
+						// $scope.eduBgLst.splice(1,0,clonedEduBg);
+						
+						var clonedEduBg2 = $.extend(true, {}, $scope.emptyEduBg);
+						$scope.editEduBg = clonedEduBg2;
+					}
+					
+					$scope._removeEduBg = function(index){
+						$scope.eduBgLst.splice(index,1);
+					}
+					
+					$scope._editEduBg = function(index){
+						var clonedEduBg = $.extend(true, {}, $scope.eduBgLst[index]);
+						$scope.editEduBg = clonedEduBg;
+						
+						$scope.editIndex = index;
+						$scope.editStateNew = false;
+					}
+					
+					$scope._confirmEduBg = function(){
+						var clonedEduBg = $.extend(true, {}, $scope.editEduBg);
+						$scope.eduBgLst.splice(editIndex,1,clonedEduBg);
+						
+						var clonedEduBg2 = $.extend(true, {}, $scope.emptyEduBg);
+						$scope.editEduBg = clonedEduBg2;
+						
+						$scope.editIndex = -1;
+						$scope.editStateNew = true;
+					}
+					
+					$scope._cancelEduBg = function(){
+						var clonedEduBg = $.extend(true, {}, $scope.emptyEduBg);
+						$scope.editEduBg = clonedEduBg;
+						
+						$scope.editIndex = -1;
+						$scope.editStateNew = true;
+					}
+				}
+			);
+		</script>
+	</body>
+
+</html>
