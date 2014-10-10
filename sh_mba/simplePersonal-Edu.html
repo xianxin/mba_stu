@@ -164,7 +164,7 @@
 						<div class="personal_tit_right">
 							<table width="556" border="0" cellspacing="0" cellpadding="0">
 								<tr>
-									<td height="36">姓名：<span>王立凯</span>
+									<td height="36">姓名：<span>{{piData.studentName}}</span>
 									</td>
 								</tr>
 								<tr>
@@ -461,6 +461,7 @@
 				function ($scope, PersonalInfoInterface){
 					PersonalInfoData = undefined;
 					PersonalInfoInterface.getPersonalInfo(function(){
+						$scope.piData = PersonalInfoData;
 						$scope.$broadcast('dataReady');
 					});
 				}
@@ -475,8 +476,8 @@
 
 					// 当parent controller 获取数据完成时候 会发出广播
 					$scope.$on('dataReady',function(){
-						if (PersonalInfoData && PersonalInfoData.educationBackground){
-							eduBgLst = PersonalInfoData.educationBackground;
+						if ($scope.piData && $scope.piData.educationBackground){
+							eduBgLst = $scope.piData.educationBackground;
 							$scope.eduBgLst = eduBgLst;
 							$scope.dataReady = true;
 						}
