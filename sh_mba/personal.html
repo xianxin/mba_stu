@@ -7,57 +7,7 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.js" language="javascript" type="text/javascript"></script>
 <script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
-<script type="text/javascript">
- function show(num){
- 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
-	for(i=0;i<lis.length;i++){
-		lis[i].className = '';
-		document.getElementById('con'+(i+1)).style.display = 'none';
-	}
-	document.getElementById('tit'+num).className = 'current';
-	document.getElementById('con'+num).style.display = 'block';
- }
-</script>
-<script type="text/javascript">
-$(function(){
-	/*============================
-	@author:flc
-	@time:2014-02-11 18:16:09
-	@qq:3407725
-	============================*/
-	$(".select_two").each(function(){
-		var s=$(this);
-		var z=parseInt(s.css("z-index"));
-		var dt=$(this).children("dt");
-		var dd=$(this).children("dd");
-		var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};   //展开效果
-		var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};    //关闭效果
-		dt.click(function(){dd.is(":hidden")?_show():_hide();});
-		dd.find("a").click(function(){dt.html($(this).html());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
-		$("body").click(function(i){ !$(i.target).parents(".select_two").first().is(s) ? _hide():"";});
-	})
-})
-</script>
-<script type="text/javascript">
-$(function(){
-	/*============================
-	@author:flc
-	@time:2014-02-11 18:16:09
-	@qq:3407725
-	============================*/
-	$(".select_three").each(function(){
-		var s=$(this);
-		var z=parseInt(s.css("z-index"));
-		var dt=$(this).children("dt");
-		var dd=$(this).children("dd");
-		var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};   //展开效果
-		var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};    //关闭效果
-		dt.click(function(){dd.is(":hidden")?_show():_hide();});
-		dd.find("a").click(function(){dt.html($(this).html());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
-		$("body").click(function(i){ !$(i.target).parents(".select_three").first().is(s) ? _hide():"";});
-	})
-})
-</script>
+
 </head>
 <body>
 <div class="hder">
@@ -122,7 +72,57 @@ $(function(){
 <script src="js/public.js" language="javascript" type="text/javascript"></script>
   </div>
 </div>
-
+<script type="text/javascript">
+ function show(num){
+ 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
+	for(i=0;i<lis.length;i++){
+		lis[i].className = '';
+		document.getElementById('con'+(i+1)).style.display = 'none';
+	}
+	document.getElementById('tit'+num).className = 'current';
+	document.getElementById('con'+num).style.display = 'block';
+ }
+</script>
+<script type="text/javascript">
+$(function(){
+	/*============================
+	@author:flc
+	@time:2014-02-11 18:16:09
+	@qq:3407725
+	============================*/
+	$(".select_two").each(function(){
+		var s=$(this);
+		var z=parseInt(s.css("z-index"));
+		var dt=$(this).children("dt");
+		var dd=$(this).children("dd");
+		var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+		var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+		dt.click(function(){dd.is(":hidden")?_show():_hide();});
+		dd.find("a").click(function(){dt.html($(this).html());_hide();});
+		$("body").click(function(i){ !$(i.target).parents(".select_two").first().is(s) ? _hide():"";});
+	})
+})
+</script>
+<script type="text/javascript">
+$(function(){
+	/*============================
+	@author:flc
+	@time:2014-02-11 18:16:09
+	@qq:3407725
+	============================*/
+	$(".select_three").each(function(){
+		var s=$(this);
+		var z=parseInt(s.css("z-index"));
+		var dt=$(this).children("dt");
+		var dd=$(this).children("dd");
+		var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+		var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+		dt.click(function(){dd.is(":hidden")?_show():_hide();});
+		dd.find("a").click(function(){dt.html($(this).html());_hide();});
+		$("body").click(function(i){ !$(i.target).parents(".select_three").first().is(s) ? _hide():"";});
+	})
+})
+</script>
 <div class="s_main">
   <div class="s_main_l">
   	<div class="crumbs">
