@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>我的课表</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link href="css/easydialog.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
+
+</head>
+<body>
+<div class="hder">
+	<div class="hder_top">
+		<div class="hder_l">
+			<a href="#" title="上海交通大学" class="fl" style="margin-right:10px; display:inline;">
+				<img src="images/logo.png" width="303" height="48">
+			</a>
+			<span class="fl">
+
+        学生系统
+
+      </span>
+		</div>
+		<div class="hder_r">
+			<p>
+				欢迎 <span>李晓京</span>，今天是：<span>2014年4月12日</span> |
+				<a href="#">安全退出</a> 
+			</p>
+		</div>
+	</div>
+	<div class="hder_nav">
+		<div class="nav">
+			<table class="f4 nav_table" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td>
+						<div class="nav_list"><a class="nav_a" href="#">首页</a>
+						</div>
+					</td>
+					<td>
+						<div class="nav_list"><a class="nav_a" href="#">我的课程</a>
+							<ul class="nav_ul2">
+								<li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">培养计划</a>
+								</li>
+								<li class="nav_li2"><a href="#" class="nav_a2 nav_carent">我的课表</a>
+								</li>
+								<li class="nav_li2"><a href="#" class="nav_a2">MBA选课</a>
+								</li>
+								<li class="nav_li2"><a href="#" class="nav_a2">课程/学籍申请调整</li>
+
+     </ul>
+
+    </div>
+
+    </td>
+
+    <td>
+
+    <div class="nav_list"><a class="nav_a" href="#">我的事务</a>
+									<ul class="nav_ul2">
+										<li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a>
+										</li>
+										<li class="nav_li2"><a href="#" class="nav_a2">二级导航</a>
+										</li>
+										<li class="nav_li2"><a href="#" class="nav_a2">二级导航</a>
+										</li>
+									</ul>
+						</div>
+					</td>
+					<td>
+						<div class="nav_list"><a class="nav_a" href="#">活动预告</a>
+							<ul class="nav_ul2">
+								<li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a>
+								</li>
+								<li class="nav_li2"><a href="#" class="nav_a2">二级导航</a>
+								</li>
+								<li class="nav_li2"><a href="#" class="nav_a2">二级导航</a>
+								</li>
+							</ul>
+						</div>
+					</td>
+					<td>
+						<div class="nav_list"><a class="nav_a" href="#">常用文档</a>
+						</div>
+					</td>
+					<td>
+						<div class="nav_list"><a class="nav_a" href="#">个人中心</a>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<script src="js/public.js" language="javascript" type="text/javascript"></script>
+	</div>
+</div>
+
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script src="js/easydialog.min.js" language="javascript" type="text/javascript"></script>
+<script>
+	function show(num){
+	 	var lis = document.getElementById('yq_xxk_kb').getElementsByTagName('li');
+		for(i=0;i<lis.length;i++){
+			lis[i].className = '';
+			document.getElementById('con'+(i+1)).style.display = 'none';
+		}
+		
+		document.getElementById('tit'+num).className = 'current';
+		document.getElementById('con'+num).style.display = 'block';
+	 }
+</script>
+<div class="s_main">
+	<div class="s_main_l">
+		<div class="crumbs">
+			<p>
+				<a href="#" title="">首页</a>&nbsp;>
+				<a href="#" title="">我的课程</a>&nbsp;>
+				<a href="#" title="">我的课表</a>
+			</p>
+		</div>
+		<div class="sider">
+			<ul>
+				<li style="border-top:3px solid #dadbdd;"><a href="#" title="">培养计划</a>
+				</li>
+				<li><a href="#" title="" class="current">我的课表</a>
+				</li>
+				<li><a href="#" title="">MBA选课</a>
+				</li>
+				<li><a href="#" title="">课程/学籍变动申请</a>
+				</li>
+			</ul>
+		</div>
+		<div class="sml_kb">
+			<ul>
+				<li><a href="#" title="">我的课表</a>
+				</li>
+				<li><a href="#" title="" id="sml_kb_cv">培养计划</a>
+				</li>
+				<li><a href="#" title="">MBA选课</a>
+				</li>
+				<li><a href="#" title="">社会活动填报</a>
+				</li>
+				<li><a href="#" title="">常用文档</a>
+				</li>
+				<li><a href="#" title="">通讯录</a>
+				</li>
+				<div class="clear"></div>
+			</ul>
+		</div>
+		<div class="sml_down">
+			<a href="#" title="">
+				<img src="images/sider_4.jpg" width="242" height="219">
+			</a>
+		</div>
+	</div>
+	<div class="s_main_r" id='ng-app' ng-app='ScheduleApp'>
+		<div class="schedule_cont" ng-controller='ScheduleController'>
+			<div class="schedule_cont_bt">
+				<h2>我的课表</h2>
+				<div class="schedule_cont_xh">
+					<span class="schedule_cont_xh_one">学号：<em ng-bind='studentSchedule.studentId'></em></span>
+					<span class="schedule_cont_xh_two">班级：<em ng-bind='studentSchedule.className'></em></span>
+					<span class="schedule_cont_xh_three">预计毕业日期：<em ng-bind='studentSchedule.graDate'></em></span>
+					<div class="clear"></div>
+				</div>
+				<div class="schedule_cont_pop">
+					<table width="736" border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td height="45" width="84">课程名称</td>
+							<td width="38">学时</td>
+							<td width="38">学分</td>
+							<td width="65">任课教师</td>
+							<td width="130">上课日期</td>
+							<td width="66">起止周</td>
+							<td width="90">停课及原因</td>
+							<td width="104">补课时间
+								<br>及原因
+							</td>
+							<td width="120">考试安排</td>
+						</tr>
+
+						<tr ng-repeat='course in studentSchedule.courseList'>
+							<td>{{course.courseName}}
+								<br />
+								<a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseReference(course.courseId)">课程资料</a>
+								<br />
+								<a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseAttendance(course.courseId)">查看考勤</a>
+							</td>
+							<td>&nbsp;{{course.courseHours}}&nbsp;</td>
+							<td>&nbsp;{{course.credit}}&nbsp;</td>
+							<td>&nbsp;{{course.teacher}}&nbsp;</td>
+							<td>&nbsp;{{course.courseTime}}&nbsp;</td>
+							<td>&nbsp;{{course.courseWeek}}&nbsp;</td>
+							<td>&nbsp;{{course.courseSuspend}}&nbsp;</td>
+							<td>&nbsp;{{course.courseMakeup}}&nbsp;</td>
+							<td ng-if='course.IsPlan'>&nbsp;{{course.examPlan}}&nbsp;</td>
+							<td ng-if='!course.IsPlan'>&nbsp;课程评估率＜95%
+								<br>不能查看考试安排
+								<br>
+								<a href title="" class="scp_kczl" ng-click="openUnevaluatedStudentList(course.courseId)">查看未完成<br>评估学生</a>&nbsp;
+							</td>
+						</tr>
+
+					</table>
+				</div>
+			</div>
+
+			<div class="dialog_wdkb" id="imgBox_CourseAttendance" style="display:none;" <!--ng-controller='CourseAttendanceController'-->>
+				
+				<div class="dialog_wdkb_mar">
+					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_bt">
+						<tr>
+							<td height="32">学年： <span ng-bind='courseAttendance.year'></span>
+							</td>
+							<td>学期： <span ng-bind='courseAttendance.term'></span>
+							</td>
+							<td>课程名称： <span ng-bind='courseAttendance.courseName'></span>
+							</td>
+						</tr>
+						<tr>
+							<td height="32">授课教师： <span ng-bind='courseAttendance.teacher'></span>
+							</td>
+							<td >考勤导入日期： <span ng-bind='courseAttendance.importTime'></span>
+							</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+
+					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_nr">
+						<tr>
+							<td height="32">考勤日期</td>
+							<td>上课开始时间</td>
+							<td>上课结束时间</td>
+							<td>打卡时间</td>
+							<td>状态</td>
+						</tr><tr ng-repeat='attendance in  courseAttendance.KQList'>
+							<td height="32">&nbsp;{{attendance.KQDate}}&nbsp;</td>
+							<td>&nbsp;{{attendance.startTime}}&nbsp;</td>
+							<td>&nbsp;{{attendance.endTime}}&nbsp;</td>
+							<td>&nbsp;{{attendance.clockTime}}&nbsp;</td>
+							<td>&nbsp;{{attendance.status}}&nbsp;</td>
+						</tr>
+					</table>
+					<div class="dialog_wdkb_mar_fh">
+						<a href="#" title="" id="btnClose" onclick="easyDialog.close();">返回</a>
+					</div>
+				</div>
+			</div>
+			
+			<!--TODO: now-->
+			<div class="dialog_wdkb" id="imgBox_UnevaluatedStudentList" style="display:none;" <!--ng-controller='UnevaluatedStudentListController'-->>
+				<div class="dialog_wdkb_mar">
+					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_bt">
+						<tr>
+							<td height="32">课程号： <span ng-bind='unEvaluation.courseId'></span>
+							</td>
+							<td>课程名： <span ng-bind='unEvaluation.courseName'></span>
+							</td>
+							<td>授课教师： <span ng-bind='unEvaluation.teacher'></span>
+							</td>
+						</tr>
+					</table>
+
+					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_nr">
+						<tr>
+							<td height="32" width="184">学号</td>
+							<td width="296">姓名</td>
+							<td width="188">班级</td>
+						</tr>
+						<tr ng-repeat='student in unEvaluation.studentList'>
+							<td height="32">&nbsp;{{student.studentId}}&nbsp;</td>
+							<td>&nbsp;{{student.studentName}}&nbsp;</td>
+							<td>&nbsp;{{student.className}}&nbsp;</td>
+						</tr>
+					</table>
+					<div class="dialog_wdkb_mar_fh">
+						<a href="#" title="" id="btnClose" onclick="easyDialog.close();">返回</a>
+					</div>
+				</div>
+			</div>
+			<div class="dialog_wdkb_two" id="imgBox_CourseReference" style="display:none;" <!--ng-controller='CourseReferenceController'-->>
+				<div class="dialog_wdkb_mar_two">
+					<div id="yq_xxk_kb">
+						<ul>
+							<li id="tit1" onclick="show(1)" class="current">
+								<div class="xxk_kb">教材信息</div>
+							</li>
+							<li id="tit2" onclick="show(2)">
+								<div class="xxk_kb">讲义下载</div>
+							</li>
+							<div class="clear"></div>
+						</ul>
+					</div>
+					<div id="con1" class="tem" style="display:block;">
+						<div class="tab_top">
+							<table width="704" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="256" height="34">学年：<span ng-bind='courseReference.year'></span>
+									</td>
+									<td width="36">&nbsp;</td>
+									<td width="120">学期：<span ng-bind='courseReference.term'></span>
+									</td>
+									<td width="68">&nbsp;</td>
+									<td width="226">课程号：<span ng-bind='courseReference.courseID'></span>
+									</td>
+								</tr>
+								<tr>
+									<td height="34">课程名称：<span  ng-bind='courseReference.courseName'></span>
+									</td>
+									<td>&nbsp;</td>
+									<td>授课教师：<span ng-bind='courseReference.teacher'></span>
+									</td>
+									<td>&nbsp;</td>
+									<td>上课班级：<span ng-bind='courseReference.className'></span>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+						<div class="ipt_list" ng-repeat='book in courseReference.bookList'>
+							<table width="704" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="72" height="38">书号：</td>
+									<td width="230">
+										<input type="text" ng-model="book.bookId" name="" class="ipt_list_shu">
+									</td>
+									<td width="60">&nbsp;</td>
+									<td>教材名称：</td>
+									<td width="230">
+										<input type="text" ng-model="book.bookName" name="" class="ipt_list_shu">
+									</td>
+									<td width="20">&nbsp;</td>
+								</tr>
+								<tr>
+									<td height="38">作者：</td>
+									<td>
+										<input type="text" ng-model="book.author" name="" class="ipt_list_shu">
+									</td>
+									<td>&nbsp;</td>
+									<td>出版社：</td>
+									<td>
+										<input type="text" ng-model="book.publisher" name="" class="ipt_list_shu">
+									</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td height="38">版次：</td>
+									<td>
+										<input type="text" ng-model="book.pubNo" name="" class="ipt_list_shu">
+									</td>
+									<td>&nbsp;</td>
+									<td>定价：</td>
+									<td>
+										<input type="text" ng-model="book.price" name="" class="ipt_list_shu">
+									</td>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+
+						</div>
+						
+						<div class="dialog_wdkb_mar_fh2">
+							<a href="#" title="" id="btnClose" onclick="easyDialog.close();">返回</a>
+						</div>
+					</div>
+					<div id="con2" class="tem">
+						<div class="tab_top tab_top_two">
+							<table width="704" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="256" height="34">学年：<span ng-bind='courseReference.year'></span>
+									</td>
+									<td width="36">&nbsp;</td>
+									<td width="120">学期：<span ng-bind='courseReference.term'></span>
+									</td>
+									<td width="68">&nbsp;</td>
+									<td width="226">课程号：<span ng-bind='courseReference.courseID'></span>
+									</td>
+								</tr>
+								<tr>
+									<td height="34">课程名称：<span ng-bind='courseReference.courseName'></span>
+									</td>
+									<td>&nbsp;</td>
+									<td>授课教师：<span ng-bind='courseReference.teacher'></span>
+									</td>
+									<td>&nbsp;</td>
+									<td>上课班级：<span ng-bind='courseReference.className'></span>
+									</td>
+								</tr>
+							</table>
+							<table width="670" border="0" cellspacing="0" cellpadding="0" class="tab_jy_two">
+								<tr>
+									<td height="35" width="480">讲义</td>
+									<td width="188">类型</td>
+								</tr>
+								<tr ng-repeat='handout in courseReference.handoutList'>
+									<td height="35"><a ng-href='handout.url' target="_blank" title="" name="" class="">&nbsp;{{handout.title}}&nbsp;</a>
+									</td>
+									<td>&nbsp;{{handout.type}}&nbsp;</td>
+								</tr>
+							</table>
+						</div>
+						<div class="dialog_wdkb_mar_fh2">
+							<a href="#" title="" id="btnClose" onclick="easyDialog.close();">返回</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+	<div class="clear"></div>
+</div>
+
+<script>
+/*
+var jquery = function(){
+	return document.getElementById(arguments[0]);
+};
+
+var btnFn = function( e ){
+	alert( e.target );
+	return false;
+};
+
+jquery('demoBtn1').onclick = function(){
+	easyDialog.open({
+		container : 'imgBox',
+			yesFn : btnFn,
+			noFn : true,
+		fixed : false
+	});
+};
+jquery('demoBtn2').onclick = function(){
+	easyDialog.open({		
+		container : 'imgBox2',
+			yesFn : btnFn,
+			noFn : true,
+		fixed : false
+	});
+};
+/*jquery('demoBtn3').onclick = function(){
+	easyDialog.open({
+		container : 'imgBox',
+		autoClose : 9999999,
+		fixed :true,
+		
+	});
+};*/
+</script>
+
+<!--TODO:Script starts here-->
+<script>
+
+	{
+		var fakeSchedule = {
+			studentId : 'studentId123',
+			className : 'className456',
+			graDate : '2011-01-01',
+			courseList : [
+			{courseId : 'cid1', courseName : 'cn1', courseHours : 'ch1', credit : 'c1', teacher : 't1', 
+			courseTime : 'ct1', courseWeek : 'cw1', courseSuspend : 'cs1', courseMakeup : 'cm1', examPlan : 'ep1', IsPlan : true},
+			{courseId : 'cid2', courseName : 'cn2', courseHours : 'ch2', credit : 'c2', teacher : 't2', 
+			courseTime : 'ct2', courseWeek : 'cw2', courseSuspend : 'cs2', courseMakeup : 'cm2', examPlan : 'ep2', IsPlan : false},
+			{courseId : 'cid3', courseName : 'cn3', courseHours : 'ch3', credit : 'c3', teacher : 't3', 
+			courseTime : 'ct3', courseWeek : 'cw3', courseSuspend : 'cs3', courseMakeup : 'cm3', examPlan : 'ep3', IsPlan : false}
+			]
+		};
+		
+		var fakeUnevaluation = {
+			courseId : 'courseId123',
+			courseName : 'courseName345',
+			teacher : 'teacherMr.C',
+			studentList : [
+			{studentId : "id123", studentName : 'student456', className : 'class789'},
+			{studentId : "id321", studentName : 'student654', className : 'class987'},
+			{studentId : "id321", studentName : 'student654', className : 'class987'},
+			{studentId : "id321", studentName : 'student654', className : 'class987'},
+			{studentId : "id321", studentName : 'student654', className : 'class987'},
+			{studentId : "id321", studentName : 'student654', className : 'class987'},
+			{studentId : "id321", studentName : 'student654', className : 'class987'}
+			]
+		};
+		
+		var fakeAttendance = {
+			year : '2040',
+			term : '2',
+			courseName : 'cn',
+			teacher : 't',
+			importTime : '2014年09月13日',
+			KQList : [
+			{KQDate : '2014年10月13日', startTime : '8:00', endTime : '16:00', clockTime : '7:55', status : '正常'},
+			{KQDate : '2014年10月14日', startTime : '8:00', endTime : '16:00', clockTime : '8:25', status : '迟到'},
+			{KQDate : '2014年10月15日', startTime : '8:00', endTime : '16:00', clockTime : '', status : '缺课'}
+			]
+		};
+		
+		var fakeReference = {
+			year : '2050',
+			term : '1',
+			courseID : 'cid',
+			courseName : 'cn',
+			teacher : 't',
+			className : 'class',
+			bookList : [
+			{bookId : 'bid1', bookName : 'bn1', author : 'a1', publisher : 'p1', pubNo : 'pn1', price : 'pr1'},
+			{bookId : 'bid2', bookName : 'bn2', author : 'a2', publisher : 'p2', pubNo : 'pn2', price : 'pr2'},
+			{bookId : 'bid3', bookName : 'bn3', author : 'a3', publisher : 'p3', pubNo : 'pn3', price : 'pr3'},
+			{bookId : 'bid4', bookName : 'bn4', author : 'a4', publisher : 'p4', pubNo : 'pn4', price : 'pr4'}
+			],
+			handoutList : [
+			{title : 'title1', type : 'type1', url : 'url1'},
+			{title : 'title2', type : 'type2', url : 'url2'},
+			{title : 'title3', type : 'type3', url : 'url3'}
+			]
+		};
+	}
+	
+	var test_local = true;
+	
+	var ScheduleAppModule = angular.module('ScheduleApp',[]).config(function($sceProvider){
+		$sceProvider.enabled(false);
+	});
+	
+	ScheduleAppModule.factory('ScheduleInterface',function($http){
+		var _ = {};
+		_.getSchedule = function(callback){
+			if (test_local) { callback(fakeSchedule); return; }
+			;
+		};		
+		_.getCourseAttendanceData = function(callback){
+			if (test_local) { callback(fakeAttendance); return; }
+			;
+		};
+		_.getUnevaluatedStudentList = function(callback){
+			if (test_local) { callback(fakeUnevaluation); return; }
+			;
+		};
+		_.getCourseReferenceData = function(callback){
+			if (test_local) { callback(fakeReference); return; }
+			;
+		};
+		return _;
+	});
+	
+	/* TODO : new */
+	ScheduleAppModule.controller(
+		'ScheduleController',
+		function($scope,ScheduleInterface){
+			var defaultStudentSchedule = {
+				studentId : '',
+				className : '',
+				graDate : '',
+				courseList : []
+			}
+			
+			var studentSchedule = $.extend(true, {}, defaultStudentSchedule);
+			$scope.studentSchedule = studentSchedule;
+			
+			/* init Schedule */
+			ScheduleInterface.getSchedule(function(data){
+				if (data) {
+					$scope.studentSchedule = data;
+				}
+			});
+			
+			/* init Easydialog */
+			var btnFn = function( e ){
+				alert( e.target );
+				return false;
+			};
+			function openDialog(name){
+				easyDialog.open({
+					container : name,
+					yesFn : btnFn,
+					noFn : true,
+					fixed : false
+				});
+			}
+			function delayOpenDialogBy10(name){
+				setTimeout(function(){
+					openDialog(name);
+				}, 10);
+			}
+			
+			/* init unEvaluation */
+			var emptyUnEvaluation = {
+				courseId : '',
+				courseName : '',
+				teacher : '',
+				studentList : []
+			};
+			$scope.unEvaluation = $.extend(true, {}, emptyUnEvaluation);
+			$scope.openUnevaluatedStudentList = function (cid){
+				ScheduleInterface.getUnevaluatedStudentList(function(data){
+					if (data){
+						$scope.unEvaluation = data;
+						delayOpenDialogBy10("imgBox_UnevaluatedStudentList");
+					}
+				});
+			};
+			
+			/* init Reference */
+			var emptyReference = {
+				year : '',
+				term : '',
+				courseID : '',
+				courseName : '',
+				teacher : '',
+				className : '',
+				bookList : [],
+				handoutList : []
+			};
+			$scope.courseReference = $.extend(true, {}, emptyReference);
+			$scope.openCourseReference = function(cid){
+				ScheduleInterface.getCourseReferenceData(function(data){
+					if (data){
+						$scope.courseReference = data;
+						delayOpenDialogBy10("imgBox_CourseReference");
+					}
+				});
+			};
+			
+			/* init Attendance */
+			var statusNormal = '正常';
+			var emptyAttendance = {
+				year : '',
+				term : '',
+				courseName : '',
+				teacher : '',
+				importTime : '',
+				KQList : []
+			};
+			$scope.courseAttendance = $.extend(true, {}, emptyAttendance);
+			$scope.openCourseAttendance = function(cid){
+				ScheduleInterface.getCourseAttendanceData(function(data){
+					if (data){
+						$scope.courseAttendance = data;
+						delayOpenDialogBy10("imgBox_CourseAttendance");
+					}
+				});
+			};
+		}
+	);
+//	
+//	ScheduleAppModule.controller(
+//		'CourseAttendanceController',
+//		function($scope, ScheduleInterface){
+//			;
+//		}
+//	);
+//	
+//	ScheduleAppModule.controller(
+//		'UnevaluatedStudentListController',
+//		function($scope, ScheduleInterface){
+//			;
+//		}
+//	);
+//	
+//	ScheduleAppModule.controller(
+//		'CourseReferenceController',
+//		function($scope, ScheduleInterface){
+//			;
+//		}
+//	);
+</script>
+
+<div class="footer">
+	<div class="ft_box">
+      <div class="ft_box_l">
+        <h2>帮助中心:</h2>
+        <p class="bzzx"><a href="#" title="" class="bzzx1">可以注册多个账号么？</a>/ <a href="#" title="">填写信息需要使用中文还是英文？ </a>/ <a href="#" title="">密码忘记后如何找回？ </a>/ <a href="#" title="">系统显示乱码或出错怎么办？</a></p>
+        <div class="ft_list">
+          <ul>
+            <li style="margin-left:-8px;"><a href="#" title="">关羽安泰</a></li>
+            <li><a href="#" title="">网站地图</a></li>
+            <li><a href="#" title="">友情链接</a></li>
+            <li><a href="#" title="">帮助中心</a></li>
+            <li style="background:none;"><a href="#" title="">联系我们</a></li>
+          </ul>
+          <a href="#" title="" class="ft_box_r">
+            <img src="images/login_5.jpg" width="238" height="50">
+          </a>
+        </div>
+        <p class="bqsy">Copyright 2011-2014 © 上海交通大学安泰经济与管理学院</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+</div>
+
+</body>
+</html>
