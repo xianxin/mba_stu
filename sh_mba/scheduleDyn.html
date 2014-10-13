@@ -101,11 +101,11 @@
 	 	var lis = document.getElementById('yq_xxk_kb').getElementsByTagName('li');
 		for(i=0;i<lis.length;i++){
 			lis[i].className = '';
-			document.getElementById('con'+(i+1)).style.display = 'none';
+			document.getElementById('tab_con'+(i+1)).style.display = 'none';
 		}
 		
 		document.getElementById('tit'+num).className = 'current';
-		document.getElementById('con'+num).style.display = 'block';
+		document.getElementById('tab_con'+num).style.display = 'block';
 	 }
 </script>
 <div class="s_main">
@@ -204,7 +204,7 @@
 				</div>
 			</div>
 
-			<div class="dialog_wdkb" id="imgBox_CourseAttendance" style="display:none;" <!--ng-controller='CourseAttendanceController'-->>
+			<div class="dialog_wdkb" id="imgBox_CourseAttendance" style="display:none;" >
 				
 				<div class="dialog_wdkb_mar">
 					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_bt">
@@ -247,7 +247,7 @@
 			</div>
 			
 			<!--TODO: now-->
-			<div class="dialog_wdkb" id="imgBox_UnevaluatedStudentList" style="display:none;" <!--ng-controller='UnevaluatedStudentListController'-->>
+			<div class="dialog_wdkb" id="imgBox_UnevaluatedStudentList" style="display:none;" >
 				<div class="dialog_wdkb_mar">
 					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_bt">
 						<tr>
@@ -277,7 +277,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="dialog_wdkb_two" id="imgBox_CourseReference" style="display:none;" <!--ng-controller='CourseReferenceController'-->>
+			<div class="dialog_wdkb_two" id="imgBox_CourseReference" style="display:none;" >
 				<div class="dialog_wdkb_mar_two">
 					<div id="yq_xxk_kb">
 						<ul>
@@ -290,7 +290,7 @@
 							<div class="clear"></div>
 						</ul>
 					</div>
-					<div id="con1" class="tem" style="display:block;">
+					<div id="tab_con1" class="tem" style="display:block;">
 						<div class="tab_top">
 							<table width="704" border="0" cellspacing="0" cellpadding="0">
 								<tr>
@@ -362,7 +362,7 @@
 							<a href="#" title="" id="btnClose" onclick="easyDialog.close();">返回</a>
 						</div>
 					</div>
-					<div id="con2" class="tem">
+					<div id="tab_con2" class="tem">
 						<div class="tab_top tab_top_two">
 							<table width="704" border="0" cellspacing="0" cellpadding="0">
 								<tr>
@@ -551,7 +551,7 @@ jquery('demoBtn2').onclick = function(){
 				className : '',
 				graDate : '',
 				courseList : []
-			}
+			};
 			
 			var studentSchedule = $.extend(true, {}, defaultStudentSchedule);
 			$scope.studentSchedule = studentSchedule;
@@ -641,27 +641,6 @@ jquery('demoBtn2').onclick = function(){
 			};
 		}
 	);
-//	
-//	ScheduleAppModule.controller(
-//		'CourseAttendanceController',
-//		function($scope, ScheduleInterface){
-//			;
-//		}
-//	);
-//	
-//	ScheduleAppModule.controller(
-//		'UnevaluatedStudentListController',
-//		function($scope, ScheduleInterface){
-//			;
-//		}
-//	);
-//	
-//	ScheduleAppModule.controller(
-//		'CourseReferenceController',
-//		function($scope, ScheduleInterface){
-//			;
-//		}
-//	);
 </script>
 
 <div class="footer">

@@ -71,6 +71,8 @@
   </div>
 </div>
 
+
+<script type="text/javascript" src="js/angular.min.js"></script>
 <div class="s_main">
   <div class="s_main_l">
   	<div class="crumbs">
@@ -105,18 +107,19 @@
       </a>
     </div>
   </div>
-  <div class="s_main_r">
-    <div class="schedule_cont">
+  <span id="stu_name"></span>
+  <div class="s_main_r" id="ng-app" ng-app="TeachingProgramApp">
+    <div class="schedule_cont" ng-controller="TeachingProgramController">
       <div class="schedule_cont_bt">
-        <h2>王立凯培养计划</h2>
+        <h2 ng-bind='program.display_studentName'></h2>
         <div class="schedule_cont_xh">
-        	<span class="schedule_cont_xh_one">学号：<em>201408291026</em></span>
-            <span class="schedule_cont_xh_two">班级：<em>P1</em></span>
-            <span class="schedule_cont_xh_three">预计毕业日期：<em>2015-06-30</em></span>
+        	<span class="schedule_cont_xh_one">学号：<em ng-bind='program.studentId'></em></span>
+            <span class="schedule_cont_xh_two">班级：<em ng-bind='program.className'></em></span>
+            <span class="schedule_cont_xh_three">预计毕业日期：<em ng-bind='program.graDate'></em></span>
             <div class="clear"></div>
         </div>
         <div class="pyjh_bxk">
-          <h2>必修课列表，要求必修课总学分10，已修必修课总学分10</h2>
+          <h2 ng-bind='program.display_compulsoryCreditStatus'></h2>
           <table width="736" border="0" cellpadding="0" cellspacing="0">
             <tr>
               <td height="58" rowspan="2" width="132">课程名称</td>
@@ -138,141 +141,39 @@
               <td width="41">3</td>
               <td width="41">4</td>
             </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>
-                <span class="pyjh_bxk_dg">
-                  <img src="images/pyjh_1.jpg" width="22" height="22">
-                </span>
-              </td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-
-              <td>1</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>
-                <span class="pyjh_bxk_dg">
-                  <img src="images/pyjh_1.jpg" width="22" height="22">
-                </span>
-              </td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-
-              <td>2</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>&nbsp;</td>
-              <td> 
-              	<span class="pyjh_bxk_dg">
-                  <img src="images/pyjh_1.jpg" width="22" height="22">
-                </span>
-              </td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-
-              <td>1</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>&nbsp;</td>
-              <td>
-                <span class="pyjh_bxk_dg">
-                  <img src="images/pyjh_1.jpg" width="22" height="22">
-                </span>
-              </td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-
-              <td>2</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>
-                <span class="pyjh_bxk_dg">
-                  <img src="images/pyjh_1.jpg" width="22" height="22">
-                </span>
-              </td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-
-              <td>2</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>
-                <span class="pyjh_bxk_dg">
-                  <img src="images/pyjh_1.jpg" width="22" height="22">
-                </span>
-              </td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-
-              <td>2</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>&nbsp;</td>
-              <td><span class="pyjh_bxk_dg">
-                  <img src="images/pyjh_1.jpg" width="22" height="22">
-                </span></td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-
-              <td>2</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
+            
+            <tr bgcolor="#F2F3F3" ng-repeat='courseCompulsory in program.compulsory'>
+            	<td height="50" background="none">{{courseCompulsory.courseName}}</td>
+            	<td>{{courseCompulsory.courseNature}}</td>
+            	<td>{{courseCompulsory.courseHours}}</td>
+            	<td>{{courseCompulsory.credit}}</td>
+            	
+            	<td>
+            		<span ng-if='courseCompulsory.YJTerm == 1' class="pyjh_bxk_dg"><img src="images/pyjh_1.jpg" width="22" height="22"></span>
+            		<span ng-if='courseCompulsory.YJTerm != 1'>&nbsp;</span>
+            	</td>
+            	<td>
+            		<span ng-if='courseCompulsory.YJTerm == 2' class="pyjh_bxk_dg"><img src="images/pyjh_1.jpg" width="22" height="22"></span>
+            		<span ng-if='courseCompulsory.YJTerm != 2'>&nbsp;</span>
+            	</td>
+            	<td>
+            		<span ng-if='courseCompulsory.YJTerm == 3' class="pyjh_bxk_dg"><img src="images/pyjh_1.jpg" width="22" height="22"></span>
+            		<span ng-if='courseCompulsory.YJTerm != 3'>&nbsp;</span>
+            	</td>
+            	<td>
+            		<span ng-if='courseCompulsory.YJTerm == 4' class="pyjh_bxk_dg"><img src="images/pyjh_1.jpg" width="22" height="22"></span>
+            		<span ng-if='courseCompulsory.YJTerm != 4'>&nbsp;</span>
+            	</td>
+            	
+            	<td>{{courseCompulsory.SJTerm}}</td>
+            	<td>{{courseCompulsory.courseRank}}</td>
+            	<td>{{courseCompulsory.courseRemark}}</td>
+            	<td>{{courseCompulsory.changeRemark}}</td>
             </tr>
           </table>
         </div>
         <div class="pyjh_bxk">
-          <h2>必修课列表，要求必修课总学分10，已修必修课总学分10</h2>
+          <h2 ng-bind='program.display_electivesCreditStatus'></h2>
           <table width="736" border="0" cellpadding="0" cellspacing="0">
             <tr>
               <td height="58" width="132">课程名称</td>
@@ -284,76 +185,104 @@
               <td width="76">课程备注</td>
               <td width="112">课程异动备注</td>
             </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="#FFF">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>1</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
+            
+            
+            <tr bgcolor="#F2F3F3" ng-repeat='courseElectives in program.electives'>
+            	<td height="50" background="none">{{courseElectives.courseName}}</td>
+            	<td>{{courseElectives.courseNature}}</td>
+            	<td>{{courseElectives.courseHours}}</td>
+            	<td>{{courseElectives.credit}}</td>
+            	<td>{{courseElectives.SJTerm}}</td>
+            	<td>{{courseElectives.courseRank}}</td>
+            	<td>{{courseElectives.courseRemark}}</td>
+            	<td>{{courseElectives.changeRemark}}</td>
             </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>1</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>1</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>1</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>1</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
-            <tr bgcolor="#f2f3f3">
-              <td height="50" background="none">商务英语</td>
-              <td>学位必修</td>
-              <td>20</td>
-              <td>2</td>
-              <td>1</td>
-              <td>B</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-            </tr>
+            
           </table>
         </div>
         <div class="pyjh_box">
           <h2>培养计划备注信息</h2>
+          <p>{{program.programRemark}}</p>
         </div>
       </div>
     </div>
   </div>
   <div class="clear"></div>
 </div>
+<script>
+	var fakeProgram = {
+		studentId : '5090379149',
+		className : 'F0903705',
+		graDate : '2013-09-09',
+		compulsory : [
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 1, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 2, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 3, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 3, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 1, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''}
+		],
+		electives : [
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '1', SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '3', SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '4', SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''}
+		],
+		compulsoryGot : 10,
+		compulsoryAll : 19,
+		electivesGot : 9,
+		electivesAll : 14,
+		programRemark : '1'
+	};
+
+	var studentName = $("stu_name").html();
+	var test_local = true;
+	var ProgramAppModule = angular.module('TeachingProgramApp', []).config(function($sceProvider){$sceProvider.enabled(false);});
+	
+	ProgramAppModule.factory('ProgramInterface',function($http){
+		var _ = {};
+		_.getProgramData = function(callback){
+			if (test_local) {callback(fakeProgram); return ;}
+		};
+		return _;
+	});
+	
+	/* TODO : here*/
+	ProgramAppModule.controller(
+		'TeachingProgramController',
+		function($scope, ProgramInterface){
+			var defaultProgram = {
+				studentId : '',
+				className : '',
+				graDate : '',
+				compulsory : [],
+				electives : [],
+				compulsoryGot : '',
+				compulsoryAll : '',
+				electivesGot : '',
+				electivesAll : '',
+				programRemark : ''
+			};
+			
+			function decoration(obj){
+				obj.display_studentName = studentName || "?" + " 培养计划";
+				obj.display_compulsoryCreditStatus = "必修课列表，要求必修课总学分" + obj.compulsoryAll + "，已修必修课总学分" + obj.compulsoryGot;
+				obj.display_electivesCreditStatus = "选修课列表，要求选修课总学分" + obj.electivesAll + "，已修选修课总学分" + obj.electivesGot;
+				
+				return obj;
+			}
+			var program = $.extend(true, {}, defaultProgram);
+			$scope.program = decoration(program);
+			
+			ProgramInterface.getProgramData(function(data){
+				if (data){
+					$scope.program = decoration(data);
+				}
+			});
+		}
+	);
+</script>
+
+
 <div class="footer">
 	<div class="ft_box">
       <div class="ft_box_l">
