@@ -185,15 +185,15 @@
 								<br />
 								<a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseAttendance(course.courseId)">查看考勤</a>
 							</td>
-							<td>&nbsp;{{course.courseHours}}&nbsp;</td>
-							<td>&nbsp;{{course.credit}}&nbsp;</td>
-							<td>&nbsp;{{course.teacher}}&nbsp;</td>
-							<td>&nbsp;{{course.courseTime}}&nbsp;</td>
-							<td>&nbsp;{{course.courseWeek}}&nbsp;</td>
-							<td>&nbsp;{{course.courseSuspend}}&nbsp;</td>
-							<td>&nbsp;{{course.courseMakeup}}&nbsp;</td>
-							<td ng-if='course.IsPlan'>&nbsp;{{course.examPlan}}&nbsp;</td>
-							<td ng-if='!course.IsPlan'>&nbsp;课程评估率＜95%
+							<td ng-bind-html='course.courseHours | checkTdEmpty'></td>
+							<td ng-bind-html='course.credit | checkTdEmpty'></td>
+							<td ng-bind-html='course.teacher | checkTdEmpty'></td>
+							<td ng-bind-html='course.courseTime | checkTdEmpty'></td>
+							<td ng-bind-html='course.courseWeek | checkTdEmpty'></td>
+							<td ng-bind-html='course.courseSuspend | checkTdEmpty'></td>
+							<td ng-bind-html='course.courseMakeup | checkTdEmpty'></td>
+							<td ng-if="course.IsPlan == 'TRUE'" ng-bind-html='course.examPlan | checkTdEmpty'></td>
+							<td ng-if="course.IsPlan == 'FALSE'">&nbsp;课程评估率＜95%
 								<br>不能查看考试安排
 								<br>
 								<a href title="" class="scp_kczl" ng-click="openUnevaluatedStudentList(course.courseId)">查看未完成<br>评估学生</a>&nbsp;
@@ -233,11 +233,11 @@
 							<td>打卡时间</td>
 							<td>状态</td>
 						</tr><tr ng-repeat='attendance in  courseAttendance.KQList'>
-							<td height="32">&nbsp;{{attendance.KQDate}}&nbsp;</td>
-							<td>&nbsp;{{attendance.startTime}}&nbsp;</td>
-							<td>&nbsp;{{attendance.endTime}}&nbsp;</td>
-							<td>&nbsp;{{attendance.clockTime}}&nbsp;</td>
-							<td>&nbsp;{{attendance.status}}&nbsp;</td>
+							<td height="32" ng-bind-html='attendance.KQDate | checkTdEmpty'></td>
+							<td ng-bind-html='attendance.startTime | checkTdEmpty'></td>
+							<td ng-bind-html='attendance.endTime | checkTdEmpty'></td>
+							<td ng-bind-html='attendance.clockTime | checkTdEmpty'></td>
+							<td ng-bind-html='attendance.status | checkTdEmpty'></td>
 						</tr>
 					</table>
 					<div class="dialog_wdkb_mar_fh">
@@ -267,9 +267,9 @@
 							<td width="188">班级</td>
 						</tr>
 						<tr ng-repeat='student in unEvaluation.studentList'>
-							<td height="32">&nbsp;{{student.studentId}}&nbsp;</td>
-							<td>&nbsp;{{student.studentName}}&nbsp;</td>
-							<td>&nbsp;{{student.className}}&nbsp;</td>
+							<td height="32" ng-bind-html='student.studentId | checkTdEmpty'></td>
+							<td ng-bind-html='student.studentName | checkTdEmpty'></td>
+							<td ng-bind-html='student.className | checkTdEmpty'></td>
 						</tr>
 					</table>
 					<div class="dialog_wdkb_mar_fh">
@@ -458,11 +458,11 @@ jquery('demoBtn2').onclick = function(){
 			graDate : '2011-01-01',
 			courseList : [
 			{courseId : 'cid1', courseName : 'cn1', courseHours : 'ch1', credit : 'c1', teacher : 't1', 
-			courseTime : 'ct1', courseWeek : 'cw1', courseSuspend : 'cs1', courseMakeup : 'cm1', examPlan : 'ep1', IsPlan : true},
+			courseTime : 'ct1<br>ct11<br>ct111', courseWeek : 'cw1', courseSuspend : 'cs1', courseMakeup : 'cm1', examPlan : 'ep1', IsPlan : 'TRUE'},
 			{courseId : 'cid2', courseName : 'cn2', courseHours : 'ch2', credit : 'c2', teacher : 't2', 
-			courseTime : 'ct2', courseWeek : 'cw2', courseSuspend : 'cs2', courseMakeup : 'cm2', examPlan : 'ep2', IsPlan : false},
+			courseTime : 'ct2', courseWeek : 'cw2', courseSuspend : 'cs2', courseMakeup : 'cm2', examPlan : 'ep2', IsPlan : 'FALSE'},
 			{courseId : 'cid3', courseName : 'cn3', courseHours : 'ch3', credit : 'c3', teacher : 't3', 
-			courseTime : 'ct3', courseWeek : 'cw3', courseSuspend : 'cs3', courseMakeup : 'cm3', examPlan : 'ep3', IsPlan : false}
+			courseTime : 'ct3', courseWeek : 'cw3', courseSuspend : 'cs3', courseMakeup : 'cm3', examPlan : 'ep3', IsPlan : 'FALSE'}
 			]
 		};
 		
@@ -517,15 +517,34 @@ jquery('demoBtn2').onclick = function(){
 	
 	var test_local = true;
 	
-	var ScheduleAppModule = angular.module('ScheduleApp',[]).config(function($sceProvider){
+	var ScheduleAppModule = angular.module('ScheduleApp',[]
+	).filter('checkTdEmpty', function(){
+		return function(input){
+			if (angular.isString(input) && !(angular.equals(input, null) || angular.equals(input,''))){
+				return input;
+			} else {
+				return '&nbsp;';
+			}
+		};
+	}).filter('to_trusted',['$sce',function($sce){
+		return function(text){return $sce.trustAsHtml(text);};
+	}]).config(function($sceProvider){
 		$sceProvider.enabled(false);
 	});
 	
 	ScheduleAppModule.factory('ScheduleInterface',function($http){
 		var _ = {};
 		_.getSchedule = function(callback){
-			if (test_local) { callback(fakeSchedule); return; }
-			;
+			/* if (test_local) { callback(fakeSchedule); return; } */			
+			$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.IScript_getXskb',{params:{}
+			}).success(function(data,status,headers,config){
+				callback(data);
+				return;
+			}).error(function(data,status,headers,config){
+				alert('无法获取课程表！（错误码：' + status + "）" );
+				callback(null);
+				return;
+			});
 		};		
 		_.getCourseAttendanceData = function(callback){
 			if (test_local) { callback(fakeAttendance); return; }
