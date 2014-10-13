@@ -12,76 +12,6 @@
 	</head>
 
 	<body>
-		<script type="text/javascript" src="js/angular.min.js" ></script>
-		<script type="text/javascript">
-			function show(num){
-			 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
-				for(i=0;i<lis.length;i++){
-					lis[i].className = '';
-					document.getElementById('con'+(i+1)).style.display = 'none';
-				}
-				
-				document.getElementById('tit'+num).className = 'current';
-				document.getElementById('con'+num).style.display = 'block';
-			 }
-		</script>
-		<script type="text/javascript">
-			$(function(){
-				/*============================
-				@author:flc
-				@time:2014-02-11 18:16:09
-				@qq:3407725
-				============================*/
-				$(".select_two").each(function(){
-					var s=$(this);
-					var z=parseInt(s.css("z-index"));
-					var dt=$(this).children("dt");
-					var dd=$(this).children("dd");
-					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};   //展开效果
-					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};    //关闭效果
-					dt.click(function(){dd.is(":hidden")?_show():_hide();});
-					dd.find("a").click(function(){dt.html($(this).html());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
-					//dd.find("a").click(function(){dt.find("input").val($(this).text());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
-					$("body").click(function(i){ !$(i.target).parents(".select_two").first().is(s) ? _hide():"";});
-				})
-			})
-		</script>
-		
-		<script type="text/javascript">
-			$(function(){
-				/*============================
-				@author:flc
-				@time:2014-02-11 18:16:09
-				@qq:3407725
-				============================*/
-				$(".select_three").each(function(){
-					var s=$(this);
-					var z=parseInt(s.css("z-index"));
-					var dt=$(this).children("dt");
-					var dd=$(this).children("dd");
-					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};   //展开效果
-					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};    //关闭效果
-					dt.click(function(){dd.is(":hidden")?_show():_hide();});
-					dd.find("a").click(function(){dt.html($(this).html());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
-					//dd.find("a").click(function(){dt.find("input").val($(this).text());_hide();});     //选择效果（如需要传值，可自定义参数，在此处返回对应的"value"值 ）
-					$("body").click(function(i){ !$(i.target).parents(".select_three").first().is(s) ? _hide():"";});
-				})
-			})
-		</script>
-		
-		<!--[if lte IE 8]>
-		    <script type="text/javascript" src="js/json3.min.js" ></script>
-		    <script>
-			    document.createElement('ng-include');
-	            document.createElement('ng-pluralize');
-		        document.createElement('ng-view');
-		        // Optionally these for CSS
-		        document.createElement('ng:include');
-		        document.createElement('ng:pluralize');
-		        document.createElement('ng:view');
-			</script>
-		<![endif]-->
-
 		<div class="hder">
 			<div class="hder_top">
 				<div class="hder_l">
@@ -145,6 +75,75 @@
 				<script src="js/public.js" language="javascript" type="text/javascript"></script>
 			</div>
 		</div>
+
+		<script type="text/javascript" src="js/angular.min.js" ></script>
+		<script type="text/javascript">
+			function show(num){
+			 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
+				for(i=0;i<lis.length;i++){
+					lis[i].className = '';
+					document.getElementById('con'+(i+1)).style.display = 'none';
+				}
+				
+				document.getElementById('tit'+num).className = 'current';
+				document.getElementById('con'+num).style.display = 'block';
+			 }
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				/*============================
+				@author:flc
+				@time:2014-02-11 18:16:09
+				@qq:3407725
+				============================*/
+				$(".select_two").each(function(){
+					var s=$(this);
+					var z=parseInt(s.css("z-index"));
+					var dt=$(this).children("dt");
+					var dd=$(this).children("dd");
+					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);}; 
+					dt.click(function(){dd.is(":hidden")?_show():_hide();});
+					dd.find("a").click(function(){dt.html($(this).html());_hide();});
+					/*dd.find("a").click(function(){dt.find("input").val($(this).text());_hide();});*/
+					$("body").click(function(i){ !$(i.target).parents(".select_two").first().is(s) ? _hide():"";});
+				})
+			})
+		</script>
+		
+		<script type="text/javascript">
+			$(function(){
+				/*============================
+				@author:flc
+				@time:2014-02-11 18:16:09
+				@qq:3407725
+				============================*/
+				$(".select_three").each(function(){
+					var s=$(this);
+					var z=parseInt(s.css("z-index"));
+					var dt=$(this).children("dt");
+					var dd=$(this).children("dd");
+					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+					dt.click(function(){dd.is(":hidden")?_show():_hide();});
+					dd.find("a").click(function(){dt.html($(this).html());_hide();});
+					/*dd.find("a").click(function(){dt.find("input").val($(this).text());_hide();});*/
+					$("body").click(function(i){ !$(i.target).parents(".select_three").first().is(s) ? _hide():"";});
+				})
+			})
+		</script>
+		
+		<!--[if lte IE 8]>
+		    <script type="text/javascript" src="js/json3.min.js" ></script>
+		    <script>
+			    document.createElement('ng-include');
+	            document.createElement('ng-pluralize');
+		        document.createElement('ng-view');
+		        document.createElement('ng:include');
+		        document.createElement('ng:pluralize');
+		        document.createElement('ng:view');
+			</script>
+		<![endif]-->
 
 		<div class="s_main" id='ng-app' ng-app='PersonalInfoApp'>
 			<div class="s_main_l">
@@ -343,8 +342,8 @@
 								<a href title="" name="">{{eduBg.degree}}</a>
 							</span>
 							<span class="personal_time_right">
-								<a href title="" class="personal_time_right_an" ng-click='edit($index)'>编辑</a>
-								<a href title="" class="personal_time_right_an" ng-click='remove($index);'>删除</a>
+								<a href title="" class="personal_time_right_an" ng-click='edit($index)' ng-show='editStateNew'>编辑</a>
+								<a href title="" class="personal_time_right_an" ng-click='remove($index);' ng-show='editStateNew'>删除</a>
 							</span>
 						</div>
 					</div>
@@ -590,37 +589,8 @@
 			</div>
 		</div>
 
-		<div class="footer">
-			<div class="ft_box">
-				<div class="ft_box_l">
-					<h2>帮助中心:</h2>
-					<p class="bzzx"><a href title="" class="bzzx1">可以注册多个账号么？</a>/ <a href title="">填写信息需要使用中文还是英文？ </a>/ <a href title="">密码忘记后如何找回？ </a>/ <a href title="">系统显示乱码或出错怎么办？</a>
-					</p>
-					<div class="ft_list">
-						<ul>
-							<li style="margin-left:-8px;"><a href title="">关羽安泰</a>
-							</li>
-							<li><a href title="">网站地图</a>
-							</li>
-							<li><a href title="">友情链接</a>
-							</li>
-							<li><a href title="">帮助中心</a>
-							</li>
-							<li style="background:none;"><a href title="">联系我们</a>
-							</li>
-						</ul>
-						<a href title="" class="ft_box_r">
-							<img src="images/login_5.jpg" width="238" height="50">
-						</a>
-					</div>
-					<p class="bqsy">Copyright 2011-2014 © 上海交通大学安泰经济与管理学院</p>
-				</div>
-				<div class="clear"></div>
-			</div>
-		</div>
-		
 		<script>
-			// 构造的假数据 测试用
+			/*  构造的假数据 测试用 */
 			var fakeObject = {
 				studentID: '5090379149',
 				studentName: 'xian xing',
@@ -653,28 +623,29 @@
 						degree:'学士学位',degreeScope:'下拉6'}
 				]
 			};
-			// 如果这个值为真 那么用fakeObject当做真实数据
+			/* 如果这个值为真 那么用fakeObject当做真实数据 */
 			var test_local = true;
-			// 信息项可见性选项
-			// TODO : 待确认，是写死的， 还是动态获取的， 还是配置的？
+			/* 信息项可见性选项 */
+			/* TODO : 待确认，是写死的， 还是动态获取的， 还是配置的？ */
 			var scopeOptions = ['其他人不可见','全班可见','全年级可见','校友可见'];
 			
-			// 初始化 （包含支持IE7的代码）
+			/* 初始化 （包含支持IE7的代码） */
 			var PersonalInfoAppModule = angular.module('PersonalInfoApp', []).config(function($sceProvider) {
 				$sceProvider.enabled(false);
 			});
 			
-			// 获取个人信息的接口
-			// TODO : 确认接口地址
+			/* 获取个人信息的接口 */
+			/* TODO : 确认接口地址 */
 			PersonalInfoAppModule.factory('PersonalInfoInterface',function($http){				
 				var _ = {};
 				_.getPersonalInfo = function(callback){
 					var PersonalInfoData = undefined;
-					// 返回promise对象
-					// return $http.post('/psc/ACEMTST/....',{params:{}});
-					$http.post('/psc/ACEMTST/....',{params:{}
+					/* 返回promise对象 */
+					/* return $http.post('/psc/ACEMTST/....',{params:{}}); */
+					$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_HOME.FieldFormula.Iscript_getStudentInfo',{params:{}
 					}).success(function(data,status,headers,config){
-						callback(data);
+						callback(fakeObject);
+						/* callback(data); */
 					}).error(function(data,status,headers,config){
 						if (test_local){
 							callback(fakeObject);
@@ -683,35 +654,35 @@
 							callback(null);
 						}
 					});
-				}
+				};
 				return _;
 			});
 			
-			// PersonalInfoController 作为父级Controller 只提供公用的数据
-			// 当获取数据完成后 广播dataReady事件
+			/* PersonalInfoController 作为父级Controller 只提供公用的数据 */
+			/* 当获取数据完成后 广播dataReady事件 */
 			PersonalInfoAppModule.controller(
 				'PersonalInfoController',
 				function ($scope, PersonalInfoInterface){
 					PersonalInfoInterface.getPersonalInfo(function(data){
-						// 如果getPersonalInfo 失败了调用callback(null);
+						/* 如果getPersonalInfo 失败了调用callback(null); */
 						if (data){
 							$scope.PersonalInfoData = data;
 						}
-						// 一定要广播，有的按钮是根据这个状态控制显示状态的
+						/* 一定要广播，有的按钮是根据这个状态控制显示状态的 */
 						$scope.$broadcast('dataReady');
 					});
 				}
 			);
 			
-			// BasicInfoController 第一个页签对应的基本信息Controller
-			// 只有一个保存功能，能更新的内容有限
+			/* BasicInfoController 第一个页签对应的基本信息Controller */
+			/* 只有一个保存功能，能更新的内容有限 */
 			PersonalInfoAppModule.controller(
 				'BasicInfoController',
 				function ($scope){
 					/**********************/
 					/* configuration area */
 					/**********************/
-					// @Unused
+					/* @Unused */
 					var defaultData = {
 						identityNoScope : '全班可见',
 						bankAccountNoScope : '其他人不可见',
@@ -722,27 +693,27 @@
 						;
 					});
 					
-					// 保存事件
+					/* 保存事件 */
 					$scope.saveBasic = function(){
 						fillin();
-						//alert($scope.PersonalInfoData.identityNoScope);
+						/*alert($scope.PersonalInfoData.identityNoScope); */
 						var postData = $.extend(true, {}, $scope.PersonalInfoData);
 						if (postData.educationBackground) delete postData.educationBackground;
 						
-						// post
+						/* post */
 						
-					}
+					};
 					
 					$scope.scopeOptions = scopeOptions;
 					
-					// 无法用ng-model做双向绑定的 select值，手动填充
+					/* 无法用ng-model做双向绑定的 select值，手动填充 */
 					function fillin(){
 						$scope.PersonalInfoData.identityNoScope = $("#identityNoScope").text();
 						$scope.PersonalInfoData.bankAccountNoScope = $("#bankAccountNoScope").text();
 						$scope.PersonalInfoData.bankNameScope = $("#bankNameScope").text();
 					}
 					
-					// @Unused
+					/* @Unused */
 					function clear(){
 						$("#identityNoScope").text(defaultData.identityNoScope);
 						$("#bankAccountNoScope").text(defaultData.bankAccountNoScope);
@@ -751,14 +722,14 @@
 				}
 			);
 			
-			// EducationBackgroundController 第三个页签教育背景对应的Controller
+			/* EducationBackgroundController 第三个页签教育背景对应的Controller */
 			PersonalInfoAppModule.controller(
 				'EducationBackgroundController',
 				function ($scope){
 					/**********************/
 					/* configuration area */
 					/**********************/
-					// 默认填充数据
+					/* 默认填充数据 */
 					var defaultData = { 
 						entryDate:'',
 						graduationDate:'',
@@ -768,25 +739,25 @@
 						degree:'',degreeScope:'全班可见'
 					};
 					
-					// eduBgLst 即PersonalInfoData.educationBackground，抽离出来单独处理
+					/* eduBgLst 即PersonalInfoData.educationBackground，抽离出来单独处理 */
 					var eduBgLst = {};
-					// 默认绑定空的对象
+					/* 默认绑定空的对象 */
 					$scope.eduBgLst = eduBgLst;
-					// 获取数据完成后再次绑定
+					/* 获取数据完成后再次绑定 */
 					$scope.$on('dataReady', function(){
 						if ($scope.PersonalInfoData && $scope.PersonalInfoData.educationBackground){
 							eduBgLst = $scope.PersonalInfoData.educationBackground;
 							$scope.eduBgLst = eduBgLst;
 						}
-						// 数据准备好了，显示添加和保存按钮（如果不等数据 直接调用保存按钮，会覆盖原有数据！）
+						/* 数据准备好了，显示添加和保存按钮（如果不等数据 直接调用保存按钮，会覆盖原有数据！） */
 						$scope.dataReady = true;
 					});
 					
-					// 正在新建记录，对应的是正在编辑记录
+					/* 正在新建记录，对应的是正在编辑记录 */
 					var editStateNew = true;
-					// 记录正在编辑的记录的index
+					/* 记录正在编辑的记录的index */
 					var editIndex = -1;
-					// 默认值编辑区域的值
+					/* 默认值编辑区域的值 */
 					var editEduBg = $.extend(true, {}, defaultData);
 					
 					$scope.editEduBg = editEduBg;
@@ -796,7 +767,7 @@
 					$scope.scopeOptions = scopeOptions;
 					$scope.dataReady = false;
 					
-					// 无法使用ng-model的部分 手动赋值
+					/* 无法使用ng-model的部分 手动赋值 */
 					function fillin(){
 						$scope.editEduBg.entryDate = $("#entryDate").text();
 						$scope.editEduBg.graduationDate = $("#graduationDate").text();
@@ -808,8 +779,8 @@
 						$scope.editEduBg.diplomaScope = $("#diplomaScope").text();
 						$scope.editEduBg.degreeScope = $("#degreeScope").text();
 						
-						// 必须的区域目前也需要 手动判断，因为没有form元素 也不是用submit做的提交
-						// TODO : 确认必填项目
+						/* 必须的区域目前也需要 手动判断，因为没有form元素 也不是用submit做的提交 */
+						/* TODO : 确认必填项目 */
 						if ($scope.editEduBg.entryDate == '' ||
 							$scope.editEduBg.graduationDate == '' ||
 							$scope.editEduBg.graduationCollege == ''){
@@ -820,7 +791,7 @@
 						return true;
 					}
 					
-					// 情况编辑区域，设置为默认值
+					/* 情况编辑区域，设置为默认值 */
 					function clear(){
 						$scope.editEduBg = $.extend(true, {}, $scope.defaultData);
 						
@@ -838,7 +809,7 @@
 						$scope.editStateNew = true;
 					}
 					
-					// 添加一条
+					/* 添加一条 */
 					$scope.add = function(){
 						if (cannot(fillin())){
 							return ;
@@ -848,23 +819,23 @@
 						$scope.eduBgLst.push(clonedEduBg);
 						
 						clear();
-					}
+					};
 					
-					// 删除
+					/* 删除 */
 					$scope.remove = function(index){
 						$scope.eduBgLst.splice(index,1);
-					}
+					};
 					
-					// 编辑
+					/* 编辑 */
 					$scope.edit = function(index){
 						var clonedEduBg = $.extend(true, {}, $scope.eduBgLst[index]);
 						$scope.editEduBg = clonedEduBg;
 						
 						$scope.editIndex = index;
 						$scope.editStateNew = false;
-					}
+					};
 					
-					// 确认修改
+					/* 确认修改 */
 					$scope.confirm = function(){
 						if (cannot(fillin())){
 							return;
@@ -874,20 +845,20 @@
 						$scope.eduBgLst.splice($scope.editIndex,1,clonedEduBg);
 						
 						clear();
-					}
+					};
 					
-					// 取消修改
+					/* 取消修改 */
 					$scope.cancel = function(){
 						clear();
-					}
+					};
 					
-					// 保存教育经历
+					/* 保存教育经历 */
 					$scope.saveEduBg = function(){
 						var postData = $.extend(true, {}, $scope.eduBgLst);
 												
-						// post
+						/* post */
 						
-					}
+					};
 					
 					function cannot(val){
 						return !val;
@@ -896,6 +867,37 @@
 				}
 			);
 		</script>
+		
+		
+		<div class="footer">
+			<div class="ft_box">
+				<div class="ft_box_l">
+					<h2>帮助中心:</h2>
+					<p class="bzzx"><a href title="" class="bzzx1">可以注册多个账号么？</a>/ <a href title="">填写信息需要使用中文还是英文？ </a>/ <a href title="">密码忘记后如何找回？ </a>/ <a href title="">系统显示乱码或出错怎么办？</a>
+					</p>
+					<div class="ft_list">
+						<ul>
+							<li style="margin-left:-8px;"><a href title="">关羽安泰</a>
+							</li>
+							<li><a href title="">网站地图</a>
+							</li>
+							<li><a href title="">友情链接</a>
+							</li>
+							<li><a href title="">帮助中心</a>
+							</li>
+							<li style="background:none;"><a href title="">联系我们</a>
+							</li>
+						</ul>
+						<a href title="" class="ft_box_r">
+							<img src="images/login_5.jpg" width="238" height="50">
+						</a>
+					</div>
+					<p class="bqsy">Copyright 2011-2014 © 上海交通大学安泰经济与管理学院</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		
 	</body>
 
 </html>

@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>个人中心-通讯录</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<script src="js/jquery.js" language="javascript" type="text/javascript"></script>
+<script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
+</head>
+<body>
+<div class="hder">
+  <div class="hder_top">
+    <div class="hder_l">
+      <a href="#" title="上海交通大学" class="fl" style="margin-right:10px; display:inline;">
+        <img src="images/logo.png" width="303" height="48">
+      </a>
+      <span class="fl">
+        学生系统
+      </span>
+    </div>
+    <div class="hder_r">
+      <p>
+          欢迎 <span>李晓京</span>，今天是：<span>2014年4月12日</span> |
+          <a href="#">安全退出</a>   
+      </p>
+    </div>
+  </div>
+  <div class="hder_nav">
+  	<div class="nav">
+ <table class="f4 nav_table" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><div class="nav_list"><a class="nav_a" href="#">首页</a></div></td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">我的课程</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">培养计划</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2 nav_carent">我的课表</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">MBA选课</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">课程/学籍申请调整</li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">我的事务</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">活动预告</a>
+     <ul class="nav_ul2">
+      <li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+      <li class="nav_li2"><a href="#" class="nav_a2">二级导航</a></li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">常用文档</a></div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">个人中心</a></div>
+    </td>
+  </tr>
+ </table>
+</div>
+<script src="js/public.js" language="javascript" type="text/javascript"></script>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(function(){
+	/*============================
+	@author:flc
+	@time:2014-02-11 18:16:09
+	@qq:3407725
+	============================*/
+	$(".select").each(function(){
+		var s=$(this);
+		var z=parseInt(s.css("z-index"));
+		var dt=$(this).children("dt");
+		var dd=$(this).children("dd");
+		var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+		var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+		dt.click(function(){dd.is(":hidden")?_show():_hide();});
+		dd.find("a").click(function(){dt.html($(this).html());_hide();});
+		$("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});
+	})
+})
+</script>
+<script type="text/javascript" src="js/angular.min.js" ></script>
+<!--[if lte IE 8]>
+    <script type="text/javascript" src="js/json3.min.js" ></script>
+    <script>
+	    document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+	</script>
+<![endif]-->
+
+<div class="s_main">
+  <div class="s_main_l">
+  	<div class="crumbs">
+      <p>
+        <a href="#" title="">首页</a>&nbsp;>
+        <a href="#" title="">个人中心</a>&nbsp;>
+        <a href="#" title="">通讯录</a>
+      </p>
+    </div>
+    <div class="sider">
+      <ul>
+        <li style="border-top:3px solid #dadbdd;"><a href="#" title="">个人信息修改</a></li>
+        <li><a href="#" title="" class="current">通讯录</a></li>
+        <li><a href="#" title="">密码修改</a></li>
+      </ul>
+    </div>
+    <div class="sml_kb">
+      <ul>
+      	<li><a href="#" title="">我的课表</a></li>
+        <li><a href="#" title="" id="sml_kb_cv">培养计划</a></li>
+        <li><a href="#" title="">MBA选课</a></li>
+        <li><a href="#" title="">社会活动填报</a></li>
+        <li><a href="#" title="">常用文档</a></li>
+        <li><a href="#" title="">通讯录</a></li>
+        <div class="clear"></div>
+      </ul>
+    </div>
+    <div class="sml_down">
+      <a href="#" title="">
+        <img src="images/sider_4.jpg" width="242" height="219">
+      </a>
+    </div>
+  </div>
+  
+  <div class="s_main_r" id='ng-app' ng-app='AddressBookApp'>
+	<div class="address" ng-controller='AddressBookController'>
+      <div class="address_tit">
+        <h2>通讯录</h2>
+      </div>
+      <div class="address_seach">
+        <div class="address_seach_top">
+        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+              <tr>
+                <td width="52" height="36" align="center">姓名</td>
+                <td width="130">
+                  <input type="text" name="" ng-model='filterObject.studentName' class="address_ipt">
+                </td>
+                <td width="52">&nbsp;</td>
+                <td width="82" align="center">公司名称</td>
+                <td>&nbsp;</td>
+                <td width="130">
+                  <input type="text" name="" ng-model="filterObject.companyName" class="address_ipt">
+                </td>
+                <td width="45">&nbsp;</td>
+                <td width="96" align="right">公司经营范围</td>
+                <td width="16">&nbsp;</td>
+                <td>
+                  <input type="text" name="" ng-model="filterObject.companyScope" class="address_ipt">
+                </td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td width="52" height="36" align="center">国籍</td>
+                <td width="130">
+                  <input type="text" name="" ng-model="filterObject.nationality" class="address_ipt">
+                </td>
+                <td width="52">&nbsp;</td>
+                <td width="82" align="center">常驻城市</td>
+                <td>&nbsp;</td>
+                <td width="130">
+                  <input type="text" name="" ng-model="filterObject.city" class="address_ipt">
+                </td>
+                <td width="45">&nbsp;</td>
+                <td width="96" align="right">公司性质</td>
+                <td width="16">&nbsp;</td>
+                <td>
+                  <dl class="select">
+                    <dt id='companyNature' ng-bind='filterObject.companyNature'>下拉</dt>
+                    <dd>
+                        <ul>
+                            <li><a href>12131</a></li>
+                            <li><a href>下拉2</a></li>
+                            <li><a href>下拉3</a></li>
+                            <li><a href>下拉4</a></li>
+                            <li><a href>下拉5</a></li>
+                            <li><a href>下拉6</a></li>
+                        </ul>
+                    </dd>
+                </dl>
+                </td>
+                <td>&nbsp;</td>
+              </tr>
+              
+            </table>
+
+        </div>
+        <div class="address_seach_ss">          
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td width="20"></td>
+              <td width="112">
+                <label>
+                <input type="radio" name="RadioGroup1" value="1" ng-model='filterObject.studentType' id="RadioGroup1_0">
+                本班同学</label>
+              </td>
+              <td width="112">
+                <label>
+                <input type="radio" name="RadioGroup1" value="2" ng-model='filterObject.studentType' id="RadioGroup1_1">
+                本年级同学</label>
+              </td>
+              <td width="112">
+                <label>
+                <input type="radio" name="RadioGroup1" value="3" ng-model='filterObject.studentType' id="RadioGroup1_2">
+                所有在校生</label>
+              </td>
+              <td width="310">&nbsp;</td>
+              <td><a href title="" class="address_seach_ss_an" ng-click='search();' >搜索</a></td>
+            </tr>
+          </table>
+        </div>
+        <div class="address_seach_biaog">
+          <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+              <td height="20">姓名</td>
+              <td>班级</td>
+              <td>手机</td>
+              <td>电子邮箱</td>
+              <td>国籍</td>
+              <td>常驻城市</td>
+              <td>公司名称</td>
+              <td>部门</td>
+              <td>职务</td>
+              <td>公司性质</td>
+              <td>公司经营范围</td>
+            </tr>
+            <!-- it's ok not to use ng-bind , onready the page show no rows of student ! -->
+            <tr dir-paginate="student in studentList | itemsPerPage: pageSize" current-page="currentPage" total-items="totalStudentNumber">
+              <td height="50">&nbsp;{{student.studentName}}&nbsp;</td>
+              <td>&nbsp;{{student.className}}&nbsp;</td>
+              <td>&nbsp;{{student.phone}}&nbsp;</td>
+              <td>&nbsp;{{student.email}}&nbsp;</td>
+              <td>&nbsp;{{student.nationality}}&nbsp;</td>
+              <td>&nbsp;{{student.city}}&nbsp;</td>
+              <td>&nbsp;{{student.companyName}}&nbsp;</td>
+              <td>&nbsp;{{student.department}}&nbsp;</td>
+              <td>&nbsp;{{student.job}}&nbsp;</td>
+              <td>&nbsp;{{student.companyNature}}&nbsp;</td>
+              <td>&nbsp;{{student.companyScope}}&nbsp;</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="notic_fanye">
+      	<dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="js/dirPagination.tpl.html"></dir-pagination-controls>
+      </div>
+    </div>
+  </div>
+  
+  
+  <script>
+  		var test_local = true;
+  		var fakeObject = {
+  			currentPageNumber: 1,
+  			totalPageNumber: 11,
+  			studentList: [{
+  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
+  			},{
+  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
+  			},{
+  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
+  			},{
+  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
+  			},{
+  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
+  			},{
+  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
+  			},{
+  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
+  			},{
+  				studentName: "Liu She", className: "Xue Qian Ban(Xiao Ban)", phone: 12333333333, email: "liuzhe@tz.com",
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Waiter", job: "Ku Bi"
+  			},{
+  				studentName: "Liu Te", className: "Xue Qian Ban(Da Ban)", phone: 12333333333, email: "liuzhe@tz.com", 
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "Tech.", job: "Niu Bi", companyNature: "Limited Cop."
+  			},{
+  				studentName: "Liu Re", className: "Xue Qian Ban(Chao Ren Ban)", phone: 12333333333, email: "liuzhe@tz.com", 
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "IT", job: "Dou Bi", companyNature: "UnLimited", companyScope: "ITITs"
+  			},{
+  				studentName: "Liu Me", className: "Xue Qian Ban(Xiao Er Ban)", phone: 12333333333, email: "liuzhe@tz.com", 
+  				nationality: "china", city: "beijing", companyName: "Tz", department: "HR"
+  			}]
+  		};
+  		
+  		var AddressBookAppModule = angular.module('AddressBookApp', []).config(function($sceProvider) {
+			$sceProvider.enabled(false);
+		});
+		
+		AddressBookAppModule.factory('AddressBookInterface', function($http){
+			var _ = {};
+			/* filterObject should have studentPerPage, pageNumber, orderBy */
+			_.getAdrressBookByPage = function(filterObject, callback){
+				if (!isValidParameter(filterObject)) {
+					callback(null);
+					return;
+				}
+				
+				$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_HOME.FieldFormula.Iscript_getStudentInfo',{params: filterObject
+				}).success(function(data,status,headers,config){
+					if (test_local ){
+						/* 测试时候的模拟 */
+						var fo = $.extend(true, {}, fakeObject);
+						var pn = filterObject.pageNumber;
+						if (!pn || pn <= 0) pn = 1;
+						fo.studentList = fo.studentList.slice(pn-1,pn);
+						callback(fo);
+					} else {
+						callback(data);
+					}
+				}).error(function(data,status,headers,config){
+					if (test_local ){
+						/* 测试时候的模拟 */
+						var fo = $.extend(true, {}, fakeObject);
+						var pn = filterObject.pageNumber;
+						if (!pn || pn <= 0) pn = 1;
+						fo.studentList = fo.studentList.slice(pn-1,pn);
+						callback(fo);
+					} else {
+						callback(null);
+					}
+				});
+			};
+			function isValidParameter(filterObject){
+				var valid = true;
+				if (!filterObject) return false;
+				if (!filterObject.studentPerPage || typeof(filterObject.studentPerPage) != "number" || filterObject.studentPerPage < 1 || filterObject.studentPerPage > 20) filterObject.studentPerPage = 10;
+				if (!filterObject.pageNumber || typeof(filterObject.pageNumber) != "number" || filterObject.pageNumber < 1) filterObject.pageNumber = 1;
+				if (!filterObject.orderBy) filterObject.orderBy = 1; /*  无orderBy  */
+				if (!filterObject.studentType) filterObject.studentType = 1; /* 本班同学 */
+				return valid;
+			};
+			return _;
+		});
+		
+		AddressBookAppModule.controller(
+			'AddressBookController',
+			function($scope, AddressBookInterface){
+				
+				/* 当前页码 每页数据量 总数据量（设置为0 否则他自动载入） */
+				$scope.currentPage = 1;
+				$scope.pageSize = 1;
+				$scope.totalStudentNumber = 0;
+				
+				
+				/* filter object */
+				var defaultFilterObject = {
+					studentName : '',
+					companyName : '',
+					companyScope : '',
+					nationality : '',
+					city : '',
+					companyNature : '',
+					studentType : 3,
+					studentPerPage : $scope.pageSize,
+					pageNumber : 1,
+					orderBy : 0
+				};
+				
+				var filterObject = $.extend(true, {}, defaultFilterObject);
+				$scope.filterObject = filterObject;
+				
+				/* by default : studentList is empty */
+				var studentList = [];
+				$scope.studentList = studentList;
+				
+				
+				function fillin(){
+					$scope.filterObject.companyNature = $("#companyNature").text();
+				};
+				
+				function getResultsPage(num){
+					if (num < 1) num = 1;
+					fillin();
+					$scope.filterObject.pageNumber = num;
+					/* $scope.filterObject is changed by the interface !!! And it's ok ! */
+					AddressBookInterface.getAdrressBookByPage($scope.filterObject, function(data){
+						$scope.studentList = data.studentList;
+						$scope.totalStudentNumber = data.totalPageNumber * $scope.pageSize;
+					});
+				};
+				
+				$scope.pageChangeHandler = function(num) {
+					getResultsPage(num);
+				};
+				
+				$scope.search = function(){
+					getResultsPage(1);
+				};
+			}
+		);
+		var moduleName = 'AddressBookApp';
+  </script>
+  <script type="text/javascript" src="js/dirPagination.js" ></script>
+  
+  <div class="clear"></div>
+</div>
+<div class="dialog_pop" id="imgBox" style="display:none;">
+    <div class="ctstab_mar">
+      <table width="326" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="11" height="40">&nbsp;</td>
+        <td width="78" align="right">课程名:</td>
+        <td width="22">&nbsp;</td>
+        <td width="198">哲学与人生</td>
+        <td width="17">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="40">&nbsp;</td>
+        <td align="right">投点数:</td>
+        <td>&nbsp;</td>
+        <td><input type="text" value="" class="ctstab_mar_ipt"></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="60">&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>
+        <div class="easyDialog_footer">
+            <a href="#" id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">取消</a>
+        </div> 
+        </td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    </div>
+</div>
+<div class="dialog_pop" id="imgBox2" style="display:none;">
+    <div class="ctstab_mar">
+      <table width="326" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="11" height="40">&nbsp;</td>
+        <td width="78" align="right">课程名:</td>
+        <td width="22">&nbsp;</td>
+        <td width="198">哲学与人生</td>
+        <td width="17">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="40">&nbsp;</td>
+        <td align="right">投点数:</td>
+        <td>&nbsp;</td>
+        <td><input type="text" value="200" class="ctstab_mar_ipt2"></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="60">&nbsp;</td>
+        <td colspan="4">
+          <div class="easyDialog_footer dialog_an">
+            <a href="#" id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">返回</a>
+            <a href="#" id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">撤销</a>
+          </div>        
+        </td>
+        </tr>
+    </table>
+    </div>
+</div>
+
+<div class="footer">
+	<div class="ft_box">
+      <div class="ft_box_l">
+        <h2>帮助中心:</h2>
+        <p class="bzzx"><a href="#" title="" class="bzzx1">可以注册多个账号么？</a>/ <a href="#" title="">填写信息需要使用中文还是英文？ </a>/ <a href="#" title="">密码忘记后如何找回？ </a>/ <a href="#" title="">系统显示乱码或出错怎么办？</a></p>
+        <div class="ft_list">
+          <ul>
+            <li style="margin-left:-8px;"><a href="#" title="">关羽安泰</a></li>
+            <li><a href="#" title="">网站地图</a></li>
+            <li><a href="#" title="">友情链接</a></li>
+            <li><a href="#" title="">帮助中心</a></li>
+            <li style="background:none;"><a href="#" title="">联系我们</a></li>
+          </ul>
+          <a href="#" title="" class="ft_box_r">
+            <img src="images/login_5.jpg" width="238" height="50">
+          </a>
+        </div>
+        <p class="bqsy">Copyright 2011-2014 © 上海交通大学安泰经济与管理学院</p>
+      </div>
+      <div class="clear"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<div class="pagination notic_fanye" ng-if="1 < pages.length">
+	<span ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }" ng-click="setCurrent(1)">首&nbsp;页</span>
+	<span ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }" ng-click="setCurrent(pagination.current - 1)">上一页</span>
+	<a href ng-repeat="pageNumber in pages track by $index" ng-class="{ current : pagination.current == pageNumber, disabled : pageNumber == '...' }" ng-click="setCurrent(pageNumber)">{{pageNumber}}</a>
+	<span ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }" ng-click="setCurrent(pagination.current + 1)">下一页</span>
+	<span ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == pagination.last }" ng-click="setCurrent(pagination.last)">末&nbsp;页</span>
+</div>
