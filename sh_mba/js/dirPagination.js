@@ -168,7 +168,6 @@
 
         return {
             restrict: 'AE',
-            replace: true,
             templateUrl: function(elem, attrs) {
                 return attrs.templateUrl || templatePath;
             },
