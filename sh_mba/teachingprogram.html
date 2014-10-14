@@ -70,41 +70,14 @@
   </div>
 </div>
 
+<!--TODO : startCopy-->
 
 <script type="text/javascript" src="js/angular.min.js"></script>
 <div class="s_main">
-  <div class="s_main_l">
-  	<div class="crumbs">
-      <p>
-        <a href="#" title="">首页</a>&nbsp;>
-        <a href="#" title="">我的课程</a>&nbsp;>
-        <a href="#" title="">培养计划</a>
-      </p>
-    </div>
-    <div class="sider">
-      <ul>
-        <li style="border-top:3px solid #dadbdd;"><a href="#" title="" class="current">培养计划</a></li>
-        <li><a href="#" title="">我的课表</a></li>
-        <li><a href="#" title="">MBA选课</a></li>
-        <li><a href="#" title="">课程/学籍变动申请</a></li>
-      </ul>
-    </div>
-    <div class="sml_kb">
-      <ul>
-      	<li><a href="#" title="">我的课表</a></li>
-        <li><a href="#" title="" id="sml_kb_cv">培养计划</a></li>
-        <li><a href="#" title="">MBA选课</a></li>
-        <li><a href="#" title="">社会活动填报</a></li>
-        <li><a href="#" title="">常用文档</a></li>
-        <li><a href="#" title="">通讯录</a></li>
-        <div class="clear"></div>
-      </ul>
-    </div>
-    <div class="sml_down">
-      <a href="#" title="">
-        <img src="images/sider_4.jpg" width="242" height="219">
-      </a>
-    </div>
+  
+	<!--left menu-->
+  <div id="left_div_id">
+    <script>$("#left_div_id").load("/mbastu/_menu/menu_503.html");</script>
   </div>
   
   <div class="s_main_r" id="ng-app" ng-app="TeachingProgramApp">
@@ -234,9 +207,7 @@
 	};
 	/*old version:compulsoryGot : 10,compulsoryAll : 19, electivesGot : 9,electivesAll : 14,programRemark : '1'*/
 
-	var studentObject = getStudentObject();
-	var studentName = '?';
-	if (studentObject && studentObject.name) studentName = studentObject.name;
+	var studentName;
 	
 	var test_local = true;
 	var ProgramAppModule = angular.module('TeachingProgramApp', []).filter('checkTdEmpty', function(){
@@ -268,7 +239,6 @@
 		return _;
 	});
 	
-	/* TODO : here*/
 	ProgramAppModule.controller(
 		'TeachingProgramController',
 		function($scope, ProgramInterface){
@@ -286,7 +256,7 @@
 			};
 			
 			function decoration(obj){
-				obj.display_studentName = studentName || "?" + " 培养计划";
+				obj.display_studentName = (studentName || "") + " 培养计划";
 				obj.display_compulsoryCreditStatus = "必修课列表，要求必修课总学分" + obj.compulsoryAll + "，已修必修课总学分" + obj.compulsoryGot;
 				obj.display_electivesCreditStatus = "选修课列表，要求选修课总学分" + obj.electivesAll + "，已修选修课总学分" + obj.electivesGot;
 				
@@ -300,11 +270,18 @@
 					$scope.program = decoration(data);
 				}
 			});
+			
+			getStudentObject(function(studentObject){
+				if (studentObject && studentObject.name){
+					studentName = studentObject.name;
+					$scope.program.displayDPI = (studentName || "") + " 培养计划";
+				}
+			});
 		}
 	);
 </script>
 
-
+<!--TODO : endCopy-->
 <div class="footer">
 	<div class="ft_box">
       <div class="ft_box_l">

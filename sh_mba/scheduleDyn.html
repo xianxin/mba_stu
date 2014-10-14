@@ -94,6 +94,8 @@
 	</div>
 </div>
 
+<!--TODO : startCopy-->
+
 <script type="text/javascript" src="js/angular.min.js"></script>
 <script src="js/easydialog.min.js" language="javascript" type="text/javascript"></script>
 <script>
@@ -109,49 +111,12 @@
 	 }
 </script>
 <div class="s_main">
-	<div class="s_main_l">
-		<div class="crumbs">
-			<p>
-				<a href="#" title="">首页</a>&nbsp;>
-				<a href="#" title="">我的课程</a>&nbsp;>
-				<a href="#" title="">我的课表</a>
-			</p>
-		</div>
-		<div class="sider">
-			<ul>
-				<li style="border-top:3px solid #dadbdd;"><a href="#" title="">培养计划</a>
-				</li>
-				<li><a href="#" title="" class="current">我的课表</a>
-				</li>
-				<li><a href="#" title="">MBA选课</a>
-				</li>
-				<li><a href="#" title="">课程/学籍变动申请</a>
-				</li>
-			</ul>
-		</div>
-		<div class="sml_kb">
-			<ul>
-				<li><a href="#" title="">我的课表</a>
-				</li>
-				<li><a href="#" title="" id="sml_kb_cv">培养计划</a>
-				</li>
-				<li><a href="#" title="">MBA选课</a>
-				</li>
-				<li><a href="#" title="">社会活动填报</a>
-				</li>
-				<li><a href="#" title="">常用文档</a>
-				</li>
-				<li><a href="#" title="">通讯录</a>
-				</li>
-				<div class="clear"></div>
-			</ul>
-		</div>
-		<div class="sml_down">
-			<a href="#" title="">
-				<img src="images/sider_4.jpg" width="242" height="219">
-			</a>
-		</div>
+	
+	<!--left menu-->
+	<div id="left_div_id">
+		<script>$("#left_div_id").load("/mbastu/_menu/menu_503.html");</script>
 	</div>
+	
 	<div class="s_main_r" id='ng-app' ng-app='ScheduleApp'>
 		<div class="schedule_cont" ng-controller='ScheduleController'>
 			<div class="schedule_cont_bt">
@@ -246,7 +211,6 @@
 				</div>
 			</div>
 			
-			<!--TODO: now-->
 			<div class="dialog_wdkb" id="imgBox_UnevaluatedStudentList" style="display:none;" >
 				<div class="dialog_wdkb_mar">
 					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_bt">
@@ -448,7 +412,6 @@ jquery('demoBtn2').onclick = function(){
 };*/
 </script>
 
-<!--TODO:Script starts here-->
 <script>
 
 	{
@@ -577,7 +540,6 @@ jquery('demoBtn2').onclick = function(){
 		return _;
 	});
 	
-	/* TODO : new */
 	ScheduleAppModule.controller(
 		'ScheduleController',
 		function($scope,ScheduleInterface){
@@ -678,6 +640,7 @@ jquery('demoBtn2').onclick = function(){
 	);
 </script>
 
+<!--TODO : endCopy-->
 <div class="footer">
 	<div class="ft_box">
       <div class="ft_box_l">

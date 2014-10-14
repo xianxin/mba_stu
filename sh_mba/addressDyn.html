@@ -72,6 +72,24 @@
   </div>
 </div>
 
+<!--TODO : startCopy-->
+
+<script type="text/javascript" src="js/sonic.js" ></script>
+<div id="loading_8" style="display: none;"></div>
+<script>var sonicLoading = new Sonic('loading_8');</script>
+<style>
+	
+	div#loading_8 {
+		border: 0;
+		position: fixed;
+		left:50%;top:50%;
+		margin-left:width/2;margin-top:height/2;
+		width: 40px;
+		height: 40px;
+		background: transparent;
+	}
+	
+</style>
 <script type="text/javascript">
 $(function(){
 	/*============================
@@ -106,37 +124,10 @@ $(function(){
 <![endif]-->
 
 <div class="s_main">
-  <div class="s_main_l">
-  	<div class="crumbs">
-      <p>
-        <a href="#" title="">首页</a>&nbsp;>
-        <a href="#" title="">个人中心</a>&nbsp;>
-        <a href="#" title="">通讯录</a>
-      </p>
-    </div>
-    <div class="sider">
-      <ul>
-        <li style="border-top:3px solid #dadbdd;"><a href="#" title="">个人信息修改</a></li>
-        <li><a href="#" title="" class="current">通讯录</a></li>
-        <li><a href="#" title="">密码修改</a></li>
-      </ul>
-    </div>
-    <div class="sml_kb">
-      <ul>
-      	<li><a href="#" title="">我的课表</a></li>
-        <li><a href="#" title="" id="sml_kb_cv">培养计划</a></li>
-        <li><a href="#" title="">MBA选课</a></li>
-        <li><a href="#" title="">社会活动填报</a></li>
-        <li><a href="#" title="">常用文档</a></li>
-        <li><a href="#" title="">通讯录</a></li>
-        <div class="clear"></div>
-      </ul>
-    </div>
-    <div class="sml_down">
-      <a href="#" title="">
-        <img src="images/sider_4.jpg" width="242" height="219">
-      </a>
-    </div>
+  
+  <!--left menu-->
+  <div id="left_div_id">
+    <script>$("#left_div_id").load("/mbastu/_menu/menu_507.html");</script>
   </div>
   
   <div class="s_main_r" id='ng-app' ng-app='AddressBookApp'>
@@ -362,6 +353,7 @@ $(function(){
 				/* 当前页码 每页数据量 总数据量（设置为0 否则他自动载入） */
 				$scope.currentPage = 1;
 				$scope.pageSize = 12;
+				if (test_local) $scope.pageSize = 1;
 				$scope.totalStudentNumber = 0;
 				
 				
@@ -392,6 +384,7 @@ $(function(){
 				};
 				
 				function getResultsPage(num){
+					if (!test_local) sonicLoading.play();
 					if (num < 1) num = 1;
 					fillin();
 					$scope.filterObject.pageNumber = num;
@@ -399,11 +392,18 @@ $(function(){
 					AddressBookInterface.getAdrressBookByPage($scope.filterObject, function(data){
 						$scope.studentList = data.studentList;
 						$scope.totalStudentNumber = data.totalPageNumber * $scope.pageSize;
+						
+						setTimeout(function(){sonicLoading.stop();},20);
 					});
 				};
 				
 				$scope.pageChangeHandler = function(num) {
-					getResultsPage(num);
+					if (test_local) {
+						setTimeout(function(){getResultsPage(num);},2000);
+						sonicLoading.play();
+					} else {
+						getResultsPage(num);
+					}
 				};
 				
 				$scope.search = function(){
@@ -418,6 +418,7 @@ $(function(){
   <div class="clear"></div>
 </div>
 
+<!--TODO : endCopy-->
 
 
 <div class="dialog_pop" id="imgBox" style="display:none;">

@@ -76,6 +76,8 @@
 			</div>
 		</div>
 
+		<!--TODO : startCopy-->
+
 		<script type="text/javascript" src="js/angular.min.js" ></script>
 		<script type="text/javascript">
 			function show(num){
@@ -146,38 +148,11 @@
 		<![endif]-->
 
 		<div class="s_main" id='ng-app' ng-app='PersonalInfoApp'>
-			<div class="s_main_l">
-				<div class="crumbs">
-					<p>
-						<a href title="">首页</a>
-						<a href title="">个人中心</a>
-						<a href title="">个人信息修改</a>
-					</p>
-				</div>
-				<div class="sider">
-					<ul>
-						<li style="border-top:3px solid #dadbdd;"><a href title="" class="current">个人信息修改</a></li>
-						<li><a href title="">通讯录</a></li>
-						<li><a href title="">密码修改</a></li>
-					</ul>
-				</div>
-				<div class="sml_kb">
-					<ul>
-						<li><a href title="">我的课表</a></li>
-						<li><a href title="" id="sml_kb_cv">培养计划</a></li>
-						<li><a href title="">MBA选课</a></li>
-						<li><a href title="">社会活动填报</a></li>
-						<li><a href title="">常用文档</a></li>
-						<li><a href title="">通讯录</a></li>
-						<div class="clear"></div>
-					</ul>
-				</div>
-				<div class="sml_down">
-					<a href title="">
-						<img src="images/sider_4.jpg" width="242" height="219">
-					</a>
-				</div>
+			<!--left menu-->
+			<div id="left_div_id">
+				<script>$("#left_div_id").load("/mbastu/_menu/menu_507.html");</script>
 			</div>
+			
 			<div class="s_main_r" ng-controller='PersonalInfoController'>
 				<div class="personal">
 					<h2>个人信息修改</h2>
@@ -635,7 +610,6 @@
 			});
 			
 			/* 获取个人信息的接口 */
-			/* TODO : 确认接口地址 */
 			PersonalInfoAppModule.factory('PersonalInfoInterface',function($http){				
 				var _ = {};
 				_.getPersonalInfo = function(callback){
@@ -869,6 +843,7 @@
 			);
 		</script>
 		
+		<!--TODO : endCopy-->
 		
 		<div class="footer">
 			<div class="ft_box">
