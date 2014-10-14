@@ -228,31 +228,31 @@ $(function(){
         <div class="address_seach_biaog">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td height="20">姓名</td>
-              <td>班级</td>
-              <td>手机</td>
-              <td>电子邮箱</td>
-              <td>国籍</td>
-              <td>常驻城市</td>
-              <td>公司名称</td>
-              <td>部门</td>
-              <td>职务</td>
-              <td>公司性质</td>
-              <td>公司经营范围</td>
+              <td style="width: 58px;padding: 2px;word-wrap:break-word;word-break:break-all;" height="20">姓名</td>
+              <td style="width: 38px;padding: 2px;word-wrap:break-word;word-break:break-all;">班级</td>
+              <td style="width: 96px;padding: 2px;word-wrap:break-word;word-break:break-all;">手机</td>
+              <td style="width: 87px;padding: 2px;word-wrap:break-word;word-break:break-all;">电子邮箱</td>
+              <td style="width: 42px;padding: 2px;word-wrap:break-word;word-break:break-all;">国籍</td>
+              <td style="width: 57px;padding: 2px;word-wrap:break-word;word-break:break-all;">常驻城市</td>
+              <td style="width: 88px;padding: 2px;word-wrap:break-word;word-break:break-all;">公司名称</td>
+              <td style="width: 42px;padding: 2px;word-wrap:break-word;word-break:break-all;">部门</td>
+              <td style="width: 27px;padding: 2px;word-wrap:break-word;word-break:break-all;">职务</td>
+              <td style="width: 58px;padding: 2px;word-wrap:break-word;word-break:break-all;">公司性质</td>
+              <td style="width: 90px;padding: 2px;word-wrap:break-word;word-break:break-all;">公司经营范围</td>
             </tr>
             <!-- it's ok not to use ng-bind , onready the page show no rows of student ! -->
             <tr dir-paginate="student in studentList | itemsPerPage: pageSize" current-page="currentPage" total-items="totalStudentNumber">
-              <td height="50">&nbsp;{{student.studentName}}&nbsp;</td>
-              <td>&nbsp;{{student.className}}&nbsp;</td>
-              <td>&nbsp;{{student.phone}}&nbsp;</td>
-              <td>&nbsp;{{student.email}}&nbsp;</td>
-              <td>&nbsp;{{student.nationality}}&nbsp;</td>
-              <td>&nbsp;{{student.city}}&nbsp;</td>
-              <td>&nbsp;{{student.companyName}}&nbsp;</td>
-              <td>&nbsp;{{student.department}}&nbsp;</td>
-              <td>&nbsp;{{student.job}}&nbsp;</td>
-              <td>&nbsp;{{student.companyNature}}&nbsp;</td>
-              <td>&nbsp;{{student.companyScope}}&nbsp;</td>
+              <td style="width: 58px;padding: 2px;word-wrap:break-word;word-break:break-all;" height="50">&nbsp;{{student.studentName}}&nbsp;</td>
+              <td style="width: 38px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.className}}&nbsp;</td>
+              <td style="width: 96px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.phone}}&nbsp;</td>
+              <td style="width: 87px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.email}}&nbsp;</td>
+              <td style="width: 42px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.nationality}}&nbsp;</td>
+              <td style="width: 57px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.city}}&nbsp;</td>
+              <td style="width: 88px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.companyName}}&nbsp;</td>
+              <td style="width: 42px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.department}}&nbsp;</td>
+              <td style="width: 27px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.job}}&nbsp;</td>
+              <td style="width: 58px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.companyNature}}&nbsp;</td>
+              <td style="width: 90px;padding: 2px;word-wrap:break-word;word-break:break-all;">&nbsp;{{student.companyScope}}&nbsp;</td>
             </tr>
           </table>
         </div>
@@ -318,7 +318,7 @@ $(function(){
 					return;
 				}
 				
-				$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_HOME.FieldFormula.IScript_getConList?' + $.param(filterObject),{params: {}
+				$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_CONLIST.FieldFormula.IScript_getConList?' + ($.param(filterObject)),{params: {}
 				}).success(function(data,status,headers,config){
 					if (test_local ){
 						/* 测试时候的模拟 */

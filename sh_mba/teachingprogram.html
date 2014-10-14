@@ -67,7 +67,6 @@
   </tr>
  </table>
 </div>
-<script src="js/public.js" language="javascript" type="text/javascript"></script>
   </div>
 </div>
 
@@ -107,7 +106,7 @@
       </a>
     </div>
   </div>
-  <span id="stu_name"></span>
+  
   <div class="s_main_r" id="ng-app" ng-app="TeachingProgramApp">
     <div class="schedule_cont" ng-controller="TeachingProgramController">
       <div class="schedule_cont_bt">
@@ -235,7 +234,9 @@
 	};
 	/*old version:compulsoryGot : 10,compulsoryAll : 19, electivesGot : 9,electivesAll : 14,programRemark : '1'*/
 
-	var studentName = $("#stu_name").html();
+	var studentObject = getStudentObject();
+	var studentName = '?';
+	if (studentObject && studentObject.name) studentName = studentObject.name;
 	
 	var test_local = true;
 	var ProgramAppModule = angular.module('TeachingProgramApp', []).filter('checkTdEmpty', function(){

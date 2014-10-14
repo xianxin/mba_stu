@@ -3,12 +3,12 @@ $(document).ready(function(){
 	$("#_verify").click(function(){
 		getVerify();
 	})
-	$("#_username").placeholder();
-	$("#_password").placeholder();
-	$("#_verifyid").placeholder();
+	if ($("#_username").length > 0) $("#_username").placeholder();
+	if ($("#_password").length > 0)	$("#_password").placeholder();
+	if ($("#_verifyid").length > 0) $("#_verifyid").placeholder();
 	
 });
-            
+
 function SKclass (obj,Rate,speed) {
 var oL=obj.offsetLeft;
 //var oT=obj.offsetTop;
