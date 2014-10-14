@@ -265,7 +265,7 @@ $(function(){
   
   
   <script>
-  		var test_local = true;
+  		var test_local = false;
   		var fakeObject = {
   			currentPageNumber: 1,
   			totalPageNumber: 11,
@@ -318,7 +318,7 @@ $(function(){
 					return;
 				}
 				
-				$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_HOME.FieldFormula.Iscript_getStudentInfo',{params: filterObject
+				$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_HOME.FieldFormula.IScript_getConList?' + $.param(filterObject),{params: {}
 				}).success(function(data,status,headers,config){
 					if (test_local ){
 						/* 测试时候的模拟 */
@@ -361,7 +361,7 @@ $(function(){
 				
 				/* 当前页码 每页数据量 总数据量（设置为0 否则他自动载入） */
 				$scope.currentPage = 1;
-				$scope.pageSize = 1;
+				$scope.pageSize = 12;
 				$scope.totalStudentNumber = 0;
 				
 				
@@ -417,6 +417,9 @@ $(function(){
   
   <div class="clear"></div>
 </div>
+
+
+
 <div class="dialog_pop" id="imgBox" style="display:none;">
     <div class="ctstab_mar">
       <table width="326" border="0" cellpadding="0" cellspacing="0">

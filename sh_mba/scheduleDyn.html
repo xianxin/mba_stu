@@ -181,9 +181,9 @@
 						<tr ng-repeat='course in studentSchedule.courseList'>
 							<td>{{course.courseName}}
 								<br />
-								<a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseReference(course.courseId)">课程资料</a>
+								<a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseReference(course.courseID)">课程资料</a>
 								<br />
-								<a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseAttendance(course.courseId)">查看考勤</a>
+								<a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseAttendance(course.courseID)">查看考勤</a>
 							</td>
 							<td ng-bind-html='course.courseHours | checkTdEmpty'></td>
 							<td ng-bind-html='course.credit | checkTdEmpty'></td>
@@ -196,7 +196,7 @@
 							<td ng-if="course.IsPlan == 'FALSE'">&nbsp;课程评估率＜95%
 								<br>不能查看考试安排
 								<br>
-								<a href title="" class="scp_kczl" ng-click="openUnevaluatedStudentList(course.courseId)">查看未完成<br>评估学生</a>&nbsp;
+								<a href title="" class="scp_kczl" ng-click="openUnevaluatedStudentList(course.courseID)">查看未完成<br>评估学生</a>&nbsp;
 							</td>
 						</tr>
 
@@ -457,11 +457,11 @@ jquery('demoBtn2').onclick = function(){
 			className : 'className456',
 			graDate : '2011-01-01',
 			courseList : [
-			{courseId : 'cid1', courseName : 'cn1', courseHours : 'ch1', credit : 'c1', teacher : 't1', 
+			{courseID : 'cid1', courseName : 'cn1', courseHours : 'ch1', credit : 'c1', teacher : 't1', 
 			courseTime : 'ct1<br>ct11<br>ct111', courseWeek : 'cw1', courseSuspend : 'cs1', courseMakeup : 'cm1', examPlan : 'ep1', IsPlan : 'TRUE'},
-			{courseId : 'cid2', courseName : 'cn2', courseHours : 'ch2', credit : 'c2', teacher : 't2', 
+			{courseID : 'cid2', courseName : 'cn2', courseHours : 'ch2', credit : 'c2', teacher : 't2', 
 			courseTime : 'ct2', courseWeek : 'cw2', courseSuspend : 'cs2', courseMakeup : 'cm2', examPlan : 'ep2', IsPlan : 'FALSE'},
-			{courseId : 'cid3', courseName : 'cn3', courseHours : 'ch3', credit : 'c3', teacher : 't3', 
+			{courseID : 'cid3', courseName : 'cn3', courseHours : 'ch3', credit : 'c3', teacher : 't3', 
 			courseTime : 'ct3', courseWeek : 'cw3', courseSuspend : 'cs3', courseMakeup : 'cm3', examPlan : 'ep3', IsPlan : 'FALSE'}
 			]
 		};
@@ -546,17 +546,33 @@ jquery('demoBtn2').onclick = function(){
 				return;
 			});
 		};		
-		_.getCourseAttendanceData = function(callback){
-			if (test_local) { callback(fakeAttendance); return; }
-			;
+		_.getCourseAttendanceData = function(cid, callback){
+			/* if (test_local) { callback(fakeAttendance); return; } */
+			$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_GetKq?' + $.param({coursId: cid}),{params:{}
+			}).success(function(data,status,headers,config){
+				callback(data);
+				return;
+			}).error(function(data,status,headers,config){
+				alert('无法获取考勤记录！（错误码：' + status + "）" );
+				callback(null);
+				return;
+			});
 		};
-		_.getUnevaluatedStudentList = function(callback){
+		_.getUnevaluatedStudentList = function(cid, callback){
 			if (test_local) { callback(fakeUnevaluation); return; }
 			;
 		};
-		_.getCourseReferenceData = function(callback){
-			if (test_local) { callback(fakeReference); return; }
-			;
+		_.getCourseReferenceData = function(cid, callback){
+			/* if (test_local) { callback(fakeReference); return; } */
+			$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_CourseData?' + $.param({coursId: cid}),{params:{}
+			}).success(function(data,status,headers,config){
+				callback(data);
+				return;
+			}).error(function(data,status,headers,config){
+				alert('无法获取考勤记录！（错误码：' + status + "）" );
+				callback(null);
+				return;
+			});
 		};
 		return _;
 	});
@@ -610,7 +626,7 @@ jquery('demoBtn2').onclick = function(){
 			};
 			$scope.unEvaluation = $.extend(true, {}, emptyUnEvaluation);
 			$scope.openUnevaluatedStudentList = function (cid){
-				ScheduleInterface.getUnevaluatedStudentList(function(data){
+				ScheduleInterface.getUnevaluatedStudentList(cid, function(data){
 					if (data){
 						$scope.unEvaluation = data;
 						delayOpenDialogBy10("imgBox_UnevaluatedStudentList");
@@ -631,7 +647,7 @@ jquery('demoBtn2').onclick = function(){
 			};
 			$scope.courseReference = $.extend(true, {}, emptyReference);
 			$scope.openCourseReference = function(cid){
-				ScheduleInterface.getCourseReferenceData(function(data){
+				ScheduleInterface.getCourseReferenceData(cid, function(data){
 					if (data){
 						$scope.courseReference = data;
 						delayOpenDialogBy10("imgBox_CourseReference");
@@ -651,7 +667,7 @@ jquery('demoBtn2').onclick = function(){
 			};
 			$scope.courseAttendance = $.extend(true, {}, emptyAttendance);
 			$scope.openCourseAttendance = function(cid){
-				ScheduleInterface.getCourseAttendanceData(function(data){
+				ScheduleInterface.getCourseAttendanceData(cid, function(data){
 					if (data){
 						$scope.courseAttendance = data;
 						delayOpenDialogBy10("imgBox_CourseAttendance");
