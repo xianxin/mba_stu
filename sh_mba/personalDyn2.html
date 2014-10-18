@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>个人中心-信息修改</title>
+		<link href="css/common.css" rel="stylesheet" type="text/css" />
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/easydialog.css" rel="stylesheet" type="text/css" />
+		<link href="css/jquery-ui.css" rel="stylesheet" type="text/css" />
+		<script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
+	</head>
+
+	<body>
+		<div class="hder">
+			<div class="hder_top">
+				<div class="hder_l">
+					<a href="#" title="上海交通大学" class="fl" style="margin-right:10px; display:inline;">
+						<img src="images/logo.png" width="303" height="48">
+					</a>
+					<span class="fl">
+        学生系统
+      </span>
+				</div>
+				<div class="hder_r">
+					<p>
+						欢迎 <span>李晓京</span>，今天是：<span>2014年4月12日</span> |
+						<a href="#">安全退出</a> 
+					</p>
+				</div>
+			</div>
+			<div class="hder_nav">
+				<div class="nav">
+					<table class="f4 nav_table" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td>
+								<div class="nav_list"><a class="nav_a" href="#">首页</a>
+								</div>
+							</td>
+							<td>
+								<div class="nav_list"><a class="nav_a" href="#">我的课程</a>
+									<ul class="nav_ul2">
+										<li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">培养计划</a>
+										</li>
+										<li class="nav_li2"><a href="#" class="nav_a2 nav_carent">我的课表</a>
+										</li>
+										<li class="nav_li2"><a href="#" class="nav_a2">MBA选课</a>
+										</li>
+										<li class="nav_li2"><a href="#" class="nav_a2">课程/学籍申请调整</li>
+     </ul>
+    </div>
+    </td>
+    <td>
+    <div class="nav_list"><a class="nav_a" href="#">我的事务</a>
+											<ul class="nav_ul2">
+												<li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a>
+												</li>
+												<li class="nav_li2"><a href="#" class="nav_a2">二级导航</a>
+												</li>
+												<li class="nav_li2"><a href="#" class="nav_a2">二级导航</a>
+												</li>
+											</ul>
+								</div>
+							</td>
+							<td>
+								<div class="nav_list"><a class="nav_a" href="#">活动预告</a>
+									<ul class="nav_ul2">
+										<li class="nav_li2" style="border:none;"><a href="#" class="nav_a2">二级导航</a>
+										</li>
+										<li class="nav_li2"><a href="#" class="nav_a2">二级导航</a>
+										</li>
+										<li class="nav_li2"><a href="#" class="nav_a2">二级导航</a>
+										</li>
+									</ul>
+								</div>
+							</td>
+							<td>
+								<div class="nav_list"><a class="nav_a" href="#">常用文档</a>
+								</div>
+							</td>
+							<td>
+								<div class="nav_list"><a class="nav_a" href="#">个人中心</a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<script src="js/public.js" language="javascript" type="text/javascript"></script>
+			</div>
+		</div>
+
+
+		<!--TODO : CopyStart-->
+
+		<script src="js/easydialog.min.js" language="javascript" type="text/javascript"></script>
+		<script type="text/javascript" src="js/jquery-ui-datepicker.js"></script>
+		<script type="text/javascript" src="js/angular.min.js" ></script>
+		<script type='text/javascript' src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
+		<script type="text/javascript">
+			function show(num){
+			 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
+				for(i=0;i<lis.length;i++){
+					lis[i].className = '';
+					document.getElementById('con'+(i+1)).style.display = 'none';
+				}
+				document.getElementById('tit'+num).className = 'current';
+				document.getElementById('con'+num).style.display = 'block';
+			 }
+		</script>
+
+		<script type="text/javascript">
+			$(function(){
+				/*============================
+				@author:flc
+				@time:2014-02-11 18:16:09
+				@qq:3407725
+				============================*/
+				$(".select_three,.select_two,.selcect_wol,.select_family").each(function(){
+					var s=$(this);
+					var z=parseInt(s.css("z-index"));
+					var dt=$(this).children("dt");
+					var dd=$(this).children("dd");
+					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+					dt.click(function(){dd.is(":hidden")?_show():_hide();});
+					dd.find("a").click(function(){dt.html($(this).html());_hide();});
+					$("body").click(function(i){ !$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
+				})
+			})
+		</script>
+		
+		<!--[if lte IE 8]>
+		    <script type="text/javascript" src="js/json3.min.js" ></script>
+		    <script>
+			    document.createElement('ng-include');
+	            document.createElement('ng-pluralize');
+		        document.createElement('ng-view');
+		        document.createElement('ng:include');
+		        document.createElement('ng:pluralize');
+		        document.createElement('ng:view');
+			</script>
+		<![endif]-->
+
+		<!--[if lte IE 8]>
+			<style>
+				.ng-hide { display:none!important; }
+			</style>
+		<![endif]-->
+		
+		<div class="s_main" id='ng-app' ng-app='PersonalInfoApp'>
+			<!--left menu-->
+			<div id="left_div_id">
+				<script>$("#left_div_id").load("/mbastu/_menu/menu_507.html");</script>
+			</div>
+			
+			<div class="s_main_r" ng-controller='PersonalInfoController'>
+				<div class="personal">
+					<h2>个人信息修改</h2>
+					<div class="personal_tit">
+						<div class="personal_tit_left">
+							<img src="images/personal_1.jpg" width="147" height="181">	<span><img src="images/personal_2.png" width="19" height="21"></span>
+						</div>
+						<div class="personal_tit_right">
+							<table width="556" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td height="36">姓名：<span ng-bind='PersonalInfoData.studentName'></span>
+									</td>
+								</tr>
+								<tr>
+									<td height="36">班级：<span ng-bind='PersonalInfoData.className'></span>
+									</td>
+								</tr>
+								<tr>
+									<td height="36">
+										学号：<span ng-bind='PersonalInfoData.studentId'></span>
+										<em><a href title="" target="" ng-show="show_visibility_options">隐私设置</a></em>
+									</td>
+								</tr>
+							</table>
+
+						</div>
+					</div>
+				</div>
+				<div id="yq_xxk">
+					<ul>
+						<li id="tit1" onclick="show(1)" class="current">
+							<div class="xxk1">基本信息</div>
+						</li>
+						<li id="tit2" onclick="show(2)">
+							<div class="xxk2">联系信息</div>
+						</li>
+						<li id="tit3" onclick="show(3)">
+							<div class="xxk2">教育背景</div>
+						</li>
+						<li id="tit4" onclick="show(4)">
+							<div class="xxk2">工作经历</div>
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+
+				<div id="con1" class="tem" style="display:block;" ng-controller='BasicInfoController'>
+					<table width="736" border="0" cellspacing="0" cellpadding="0" class="personal_list">
+						<tr>
+							<td width="116" height="50" align="right">姓名</td>
+							<td width="22">&nbsp;</td>
+							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.studentName'></span>
+							</td>
+							<td width="224">&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="50">性别</td>
+							<td>&nbsp;</td>
+							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.sex'></span>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="50">班级</td>
+							<td>&nbsp;</td>
+							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.className'></span>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="50">学号</td>
+							<td>&nbsp;</td>
+							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.studentId'></span>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="50">国籍</td>
+							<td>&nbsp;</td>
+							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.nationality'></span>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="50">证件号</td>
+							<td>&nbsp;</td>
+							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.identityNo'></span>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="50">银行卡号</td>
+							<td>&nbsp;</td>
+							<td align="left">
+								<input type="text" name="" ng-model="PersonalInfoData.bankAccountNo" class="personal_ipt">
+								<span class="personal_mc"></span>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="50">开户行</td>
+							<td>&nbsp;</td>
+							<td align="left">
+								<input type="text" name="" ng-model="PersonalInfoData.bankName" class="personal_ipt">
+								<span class="personal_mc"></span>
+								<!--
+								<dl class="select_two">
+									<dt id='bankName' ng-bind='PersonalInfoData.bankName'>下拉</dt>
+									<dd>
+										<ul>
+											<li ng-repeat='opt in bankNameOptions'><a href>{{opt}}</a></li>
+										</ul>
+									</dd>
+								</dl>
+								-->
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="30">&nbsp;</td>
+							<td>&nbsp;</td>
+							<td align="left">&nbsp;</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td align="right" height="34">&nbsp;</td>
+							<td>&nbsp;</td>
+							<td align="left"><a href="#" title="" class="personal_bc" ng-click='saveBasic();'>保存</a>
+							</td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+					</table>
+
+				</div>
+				<div id="con2" class="tem" style="display:none">
+					<div class="personal_time">
+						<table width="738" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="10" height="30">&nbsp;</td>
+								<td width="34">主要</td>
+								<td width="17">&nbsp;</td>
+								<td width="135">地址类型</td>
+								<td width="10">&nbsp;</td>
+								<td width="410">地址</td>
+								<td width="12">&nbsp;</td>
+								<td width="84">邮编</td>
+								<td width="12">&nbsp;</td>
+								<td width="18">
+									<a href="#" title="添加" target="" class="personal_tj"></a>
+								</td>
+								<td width="20">&nbsp;</td>
+							</tr>
+							<tr>
+								<td height="38">&nbsp;</td>
+								<td>
+									<input name="" type="checkbox" value="" class="edu_zhuyao">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<dl class="select_family">
+										<dt>家庭住址</dt>
+										<dd>
+											<ul>
+												<li><a href="#">12131</a>
+												</li>
+												<li><a href="#">下拉2</a>
+												</li>
+												<li><a href="#">下拉3</a>
+												</li>
+												<li><a href="#">下拉4</a>
+												</li>
+												<li><a href="#">下拉5</a>
+												</li>
+												<li><a href="#">下拉6</a>
+												</li>
+											</ul>
+										</dd>
+									</dl>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_adress">
+								</td>
+
+
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_yb">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<a href="#" title="添加" target="" class="personal_sc"></a>
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td height="38">&nbsp;</td>
+								<td>
+									<input name="" type="checkbox" value="" class="edu_zhuyao">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<dl class="select_family">
+										<dt>家庭住址</dt>
+										<dd>
+											<ul>
+												<li><a href="#">12131</a>
+												</li>
+												<li><a href="#">下拉2</a>
+												</li>
+												<li><a href="#">下拉3</a>
+												</li>
+												<li><a href="#">下拉4</a>
+												</li>
+												<li><a href="#">下拉5</a>
+												</li>
+												<li><a href="#">下拉6</a>
+												</li>
+											</ul>
+										</dd>
+									</dl>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_adress">
+								</td>
+
+
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_yb">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<a href="#" title="添加" target="" class="personal_sc"></a>
+								</td>
+								<td></td>
+							</tr>
+						</table>
+
+					</div>
+					<div class="personal_time">
+						<table width="738" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="10" height="30">&nbsp;</td>
+								<td width="34">主要</td>
+								<td width="17">&nbsp;</td>
+								<td width="135">电话类型</td>
+								<td width="10">&nbsp;</td>
+								<td width="138">国际电话区号</td>
+								<td width="10">&nbsp;</td>
+								<td width="238">电话</td>
+								<td width="12">&nbsp;</td>
+								<td width="108">分机号</td>
+								<td width="12">&nbsp;</td>
+								<td width="18">
+									<a href="#" title="添加" target="" class="personal_tj"></a>
+								</td>
+								<td width="20">&nbsp;</td>
+							</tr>
+							<tr>
+								<td height="38">&nbsp;</td>
+								<td>
+									<input name="" type="checkbox" value="" class="edu_zhuyao">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<dl class="select_family">
+										<dt>家庭住址</dt>
+										<dd>
+											<ul>
+												<li><a href="#">12131</a>
+												</li>
+												<li><a href="#">下拉2</a>
+												</li>
+												<li><a href="#">下拉3</a>
+												</li>
+												<li><a href="#">下拉4</a>
+												</li>
+												<li><a href="#">下拉5</a>
+												</li>
+												<li><a href="#">下拉6</a>
+												</li>
+											</ul>
+										</dd>
+									</dl>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_phone_one">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_phone_two">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_fjh">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<a href="#" title="添加" target="" class="personal_sc"></a>
+								</td>
+								<td></td>
+							</tr>
+						</table>
+
+					</div>
+					<div class="personal_time">
+						<table width="738" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="10" height="30">&nbsp;</td>
+								<td width="34">主要</td>
+								<td width="17">&nbsp;</td>
+								<td width="135">邮件类型</td>
+								<td width="10">&nbsp;</td>
+								<td width="500">邮件地址</td>
+
+								<td width="12">&nbsp;</td>
+								<td width="18">
+									<a href="#" title="添加" target="" class="personal_tj"></a>
+								</td>
+								<td width="20">&nbsp;</td>
+							</tr>
+							<tr>
+								<td height="38">&nbsp;</td>
+								<td>
+									<input name="" type="checkbox" value="" class="edu_zhuyao">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<dl class="select_family">
+										<dt>工作</dt>
+										<dd>
+											<ul>
+												<li><a href="#">12131</a>
+												</li>
+												<li><a href="#">下拉2</a>
+												</li>
+												<li><a href="#">下拉3</a>
+												</li>
+												<li><a href="#">下拉4</a>
+												</li>
+												<li><a href="#">下拉5</a>
+												</li>
+												<li><a href="#">下拉6</a>
+												</li>
+											</ul>
+										</dd>
+									</dl>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_work">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<a href="#" title="添加" target="" class="personal_sc"></a>
+								</td>
+								<td></td>
+							</tr>
+
+						</table>
+
+					</div>
+					<div class="personal_time">
+						<table width="738" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="10" height="30">&nbsp;</td>
+								<td width="34">主要</td>
+								<td width="17">&nbsp;</td>
+								<td width="135">SNS类型</td>
+								<td width="10">&nbsp;</td>
+								<td width="500">详细信息</td>
+
+								<td width="12">&nbsp;</td>
+								<td width="18">
+									<a href="#" title="添加" target="" class="personal_tj"></a>
+								</td>
+								<td width="20">&nbsp;</td>
+							</tr>
+							<tr>
+								<td height="38">&nbsp;</td>
+								<td>
+									<input name="" type="checkbox" value="" class="edu_zhuyao">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<dl class="select_family">
+										<dt>工作</dt>
+										<dd>
+											<ul>
+												<li><a href="#">12131</a>
+												</li>
+												<li><a href="#">下拉2</a>
+												</li>
+												<li><a href="#">下拉3</a>
+												</li>
+												<li><a href="#">下拉4</a>
+												</li>
+												<li><a href="#">下拉5</a>
+												</li>
+												<li><a href="#">下拉6</a>
+												</li>
+											</ul>
+										</dd>
+									</dl>
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_work">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<a href="#" title="添加" target="" class="personal_sc"></a>
+								</td>
+								<td></td>
+							</tr>
+
+						</table>
+
+					</div>
+					<div class="tel_an">
+						<a href="#" title="" target="">保存</a>
+					</div>
+				</div>
+				<div id="con3" class="tem" style="display:none;" ng-controller='EducationController'>
+					<div class="personal_time">
+						<table id="educationTable" width="738" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td width="10" height="30">&nbsp;</td>
+								<td width="17">&nbsp;</td>
+								<td width="116">入学时间</td>
+								<td width="3">&nbsp;</td>
+								<td width="116">毕业时间</td>
+								<td width="3">&nbsp;</td>
+								<td width="124">毕业院校</td>
+								<td width="3">&nbsp;</td>
+								<td width="100">专业</td>
+								<td width="3">&nbsp;</td>
+								<td width="76">获得学历</td>
+								<td width="3">&nbsp;</td>
+								<td width="76">获得学位</td>
+								<td width="12">&nbsp;</td>
+								<td width="18">
+									<a href title="添加" target="" class="personal_tj" ng-click='addLine()'>addLine When No Image</a>
+								</td>
+								<td width="16">&nbsp;</td>
+							</tr>
+							<tr ng-repeat='eduBg in eduBgLst track by $index'>
+								<td height="38">&nbsp;</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" datepicker class="edu_rx" ng-model='eduBg.edu_rxsj' ng-disabled='!eduBg.editEnabled' style="font-family: 'microsoft yahei';">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" datepicker class="edu_rx" ng-model='eduBg.edu_bysj' ng-disabled='!eduBg.editEnabled' style="font-family: 'microsoft yahei';">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_yx" ng-disabled='!eduBg.editEnabled'  ng-model='eduBg.edu_byxx' style="font-family: 'microsoft yahei';">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_zy" ng-disabled='!eduBg.editEnabled' ng-model='eduBg.edu_xxzy' style="font-family: 'microsoft yahei';">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_xl" ng-disabled='!eduBg.editEnabled' ng-model='eduBg.edu_hdxl' style="font-family: 'microsoft yahei';">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<input type="text" class="edu_xl" ng-disabled='!eduBg.editEnabled' ng-model='eduBg.edu_hdxw' style="font-family: 'microsoft yahei';">
+								</td>
+								<td>&nbsp;</td>
+								<td>
+									<a href title="删除" ng-disabled='!eduBg.editEnabled' ng-show='eduBg.editEnabled' target="" class="personal_sc deleteLineClass" ng-click='remove($index)'>remove When No Image</a>
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+						</table>
+
+					</div>
+					<div class="tel_an">
+						<a href title="" target="" ng-click='saveEduBg()'>保存</a>
+					</div>
+				</div>
+				<div id="con4" class="tem" style="display:none;">
+					<div class="works">
+						<h2>提示：不允许在线修改过往工作经历，如需调整，请到MBA办公室申请调整。</h2>
+						<div class="works_one">
+							<div class="works_one_tit">
+								<h2>工作经历一</h2>
+							</div>
+							<div class="works_one_list">
+								<div class="wol_lite">
+									<span>工作开始日期：</span>
+									<p>20140506</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>工作部门中文：</span>
+									<p>商务部</p>
+								</div>
+								<div class="wol_lite">
+									<span>工作结束日期：</span>
+									<p>20150304</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>工作部门英文：</span>
+									<p>held in Los Angeles on
+										<br>Sunday night, ADELE's Skyfall\</p>
+								</div>
+								<div class="wol_lite">
+									<span>公司中文名：</span>
+									<p>上海XX国际股份有限公司</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>担任职务中文：</span>
+									<p>一二三</p>
+								</div>
+								<div class="wol_lite">
+									<span>公司英文名：</span>
+									<p>held in Los Angeles on Sunday
+										<br>night
+									</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>担任职务英文：</span>
+									<p>held in Los</p>
+								</div>
+								<div class="wol_lite">
+									<span>公司经营范围中文：</span>
+									<p>商务贸易</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>公司行业：</span>
+									<p>重金属</p>
+								</div>
+								<div class="wol_lite">
+									<span>公司经营范围英文：</span>
+									<p>held in Los Angeles on Sunday
+										<br>night, ADELE's Skyfall won the</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>公司性质：</span>
+									<p>国企</p>
+								</div>
+								<div class="wol_lite wol_lite_big">
+									<span>工作内容：</span>
+									<p>有限责任公司。有限责任公司是依照《中华人民共和国公司法》设立，股东以其出资为限对公司承担责任，公司以其全部财产对公司债务承担责任的企业法人。</p>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="works_one">
+							<div class="works_one_tit">
+								<h2>工作经历一</h2>
+							</div>
+							<div class="works_one_list">
+								<div class="wol_lite">
+									<span>工作开始日期：</span>
+									<p>20140506</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>工作部门中文：</span>
+									<p>商务部</p>
+								</div>
+								<div class="wol_lite">
+									<span>工作结束日期：</span>
+									<p>20150304</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>工作部门英文：</span>
+									<p>held in Los Angeles on
+										<br>Sunday night, ADELE's Skyfall\</p>
+								</div>
+								<div class="wol_lite">
+									<span>公司中文名：</span>
+									<p>上海XX国际股份有限公司</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>担任职务中文：</span>
+									<p>一二三</p>
+								</div>
+								<div class="wol_lite">
+									<span>公司英文名：</span>
+									<p>held in Los Angeles on Sunday
+										<br>night
+									</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>担任职务英文：</span>
+									<p>held in Los</p>
+								</div>
+								<div class="wol_lite">
+									<span>公司经营范围中文：</span>
+									<p>商务贸易</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>公司行业：</span>
+									<p>重金属</p>
+								</div>
+								<div class="wol_lite">
+									<span>公司经营范围英文：</span>
+									<p>held in Los Angeles on Sunday
+										<br>night, ADELE's Skyfall won the</p>
+								</div>
+								<div class="wol_lite wol_lite_right">
+									<span>公司性质：</span>
+									<p>国企</p>
+								</div>
+								<div class="wol_lite wol_lite_big">
+									<span>工作内容：</span>
+									<p>有限责任公司。有限责任公司是依照《中华人民共和国公司法》设立，股东以其出资为限对公司承担责任，公司以其全部财产对公司债务承担责任的企业法人。</p>
+								</div>
+							</div>
+							<div class="clear"></div>
+						</div>
+
+						<div class="wol_an">
+							<a href="javascript:void(0)" title="" target="" id="demoBtn1">继续添加</a>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="dialog_wdkb" id="imgBox" style="display:none;">
+			<div class="dialog_wol_mar">
+				<h2><a href="#" title="关闭" onclick="easyDialog.close();"><img src="images/close.png" width="20" height="20"></a></h2>
+
+
+				<table width="695" border="0" cellspacing="0" cellpadding="0" class="dialog_wol_nr">
+					<tr>
+						<td height="46" width="130">工作开始日期</td>
+						<td width="228">
+							<input type="text" name="" value="2012/12/12" class="wol_ipt">
+						</td>
+						<td width="109">工作部门中文</td>
+						<td width="228">
+							<input type="text" name="" value="2012/12/12" class="wol_ipt">
+						</td>
+					</tr>
+					<tr>
+						<td height="46">工作结束日期</td>
+						<td>
+							<input type="text" name="" value="2012/12/12" class="wol_ipt">
+						</td>
+						<td>工作部门英文</td>
+						<td>
+							<input type="text" name="" value="2012/12/12" class="wol_ipt">
+						</td>
+					</tr>
+					<tr>
+						<td height="46">公司中文名</td>
+						<td>
+							<input type="text" name="" value="2012/12/12" class="wol_ipt">
+						</td>
+						<td>担任职务中文</td>
+						<td>
+							<input type="text" name="" value="2012/12/12" class="wol_ipt">
+						</td>
+					</tr>
+					<tr>
+						<td height="46">公司英文名</td>
+						<td>
+							<input type="text" name="" value="" class="wol_ipt">
+						</td>
+						<td>担任职务英文</td>
+						<td>
+							<input type="text" name="" value="" class="wol_ipt">
+						</td>
+					</tr>
+
+					<tr>
+						<td height="46">公司经营范围中文</td>
+						<td>
+							<input type="text" name="" value="" class="wol_ipt">
+						</td>
+						<td>公司行业</td>
+						<td>
+							<dl class="selcect_wol">
+								<dt>实木</dt>
+								<dd>
+									<ul>
+										<li><a href="#">12131</a>
+										</li>
+										<li><a href="#">下拉2</a>
+										</li>
+										<li><a href="#">下拉3</a>
+										</li>
+										<li><a href="#">下拉4</a>
+										</li>
+										<li><a href="#">下拉5</a>
+										</li>
+										<li><a href="#">下拉6</a>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td height="46">公司经营范围英文</td>
+						<td>
+							<input type="text" name="" value="" class="wol_ipt">
+						</td>
+						<td>公司性质</td>
+						<td>
+							<dl class="selcect_wol">
+								<dt>私企</dt>
+								<dd>
+									<ul>
+										<li><a href="#">12131</a>
+										</li>
+										<li><a href="#">下拉2</a>
+										</li>
+										<li><a href="#">下拉3</a>
+										</li>
+										<li><a href="#">下拉4</a>
+										</li>
+										<li><a href="#">下拉5</a>
+										</li>
+										<li><a href="#">下拉6</a>
+										</li>
+									</ul>
+								</dd>
+							</dl>
+						</td>
+					</tr>
+					<tr>
+						<td height="50">工作内容</td>
+						<td colspan="3" rowspan="2" valign="middle">
+							<textarea type="text" name="" value="" class="wol_ipt_big"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td height="30">&nbsp;</td>
+					</tr>
+				</table>
+				<div class="wol_pop_an">
+					<a href="#" title="" id="btnClose" onclick="easyDialog.close();">添加</a>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			var btnFn = function( e ){
+				alert( e.target );
+				return false;
+			};
+			/*
+			jquery('demoBtn1').onclick = function(){
+				easyDialog.open({
+					container : 'imgBox',
+						yesFn : btnFn,
+						noFn : true,
+					fixed : false
+				});
+			};*/
+		</script>
+		<script type="text/javascript">
+			$(function(){
+				/*
+				$(".edu_rx").datepicker({
+					dateFormat: 'yy-mm-dd'
+				});
+				$("#date_1").datepicker();
+				$("#date_2").datepicker({
+					dateFormat: 'yy-mm-dd'
+				});*/
+			});
+		</script>
+		
+		<script>
+			var sexMtoNan = {"M":"男","F":"女"};
+			var sexNanToM = {"男":"M","女":"F"};
+			
+			var bankNameOptions = ['bank 1', 'bank 2', 'bank 3'];
+			
+			var addressTypeOptions = ['工作','家庭地址','现居地址','户籍','其他'];
+			var phoneTypeOptions = ['手机','工作','公司电话','住宅','传真','其他'];
+			var emailTypeOptions = ['工作','次要','个人','其他'];
+			var snsTypeOptions = ['QQ','微博','微信','个人主页','个人博客','Facebook','MSN','其他'];
+			var diplomaOptions = ['博士研究生','硕士研究生','本科','大专','高中','中专/技校','其他'];
+			var degreeOptions = ['博士','硕士','学士','其他'];
+			var industryOption = [
+				'快速消费品（食品/饮料/化妆品）','耐用消费品（服装/纺织/家具/家电）','专业服务（咨询/法律）',
+				'金融服务（银行/证劵/保险/投资/基金等）','零售/贸易','交通物流','IT/网络',
+				'房地产/建筑/装潢设计','通信','电子/半导体','保健/医药/生化/医疗设备/医院',
+				'能源/精细化工','媒体/广告/公关','政府/非盈利机构','教育/培训','其他','工业品/设备','汽车/摩托车'
+			];
+			var natureOption = [
+				'国有或国有控股','外商合资','外商独资','港澳台合资',
+				'港澳台独资','民营或私有控股','政府部门','事业单位','非营利机构','其他'
+			];
+			
+			/*  构造的假数据 测试用 */
+			var fakeObject = {
+				person_id: '67687',
+				studentId: 'L1071676',
+				studentName: 'xian xing',
+				className: 'ruan gong wu ban',
+				picurl: '/enrollImage/20141016/676872014-10-16-09.58.21.000000.jpg',
+				sex: 'M',
+				nationality: '中国',
+				identityNo: '5090379149',
+				identityNoScope: '其他人不可见',
+				bankAccountNo: '123456',
+				bankAccountNoScope: '其他人不可见',
+				bankName: 'Bank Of China',
+				bankNameScope: '其他人不可见',
+				
+				contact: [
+					{
+						contact_main : 'Y',
+						contact_fs: "A",
+						contact_dz: "中国北京",
+						contact_yb: "123456"
+					}
+				],
+				
+				phone: [
+					{
+						phone_main: 'Y',
+						phone_fs: 'A',
+						phone_qh: '1',
+						phone_dh: '13284958374',
+						phone_fjh: '2'
+					}
+				],
+				
+				email: [
+					{
+						email_main: 'Y',
+						email_lx: 'A',
+						email_dz: 'LIU@163.com'
+					}
+				],
+				
+				sns: [
+					{
+						sns_lx: 'C',
+						sns_xx: '1111'
+					}
+				],
+				
+				education: [
+					{
+						edu_rxsj:'2005-09-10',
+						edu_bysj:'2006-09-10',
+						edu_byxx:'北京交通大学',
+						edu_xxzy:'Computer Science',
+						edu_hdxl:'本科',
+						edu_hdxw:'学士学位'
+					},
+					{
+						edu_rxsj:'2005-09-01',
+						edu_bysj:'2007-09-01',
+						edu_byxx:'上海交通大学',
+						edu_xxzy:'Software Engineering',
+						edu_hdxl:'本科',
+						edu_hdxw:'学士学位'
+					}
+				],
+				
+				work: [
+					{
+						work_kssj: '2014-10-01',
+						work_jssj: '2014-10-08',
+						work_zwm: '上海交大',
+						work_ywm: 'SJTU',
+						work_fwzw: '范围',
+						work_fwyw: 'scope',
+						work_zwzw: '职位',
+						work_zwyw: 'job',
+						work_bmzw: '部门',
+						work_bmyw: 'department',
+						work_hy: 'hangye',
+						work_xz: 'xingzhi',
+						work_nr: 'neirong'
+					}
+				]
+			};
+			
+			var test_local = true;
+			var show_visibility_options = false;
+
+			var PersonalInfoAppModule = angular.module('PersonalInfoApp', []
+			).config(
+				function($sceProvider) {
+					$sceProvider.enabled(false);
+				}
+			).directive('datepicker', function() {
+				return {
+					restrict: 'A',
+					replace: true,
+					require: '?ngModel',
+					scope: {
+						select: '&'
+					},
+					link: function(scope, element, attrs, ngModel) {
+						if (!ngModel) return;
+						var optionsObj = {};
+						optionsObj.dateFormat = 'yy-mm-dd';
+						var updateModel = function(dateTxt) {
+							scope.$apply(function() {
+								ngModel.$setViewValue(dateTxt);
+							});
+						};
+						optionsObj.onSelect = function(dateTxt,
+							picker) {
+							updateModel(dateTxt);
+							if (scope.select) {
+								scope.$apply(function() {
+									scope.select({
+										date: dateTxt
+									});
+								});
+							}
+						};
+						ngModel.$render = function() {
+							element.datepicker('setDate', ngModel.$viewValue || '');
+						};
+						element.datepicker(optionsObj);
+					}
+				};
+			});
+
+
+			PersonalInfoAppModule.factory('PersonalInfoInterface',
+				function ($http){
+					var _ = {};
+					_.getPersonalInfo = function(callback){
+						var PersonalInfoData = undefined;
+						/* 返回promise对象 */
+						/* return $http.post('/psc/ACEMTST/....',{params:{}}); */
+						$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_HOME.FieldFormula.Iscript_getStudentInfo',{params:{}
+						}).success(function(data,status,headers,config){
+							if (test_local){
+								callback(fakeObject);
+							}
+							else {
+								callback(data);
+							}
+						}).error(function(data,status,headers,config){
+							if (test_local){
+								callback(fakeObject);
+							} else {
+								alert('无法获取个人信息！（错误码：'+status+')');
+								callback(null);
+							}
+						});
+					};
+					
+					_.updateBasicInfo = function(postData, callback){
+						$.ajax({
+							type:"post",
+							url:"/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBAXKE.TZ_MBAXKE_ISCRIPT.FieldFormula.Iscript_save_jbxx",
+							async:true,
+							success:function(data){
+								if (data == 'success'){
+									alert('保存成功');
+								} else {
+									alert('保存失败');
+								}
+							},
+							error: function(XMLHttpRequest, textStatus, errorThrown){
+								alert('无法保存！（错误码：' + XMLHttpRequest.status + "）");
+							}
+						});
+					};
+					
+					_.updateEducationBackground = function(postData,callback){
+						$.ajax({
+							type:"post",
+							url:"/",
+							async:true,
+							data : postData,
+							success: function(data){
+								if (data == 'success'){
+									alert('保存成功');
+								} else {
+									alert('保存失败');
+								}
+							},
+							error: function(XMLHttpRequest, textStatus, errorThrown){
+	                    		alert('无法保存！（错误码：' + XMLHttpRequest.status + "）");
+	                   		}
+						});
+					};
+					return _;
+				}
+			);
+			
+			PersonalInfoAppModule.controller(
+				'PersonalInfoController',
+				function ($scope, PersonalInfoInterface){
+					/* 不显示 隐私设置  */
+					$scope.show_visibility_options = show_visibility_options;
+					PersonalInfoInterface.getPersonalInfo(function(data){
+						if (data){
+							$scope.PersonalInfoData = data;
+						}
+						
+						/* 无论是否正常地获取到数据，都广播下 */
+						$scope.$broadcast('dataReady');
+					});
+				}
+			);
+			
+			PersonalInfoAppModule.controller(
+				'BasicInfoController',
+				function ($scope, PersonalInfoInterface){
+					$scope.saveBasic = function(){
+						fillin();
+						
+						var postData = {};
+						postData.bankAccountNo = $scope.PersonalInfoData.bankAccountNo;
+						postData.bankName = $scope.PersonalInfoData.bankName;
+						
+						/* post */
+						PersonalInfoInterface.updateBasicInfo(postData, function(){;});
+					};
+					
+					function fillin(){
+						;/* $scope.PersonalInfoData.bankName = $("#bankName").text(); */
+					}
+					
+				}
+			);
+			
+			PersonalInfoAppModule.controller(
+				'EducationController',
+				function($scope, PersonalInfoInterface){
+					/* by default , can be deleted */
+					var defaultData = {
+						edu_rxsj: '',
+						edu_bysj: '',
+						edu_byxx: '',
+						edu_xxzy: '',
+						edu_hdxl: '',
+						edu_hdxw: '',
+						editEnabled: true
+					};
+					
+					var eduBgLst = [];
+					$scope.eduBgLst = eduBgLst;
+					$scope.dataReady = false;
+					
+					
+					function fillin(){
+						;
+					}
+					
+					function packUp(packedUp, currentObj, num){
+						packedUp["TZ_ADMISSN_DT_"+num] = currentObj.edu_rxsj + "/01";
+						packedUp["TZ_UDRGRD_DT_"+num] = currentObj.edu_bysj + "/01";
+						packedUp["TZ_SCH_CNAME_"+num] = currentObj.edu_byxx;
+						packedUp["TZ_SPECIALTY_"+num] = currentObj.edu_xxzy;
+						packedUp["TZ_OBT_EDUC_"+num] = currentObj.edu_hdxl;
+						packedUp["TZ_OBT_DEGR_"+num] = currentObj.edu_hdxw;
+					}
+					
+					$scope.addLine = function(){
+						var emptyNewLine = $.extend(true, {}, defaultData);
+						$scope.eduBgLst.push(emptyNewLine);
+					};
+					
+					$scope.remove = function(index){
+						if ($scope.eduBgLst &&
+						$scope.eduBgLst[index] &&
+						$scope.eduBgLst[index].editEnabled)
+							$scope.eduBgLst.splice(index,1);
+					};
+					
+					$scope.saveEduBg = function(){
+						var edus = $.extend(true, {}, $scope.eduBgLst);
+						var postData = {};
+						var count = 0;
+						while(edus[count]) packUp(postData,edus[count],++count);
+
+						/* post */
+						PersonalInfoInterface.updateEducationBackground(postData, function(){;});
+						
+					};
+					
+					$scope.$on('dataReady', function(){
+						if ($scope.PersonalInfoData && $scope.PersonalInfoData.education){
+							eduBgLst = $scope.PersonalInfoData.education;
+							
+							/* hide edit button */
+							for (var i = 0; i < eduBgLst.length; i++){
+								eduBgLst[i].editEnabled = false;
+							}
+							
+							$scope.eduBgLst = eduBgLst;
+							
+							/* IE7 Fix */
+							var trs = $("#educationTable tr");
+							for (var i = 1; i < trs.length; i ++){
+								trs[i].style.display = "none"
+							}
+						}
+						$scope.dataReady = true;
+					});
+					
+				}
+			);
+			
+		</script>
+		
+		<!--TODO : CopyEnd-->
+		
+		<div class="footer">
+			<div class="ft_box">
+				<div class="ft_box_l">
+					<div class="ft_list">
+						<ul>
+							<li style="margin-left:-8px;"><a href="#" title="">关于安泰</a>
+							</li>
+							<li><a href="#" title="">网站地图</a>
+							</li>
+							<li><a href="#" title="">友情链接</a>
+							</li>
+							<li><a href="#" title="">帮助中心</a>
+							</li>
+							<li style="background:none;"><a href="#" title="">联系我们</a>
+							</li>
+						</ul>
+						<a href="#" title="" class="ft_box_r">
+							<img src="images/login_5.jpg" width="238" height="50">
+						</a>
+					</div>
+					<p class="bqsy">Copyright 2011-2014 © 上海交通大学安泰经济与管理学院</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</body>
+
+</html>

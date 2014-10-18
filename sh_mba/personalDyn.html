@@ -169,7 +169,7 @@
 									<td height="36">班级：<span ng-bind='PersonalInfoData.className'></span></td>
 								</tr>
 								<tr>
-									<td height="36">学号：<span ng-bind='PersonalInfoData.studentID'></span></td>
+									<td height="36">学号：<span ng-bind='PersonalInfoData.studentId'></span></td>
 								</tr>
 							</table>
 						</div>
@@ -219,7 +219,7 @@
 						<tr>
 							<td align="right" height="34">学号</td>
 							<td>&nbsp;</td>
-							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.studentID'></span></td>
+							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.studentId'></span></td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
@@ -237,7 +237,7 @@
 							<td align="left"><span class="personal_mc" ng-bind='PersonalInfoData.identityNo'></span></td>
 							<td>&nbsp;</td>
 							<td>
-								<dl class="select_three">
+								<dl class="select_three" ng-show='show_visibility_options'>
 									<dt id='identityNoScope' ng-bind='PersonalInfoData.identityNoScope'></dt>
 									<dd>
 										<ul>
@@ -256,7 +256,7 @@
 							</td>
 							<td>&nbsp;</td>
 							<td>
-								<dl class="select_three">
+								<dl class="select_three" ng-show='show_visibility_options'>
 									<dt id='bankAccountNoScope' ng-bind='PersonalInfoData.bankAccountNoScope'></dt>
 									<dd>
 										<ul>
@@ -275,7 +275,7 @@
 							</td>
 							<td>&nbsp;</td>
 							<td>
-								<dl class="select_three">
+								<dl class="select_three" ng-show='show_visibility_options'>
 									<dt id='bankNameScope' ng-bind='PersonalInfoData.bankNameScope'></dt>
 									<dd>
 										<ul>
@@ -306,19 +306,19 @@
 				<div id="con2" class="tem">
 					222
 				</div>
-				<div id="con3" class="tem" ng-controller='EducationBackgroundController'>
+				<div id="con3" class="tem" ng-controller='educationController'>
 					<div class="personal_time" style="height: auto; padding: 12px;" ng-show='eduBgLst.length > 0'>
 						<div class="personal_time_list" ng-repeat='eduBg in eduBgLst track by $index'>
 							<span class="personal_time_left">
-								<i>{{eduBg.entryDate}}-{{eduBg.graduationDate}}：</i>
-								<a href title="" name="">{{eduBg.graduationCollege}}</a>|
-								<a href title="" name="">{{eduBg.major}}</a>|
-								<a href title="" name="">{{eduBg.diploma}}</a>|
-								<a href title="" name="">{{eduBg.degree}}</a>
+								<i>{{eduBg.edu_rxsj}}-{{eduBg.edu_bysj}}：</i>
+								<a href title="" name="">{{eduBg.edu_byxx}}</a>|
+								<a href title="" name="">{{eduBg.edu_xxzy}}</a>|
+								<a href title="" name="">{{eduBg.edu_hdxl}}</a>|
+								<a href title="" name="">{{eduBg.edu_hdxw}}</a>
 							</span>
 							<span class="personal_time_right">
-								<a href title="" class="personal_time_right_an" ng-click='edit($index)' ng-show='editStateNew'>编辑</a>
-								<a href title="" class="personal_time_right_an" ng-click='remove($index);' ng-show='editStateNew'>删除</a>
+								<a href title="" class="personal_time_right_an" ng-click='edit($index)' ng-show='editStateNew && !eduBg.solid'>编辑</a>
+								<a href title="" class="personal_time_right_an" ng-click='remove($index);' ng-show='editStateNew && !eduBg.solid'>删除</a>
 							</span>
 						</div>
 					</div>
@@ -328,7 +328,7 @@
 							<td width="22">&nbsp;</td>
 							<td align="left" width="226">
 								<dl class="select_two">
-									<dt id='entryDate' ng-bind='editEduBg.entryDate'></dt>
+									<dt id='edu_rxsj' ng-bind='editEduBg.edu_rxsj'></dt>
 									<dd>
 										<ul>
 											<!-- <li ng-repeat='opt in scopeOptions'><a href>{{opt}}</a></li> -->
@@ -351,7 +351,7 @@
 							<td>&nbsp;</td>
 							<td align="left">
 								<dl class="select_two">
-									<dt id='graduationDate' ng-bind='editEduBg.graduationDate'></dt>
+									<dt id='edu_bysj' ng-bind='editEduBg.edu_bysj'></dt>
 									<dd>
 										<ul>
 											<!-- <li ng-repeat='opt in scopeOptions'><a href>{{opt}}</a></li> -->
@@ -374,7 +374,7 @@
 							<td>&nbsp;</td>
 							<td align="left">
 								<dl class="select_two">
-									<dt id='graduationCollege' ng-bind='editEduBg.graduationCollege'></dt>
+									<dt id='edu_byxx' ng-bind='editEduBg.edu_byxx'></dt>
 									<dd>
 										<ul>
 											<!-- <li ng-repeat='opt in scopeOptions'><a href>{{opt}}</a></li> -->
@@ -391,8 +391,8 @@
 							</td>
 							<td>&nbsp;</td>
 							<td>
-								<dl class="select_three">
-									<dt id='graduationCollegeScope' ng-bind='editEduBg.graduationCollegeScope'></dt>
+								<dl class="select_three" ng-show='show_visibility_options'>
+									<dt id='edu_byxxScope' ng-bind='editEduBg.edu_byxxScope'></dt>
 									<dd>
 										<ul>
 											<li ng-repeat='opt in scopeOptions'><a href>{{opt}}</a></li>
@@ -406,7 +406,7 @@
 							<td>&nbsp;</td>
 							<td align="left">
 								<dl class="select_two">
-									<dt id='major' ng-bind='editEduBg.major'></dt>
+									<dt id='edu_xxzy' ng-bind='editEduBg.edu_xxzy'></dt>
 									<dd>
 										<ul>
 											<!-- <li ng-repeat='opt in scopeOptions'><a href>{{opt}}</a></li> -->
@@ -423,8 +423,8 @@
 							</td>
 							<td>&nbsp;</td>
 							<td>
-								<dl class="select_three">
-									<dt id='majorScope' ng-bind='editEduBg.majorScope'></dt>
+								<dl class="select_three" ng-show='show_visibility_options'>
+									<dt id='edu_xxzyScope' ng-bind='editEduBg.edu_xxzyScope'></dt>
 									<dd>
 										<ul>
 											<li ng-repeat='opt in scopeOptions'><a href>{{opt}}</a></li>
@@ -438,12 +438,12 @@
 							<td align="right" height="34">获得学历</td>
 							<td>&nbsp;</td>
 							<td align="left">
-								<input type="text" name="" ng-model="editEduBg.diploma" class="personal_ipt" />
+								<input type="text" name="" ng-model="editEduBg.edu_hdxl" class="personal_ipt" />
 							</td>
 							<td>&nbsp;</td>
 							<td>
-								<dl class="select_three">
-									<dt id='diplomaScope' ng-bind='editEduBg.diplomaScope'></dt>
+								<dl class="select_three" ng-show='show_visibility_options'>
+									<dt id='edu_hdxlScope' ng-bind='editEduBg.edu_hdxlScope'></dt>
 									<dd>
 										<ul>
 											<li ng-repeat='opt in scopeOptions'><a href>{{opt}}</a></li>
@@ -456,12 +456,12 @@
 							<td align="right" height="34">获得学位</td>
 							<td>&nbsp;</td>
 							<td align="left">
-								<input type="text" name="" ng-model="editEduBg.degree" class="personal_ipt" />
+								<input type="text" name="" ng-model="editEduBg.edu_hdxw" class="personal_ipt" />
 							</td>
 							<td>&nbsp;</td>
 							<td>
-								<dl class="select_three">
-									<dt id='degreeScope' ng-bind='editEduBg.degreeScope'></dt>
+								<dl class="select_three" ng-show='show_visibility_options'>
+									<dt id='edu_hdxwScope' ng-bind='editEduBg.edu_hdxwScope'></dt>
 									<dd>
 										<ul>
 											<li ng-repeat='opt in scopeOptions'><a href>{{opt}}</a></li>
@@ -485,7 +485,7 @@
 								<a href title="" class="personal_bc2" ng-show='editStateNew && dataReady' ng-click='add()'>添加</a>
 								<a href title="" class="personal_bc2" ng-show='!editStateNew && dataReady' ng-click='confirm()'>确认修改</a>
 							</td>
-							<td align="left"><a href title="" class="personal_bc2" ng-show='dataReady'>保存</a></td>
+							<td align="left"><a href title="" class="personal_bc2" ng-show='dataReady' ng-click='saveEduBg()'>保存</a></td>
 						</tr>
 					</table>
 				</div>
@@ -497,80 +497,15 @@
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="dialog_pop" id="imgBox" style="display:none;">
-			<div class="ctstab_mar">
-				<table width="326" border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td width="11" height="40">&nbsp;</td>
-						<td width="78" align="right">课程名:</td>
-						<td width="22">&nbsp;</td>
-						<td width="198">哲学与人生</td>
-						<td width="17">&nbsp;</td>
-					</tr>
-					<tr>
-						<td height="40">&nbsp;</td>
-						<td align="right">投点数:</td>
-						<td>&nbsp;</td>
-						<td>
-							<input type="text" value="" class="ctstab_mar_ipt">
-						</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td height="60">&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>&nbsp;</td>
-						<td>
-							<div class="easyDialog_footer">
-								<a href id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
-								<a href id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">取消</a>
-							</div>
-						</td>
-						<td>&nbsp;</td>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div class="dialog_pop" id="imgBox2" style="display:none;">
-			<div class="ctstab_mar">
-				<table width="326" border="0" cellpadding="0" cellspacing="0">
-					<tr>
-						<td width="11" height="40">&nbsp;</td>
-						<td width="78" align="right">课程名:</td>
-						<td width="22">&nbsp;</td>
-						<td width="198">哲学与人生</td>
-						<td width="17">&nbsp;</td>
-					</tr>
-					<tr>
-						<td height="40">&nbsp;</td>
-						<td align="right">投点数:</td>
-						<td>&nbsp;</td>
-						<td>
-							<input type="text" value="200" class="ctstab_mar_ipt2">
-						</td>
-						<td>&nbsp;</td>
-					</tr>
-					<tr>
-						<td height="60">&nbsp;</td>
-						<td colspan="4">
-							<div class="easyDialog_footer dialog_an">
-								<a href id="btnClose" class="dialog_an_l" onclick="easyDialog.close();">确定</a>
-								<a href id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">返回</a>
-								<a href id="btnClose" class="dialog_an_r" onclick="easyDialog.close();">撤销</a>
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
-		</div>
+		
 
 		<script>
 			/*  构造的假数据 测试用 */
 			var fakeObject = {
-				studentID: '5090379149',
+				studentId: '5090379149',
 				studentName: 'xian xing',
 				className: 'ruan gong wu ban',
-				studentFace: '',
+				picurl: '',
 				sex: 'm',
 				nationality: '中国',
 				identityNo: '5090379149',
@@ -580,26 +515,29 @@
 				bankName: 'Bank Of China',
 				bankNameScope: '其他人不可见',
 				
-				educationBackground: [
+				education: [
 					{
-						entryDate:'2005/09',
-						graduationDate:'2007/09',
-						graduationCollege:'北京交通大学',graduationCollegeScope:'下拉3',
-						major:'Computer Science',majorScope:'下拉2',
-						diploma:'本科',diplomaScope:'12131',
-						degree:'学士学位',degreeScope:'下拉6'
+						edu_rxsj:'2005/09',
+						edu_bysj:'2007/09',
+						edu_byxx:'北京交通大学',edu_byxxScope:'下拉3',
+						edu_xxzy:'Computer Science',edu_xxzyScope:'下拉2',
+						edu_hdxl:'本科',edu_hdxlScope:'12131',
+						edu_hdxw:'学士学位',edu_hdxwScope:'下拉6'
 					},
 					{
-						entryDate:'2005/09',
-						graduationDate:'2007/09',
-						graduationCollege:'上海交通大学',graduationCollegeScope:'下拉3',
-						major:'Software Engineering',majorScope:'下拉2',
-						diploma:'本科',diplomaScope:'12131',
-						degree:'学士学位',degreeScope:'下拉6'}
+						edu_rxsj:'2005/09',
+						edu_bysj:'2007/09',
+						edu_byxx:'上海交通大学',edu_byxxScope:'下拉3',
+						edu_xxzy:'Software Engineering',edu_xxzyScope:'下拉2',
+						edu_hdxl:'本科',edu_hdxlScope:'12131',
+						edu_hdxw:'学士学位',edu_hdxwScope:'下拉6'}
 				]
 			};
 			/* 如果这个值为真 那么用fakeObject当做真实数据 */
-			var test_local = true;
+			var test_local = false;
+			
+			var show_visibility_options = false;
+			
 			/* 信息项可见性选项 */
 			/* TODO : 待确认，是写死的， 还是动态获取的， 还是配置的？ */
 			var scopeOptions = ['其他人不可见','全班可见','全年级可见','校友可见'];
@@ -629,6 +567,22 @@
 						}
 					});
 				};
+				
+				_.updateEducationBackground = function(postData,callback){
+					$.ajax({
+						type:"post",
+						url:"/",
+						async:true,
+						data : postData,
+						success: function(data){
+							alert(data);
+						},
+						error: function(XMLHttpRequest, textStatus, errorThrown){
+                    		alert('无法保存！（错误码：' + XMLHttpRequest.status + "）");
+                   		}
+					});
+				};
+				
 				return _;
 			});
 			
@@ -637,6 +591,9 @@
 			PersonalInfoAppModule.controller(
 				'PersonalInfoController',
 				function ($scope, PersonalInfoInterface){
+					
+					$scope.show_visibility_options = show_visibility_options;
+					
 					PersonalInfoInterface.getPersonalInfo(function(data){
 						/* 如果getPersonalInfo 失败了调用callback(null); */
 						if (data){
@@ -672,7 +629,7 @@
 						fillin();
 						/*alert($scope.PersonalInfoData.identityNoScope); */
 						var postData = $.extend(true, {}, $scope.PersonalInfoData);
-						if (postData.educationBackground) delete postData.educationBackground;
+						if (postData.education) delete postData.education;
 						
 						/* post */
 						
@@ -696,31 +653,35 @@
 				}
 			);
 			
-			/* EducationBackgroundController 第三个页签教育背景对应的Controller */
+			/* educationController 第三个页签教育背景对应的Controller */
 			PersonalInfoAppModule.controller(
-				'EducationBackgroundController',
-				function ($scope){
+				'educationController',
+				function ($scope, PersonalInfoInterface){
 					/**********************/
 					/* configuration area */
 					/**********************/
 					/* 默认填充数据 */
 					var defaultData = { 
-						entryDate:'',
-						graduationDate:'',
-						graduationCollege:'',graduationCollegeScope:'全班可见',
-						major:'',majorScope:'全班可见',
-						diploma:'',diplomaScope:'全班可见',
-						degree:'',degreeScope:'全班可见'
+						edu_rxsj:'',
+						edu_bysj:'',
+						edu_byxx:'',edu_byxxScope:'全班可见',
+						edu_xxzy:'',edu_xxzyScope:'全班可见',
+						edu_hdxl:'',edu_hdxlScope:'全班可见',
+						edu_hdxw:'',edu_hdxwScope:'全班可见'
 					};
 					
-					/* eduBgLst 即PersonalInfoData.educationBackground，抽离出来单独处理 */
+					/* eduBgLst 即PersonalInfoData.education，抽离出来单独处理 */
 					var eduBgLst = {};
 					/* 默认绑定空的对象 */
 					$scope.eduBgLst = eduBgLst;
 					/* 获取数据完成后再次绑定 */
 					$scope.$on('dataReady', function(){
-						if ($scope.PersonalInfoData && $scope.PersonalInfoData.educationBackground){
-							eduBgLst = $scope.PersonalInfoData.educationBackground;
+						if ($scope.PersonalInfoData && $scope.PersonalInfoData.education){
+							eduBgLst = $scope.PersonalInfoData.education;
+							/* hide edit button */
+							for (var i = 0; i < eduBgLst.length; i++){
+								eduBgLst[i].solid = true;
+							}
 							$scope.eduBgLst = eduBgLst;
 						}
 						/* 数据准备好了，显示添加和保存按钮（如果不等数据 直接调用保存按钮，会覆盖原有数据！） */
@@ -743,21 +704,21 @@
 					
 					/* 无法使用ng-model的部分 手动赋值 */
 					function fillin(){
-						$scope.editEduBg.entryDate = $("#entryDate").text();
-						$scope.editEduBg.graduationDate = $("#graduationDate").text();
-						$scope.editEduBg.graduationCollege = $("#graduationCollege").text();
-						$scope.editEduBg.major = $("#major").text();
+						$scope.editEduBg.edu_rxsj = $("#edu_rxsj").text();
+						$scope.editEduBg.edu_bysj = $("#edu_bysj").text();
+						$scope.editEduBg.edu_byxx = $("#edu_byxx").text();
+						$scope.editEduBg.edu_xxzy = $("#edu_xxzy").text();
 						
-						$scope.editEduBg.graduationCollegeScope = $("#graduationCollegeScope").text();
-						$scope.editEduBg.majorScope = $("#majorScope").text();
-						$scope.editEduBg.diplomaScope = $("#diplomaScope").text();
-						$scope.editEduBg.degreeScope = $("#degreeScope").text();
+						$scope.editEduBg.edu_byxxScope = $("#edu_byxxScope").text();
+						$scope.editEduBg.edu_xxzyScope = $("#edu_xxzyScope").text();
+						$scope.editEduBg.edu_hdxlScope = $("#edu_hdxlScope").text();
+						$scope.editEduBg.edu_hdxwScope = $("#edu_hdxwScope").text();
 						
 						/* 必须的区域目前也需要 手动判断，因为没有form元素 也不是用submit做的提交 */
 						/* TODO : 确认必填项目 */
-						if ($scope.editEduBg.entryDate == '' ||
-							$scope.editEduBg.graduationDate == '' ||
-							$scope.editEduBg.graduationCollege == ''){
+						if ($scope.editEduBg.edu_rxsj == '' ||
+							$scope.editEduBg.edu_bysj == '' ||
+							$scope.editEduBg.edu_byxx == ''){
 							alert('请填写入学时间、毕业时间、毕业院校等信息！');
 							return false; 
 						}
@@ -769,18 +730,35 @@
 					function clear(){
 						$scope.editEduBg = $.extend(true, {}, $scope.defaultData);
 						
-						$("#entryDate").text($scope.editEduBg.entryDate);
-						$("#graduationDate").text($scope.editEduBg.graduationDate);
-						$("#graduationCollege").text($scope.editEduBg.graduationCollege);
-						$("#major").text($scope.editEduBg.major);
+						$("#edu_rxsj").text($scope.editEduBg.edu_rxsj);
+						$("#edu_bysj").text($scope.editEduBg.edu_bysj);
+						$("#edu_byxx").text($scope.editEduBg.edu_byxx);
+						$("#edu_xxzy").text($scope.editEduBg.edu_xxzy);
 						
-						$("#graduationCollegeScope").text($scope.editEduBg.graduationCollegeScope);
-						$("#majorScope").text($scope.editEduBg.majorScope);
-						$("#diplomaScope").text($scope.editEduBg.diplomaScope);
-						$("#degreeScope").text($scope.editEduBg.degreeScope);
+						$("#edu_byxxScope").text($scope.editEduBg.edu_byxxScope);
+						$("#edu_xxzyScope").text($scope.editEduBg.edu_xxzyScope);
+						$("#edu_hdxlScope").text($scope.editEduBg.edu_hdxlScope);
+						$("#edu_hdxwScope").text($scope.editEduBg.edu_hdxwScope);
 						
 						$scope.editIndex = -1;
 						$scope.editStateNew = true;
+					}
+					
+					function packUp(packedUp, currentObj, num){
+						/*
+						edu_rxsj:'',TZ_ADMISSN_DT
+						edu_bysj:'',TZ_UDRGRD_DT
+						edu_byxx:'',TZ_SCH_CNAME
+						edu_xxzy:'',TZ_SPECIALTY
+						edu_hdxl:'',TZ_OBT_EDUC
+						edu_hdxw:'',TZ_OBT_DEGR
+						*/
+						packedUp["TZ_ADMISSN_DT_"+num] = currentObj.edu_rxsj + "/01";
+						packedUp["TZ_UDRGRD_DT_"+num] = currentObj.edu_bysj + "/01";
+						packedUp["TZ_SCH_CNAME_"+num] = currentObj.edu_byxx;
+						packedUp["TZ_SPECIALTY_"+num] = currentObj.edu_xxzy;
+						packedUp["TZ_OBT_EDUC_"+num] = currentObj.edu_hdxl;
+						packedUp["TZ_OBT_DEGR_"+num] = currentObj.edu_hdxw;
 					}
 					
 					/* 添加一条 */
@@ -789,6 +767,9 @@
 							return ;
 						}
 						var clonedEduBg = $.extend(true, {}, $scope.editEduBg);
+						/* show edit button */
+						clonedEduBg.solid = false;
+						
 						var len = $scope.eduBgLst.length;
 						$scope.eduBgLst.push(clonedEduBg);
 						
@@ -829,9 +810,13 @@
 					
 					/* 保存教育经历 */
 					$scope.saveEduBg = function(){
-						var postData = $.extend(true, {}, $scope.eduBgLst);
-												
+						var edus = $.extend(true, {}, $scope.eduBgLst);
+						var postData = {};
+						var count = 0;
+						while(edus[count]) packUp(postData,edus[count],++count);
+
 						/* post */
+						PersonalInfoInterface.updateEducationBackground(postData, function(){});
 						
 					};
 					

@@ -11,9 +11,9 @@ a:hover{color:#F03E34; text-decoration:none;}
 .fr{ float:right}
 img{ border:0px;}
 
-.header{ width:100%; height:125px; padding-top:65px;}
+.header{ width:100%; height:100px; padding-top:40px;}
 .login_head{ width:621px; height:72px; margin:0 auto; overflow:hidden;}
-.cont{ width:1000px; height:667px; font-size:1px; border-top:4px solid #ea6c24; border-bottom:2px solid #ea6c24; margin:0 auto; position:relative;}
+.cont{ width:1000px; height:667px; font-size:1px; border-top:4px solid #ea6c24; margin:0 auto; position:relative;}
 
 .cont .cont_bg{ width:1000px; font-size:1px; border:0; margin:0 auto; padding:0;}
 .cont_bg img{ border:0; font-size:1px; margin:0; padding:0; display:block;}
@@ -26,11 +26,11 @@ img{ border:0px;}
 .cont_tab_yzmtp{ margin-left:30px; padding-top:6px;  float:left; display:inline;}
 .cont_tab_dl{ width:302px; height:47px; background:#fa7f00; border-top:1px solid #fcb266; line-height:47px; font-size:18px; text-align:center;  font-family:"微软雅黑";}
 .cont_tab_dl a{ color:#FFF; display:block; letter-spacing:1em;}
-.cont_tab_dl a:hover{ color:#F03E34;}
+.cont_tab_dl a:hover{ background:#de7100; color:#FFF;}
 .cont_tab_ts{ color:#000; font-size:14px; color:#fa7f00;}
 .wjmm_box{ width:300px; float:left;}
 .wjmm{ color:#5a5a5a; display:block;  font-size:14px; border-bottom:1px solid #5a5a5a; display:block;}
-.footer{ width:100%; height:214px; background:#eeeeee;}
+.footer{ width:100%; height:214px; background:#eeeeee; border-top:2px solid #ea6c24;}
 .ft_box{ width:1000px; margin:0 auto;}
 .ft_box_l{ width:1000px; padding-top:20px; float:left;}
 .ft_box_l h2{ height:40px; line-height:40px; font-size:12px; font-family:"微软雅黑"; font-weight:700;}
