@@ -10,6 +10,9 @@
 <script src='js/jslayer.js'></script>
 <script>
 	var psc_url = '';
+	function setCurrent(){
+		;
+	}
 </script>
 
 </head>
@@ -125,6 +128,11 @@
 		document.getElementById('tab_con'+num).style.display = 'block';
 	 }
 </script>
+<style>
+	.schedule_cont_pop table td {
+		padding: 2px;
+	}
+</style>
 <div class="s_main">
 	
 	<!--left menu-->
@@ -173,8 +181,9 @@
 							<td ng-bind-html='course.courseWeek | checkTdEmpty'></td>
 							<td ng-bind-html='course.courseSuspend | checkTdEmpty'></td>
 							<td ng-bind-html='course.courseMakeup | checkTdEmpty'></td>
-							<td ng-if="course.IsPlan == 'TRUE'" ng-bind-html='course.examPlan | checkTdEmpty'></td>
-							<td ng-if="course.IsPlan == 'FALSE'">&nbsp;课程评估率＜95%
+							<td ng-if="course.IsOpen == 'N'">待定</td>
+							<td ng-if="course.IsOpen == 'Y' && course.IsPlan == 'TRUE'" ng-bind-html='course.examPlan | checkTdEmpty'></td>
+							<td ng-if="course.IsOpen == 'Y' && course.IsPlan == 'FALSE'">&nbsp;课程评估率＜95%
 								<br>不能查看考试安排
 								<br>
 								<a href title="" class="scp_kczl" ng-click="openUnevaluatedStudentList(course.courseID)">查看未完成<br>评估学生</a>&nbsp;
@@ -231,33 +240,35 @@
 				<div class="dialog_wdkb_mar">
 					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_bt">
 						<tr>
-							<td height="32" style="text-align: left; padding: 5px 20px;">课程号： <span ng-bind='unEvaluation.courseID'></span>
+							<td height="32" style="text-align: center; padding: 15px 20px;">课程号： <span ng-bind='unEvaluation.courseID'></span>
 							</td>
-							<td style="text-align: left; padding: 5px 20px;">课程名： <span ng-bind='unEvaluation.courseName'></span>
+							<td style="text-align: center; padding: 5px 20px;">课程名： <span ng-bind='unEvaluation.courseName'></span>
 							</td>
-							<td ng-if='unEvaluation.teacherList.length <= 1'  style="text-align: left; padding: 5px 20px;">授课教师： <span>{{unEvaluation.teacherList[0]}}</span>
-							</td>
+							<!--<td ng-if='unEvaluation.teacherList.length <= 1'  style="text-align: left; padding: 5px 20px;">授课教师： <span>{{unEvaluation.teacherList[0]}}</span>
+							</td>-->
 						</tr>
-						<tr ng-if='unEvaluation.teacherList.length > 1'>
+						<!--<tr ng-if='unEvaluation.teacherList.length > 1'>
 							<td style="text-align: left; padding: 5px 20px;">
 								授课教师： <span ng-repeat='teacher in unEvaluation.teacherList'>{{($index == 0 ? '':',') + teacher}}</span>
 							</td>
-						</tr>
+						</tr>-->
 					</table>
 					<br />
+					<div class='dialog_wdkb_nr_wrapper'>
 					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_nr">
 						<tr>
-							<td height="32" width="184">学号</td>
-							<td width="296">姓名</td>
+							<td height="32" width="190">授课教师</td>
+							<td width="216">姓名</td>
 							<td width="188">班级</td>
 						</tr>
 						<tr ng-repeat='student in unEvaluation.studentList'>
-							<td height="32" ng-bind-html='student.studentId | checkTdEmpty'></td>
+							<td height="32" ng-bind-html='student.teacherName | checkTdEmpty'></td>
 							<td ng-bind-html='student.studentName | checkTdEmpty'></td>
 							<td ng-bind-html='student.className | checkTdEmpty'></td>
 						</tr>
 					</table>
-					<div class="dialog_wdkb_mar_fh">
+					</div>
+					<div class="dialog_wdkb_mar_fh" style="margin-bottom: 10px;margin-top: 10px;">
 						<a href="#" title="" id="btnClose" onclick="easyDialog.close();">返回</a>
 					</div>
 				</div>
@@ -418,7 +429,7 @@
 			graDate : '2011-01-01',
 			courseList : [
 			{courseID : 'cid1', courseName : 'cn1', courseHours : 'ch1', credit : 'c1', teacher : 't1', 
-			courseTime : 'ct1<br>ct11<br>ct111', courseWeek : 'cw1', courseSuspend : 'cs1', courseMakeup : 'cm1', examPlan : 'ep1', IsPlan : 'TRUE'},
+			courseTime : 'ct1<br>ct11<br>ct111', courseWeek : 'cw1', courseSuspend : 'cs1', courseMakeup : 'cm1', examPlan : 'ep1', IsPlan : 'FALSE', IsOpen : 'Y'},
 			{courseID : 'cid2', courseName : 'cn2', courseHours : 'ch2', credit : 'c2', teacher : 't2', 
 			courseTime : 'ct2', courseWeek : 'cw2', courseSuspend : 'cs2', courseMakeup : 'cm2', examPlan : 'ep2', IsPlan : 'FALSE'},
 			{courseID : 'cid3', courseName : 'cn3', courseHours : 'ch3', credit : 'c3', teacher : 't3', 
@@ -429,16 +440,28 @@
 		var fakeUnevaluation = {
 			courseID : 'courseId123',
 			courseName : 'courseName345',
-			teacherList : ['teacherMr.C'],
-			studentList : [
-			{studentId : "id123", studentName : 'student456', className : 'class789'},
-			{studentId : "id321", studentName : 'student654', className : 'class987'},
-			{studentId : "id321", studentName : 'student654', className : 'class987'},
-			{studentId : "id321", studentName : 'student654', className : 'class987'},
-			{studentId : "id321", studentName : 'student654', className : 'class987'},
-			{studentId : "id321", studentName : 'student654', className : 'class987'},
-			{studentId : "id321", studentName : 'student654', className : 'class987'}
-			]
+			teacherList : [{
+				teacher: 'teacherMr.C',
+				
+				studentList : [
+				{studentID : "id123", studentName : 'student456', className : 'class789'},
+				{studentID : "id321", studentName : 'student654', className : 'class987'},
+				{studentID : "id321", studentName : 'student654', className : 'class987'},
+				{studentID : "id321", studentName : 'student654', className : 'class987'},
+				{studentID : "id321", studentName : 'student654', className : 'class987'},
+				{studentID : "id321", studentName : 'student654', className : 'class987'},
+				{studentID : "id321", studentName : 'student654', className : 'class987'}
+				]
+			},
+			{
+				teacher: 'teacherMr.Dg',
+				
+				studentList: [
+				{studentID : "aaaid123", studentName : 'aaastudent456', className : 'class789'},
+				{studentID : "aaaid321", studentName : 'aaastudent654', className : 'class987'},
+				{studentID : "aaaid321", studentName : 'aaastudent654', className : 'class987'}
+				]
+			}]
 		};
 		
 		var fakeAttendance = {
@@ -476,6 +499,7 @@
 	}
 	
 	var test_local = false;
+	var loadingWidget;
 	
 	var ScheduleAppModule = angular.module('ScheduleApp',[]
 	).filter('checkTdEmpty', function(){
@@ -593,11 +617,27 @@
 			};
 			$scope.unEvaluation = $.extend(true, {}, emptyUnEvaluation);
 			$scope.openUnevaluatedStudentList = function (cid){
+				loadingWidget = layer.load('获取数据中..');
+				layer.area(loadingWidget);
 				ScheduleInterface.getUnevaluatedStudentList(cid, function(data){
-					if (data){
+					if (data && data.teacherList){
+						var studentList = [];
+						for (var i = 0; i < data.teacherList.length; i ++){
+							if (!data.teacherList[i].studentList.length) continue;
+							for (var j = 0; j < data.teacherList[i].studentList.length; j ++){
+								studentList.push($.extend({teacherName : data.teacherList[i].teacher},$.extend(true, {}, data.teacherList[i].studentList[j])));
+							}
+						}
+						data.studentList = studentList;
 						$scope.unEvaluation = data;
 						delayOpenDialogBy10("imgBox_UnevaluatedStudentList");
+						setTimeout(function(){
+							$("#imgBox_UnevaluatedStudentList .dialog_wdkb_nr_wrapper").css("max-height","500px");
+							$("#imgBox_UnevaluatedStudentList .dialog_wdkb_nr_wrapper").css("overflow-y","scroll");
+							$("#imgBox_UnevaluatedStudentList .dialog_wdkb_nr_wrapper").scrollTop(0);
+						},30);
 					}
+					layer.closeAll();
 				});
 			};
 			
@@ -614,11 +654,14 @@
 			};
 			$scope.courseReference = $.extend(true, {}, emptyReference);
 			$scope.openCourseReference = function(cid){
+				loadingWidget = layer.load('获取数据中..');
+				layer.area(loadingWidget);
 				ScheduleInterface.getCourseReferenceData(cid, function(data){
 					if (data){
 						$scope.courseReference = data;
 						delayOpenDialogBy10("imgBox_CourseReference");
 					}
+					layer.closeAll();
 				});
 			};
 			
@@ -635,10 +678,13 @@
 			$scope.courseAttendance = $.extend(true, {}, emptyAttendance);
 			$scope.openCourseAttendance = function(cid){
 				ScheduleInterface.getCourseAttendanceData(cid, function(data){
+					loadingWidget = layer.load('获取数据中..');
+					layer.area(loadingWidget);
 					if (data){
 						$scope.courseAttendance = data;
 						delayOpenDialogBy10("imgBox_CourseAttendance");
 					}
+					layer.closeAll();
 				});
 			};
 			
