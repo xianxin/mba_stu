@@ -7,6 +7,11 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.js" language="javascript" type="text/javascript"></script>
 <script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
+<script type="text/javascript" src="js/jslayer.js" ></script>
+<script>
+	var psc_url = '';
+	function setCurrent(a,b){;}
+</script>
 </head>
 <body>
 <div class="hder">
@@ -74,42 +79,24 @@
 
 <!--TODO : startCopy-->
 
-<script type="text/javascript" src="js/sonic.js" ></script>
-<div id="loading_8" style="display: none;"></div>
-<script>var sonicLoading = new Sonic('loading_8');</script>
-<style>
-	
-	div#loading_8 {
-		border: 0;
-		position: fixed;
-		left:50%;top:50%;
-		margin-left:width/2;margin-top:height/2;
-		width: 40px;
-		height: 40px;
-		background: transparent;
+<script type="text/javascript">
+
+	function fastbind(){
+	  	$(".select").each(function(){
+			var s=$(this);
+			var z=parseInt(s.css("z-index"));
+			var dt=$(this).children("dt");
+			var dd=$(this).children("dd");
+			var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+			var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+			dt.click(function(){dd.is(":hidden")?_show():_hide();});
+			dd.find("a").click(function(){dt.html($(this).html());_hide();});
+			$("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});
+		});
 	}
 	
-</style>
-<script type="text/javascript">
-$(function(){
-	/*============================
-	@author:flc
-	@time:2014-02-11 18:16:09
-	@qq:3407725
-	============================*/
-	$(".select").each(function(){
-		var s=$(this);
-		var z=parseInt(s.css("z-index"));
-		var dt=$(this).children("dt");
-		var dd=$(this).children("dd");
-		var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-		var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-		dt.click(function(){dd.is(":hidden")?_show():_hide();});
-		dd.find("a").click(function(){dt.html($(this).html());_hide();});
-		$("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});
-	})
-})
 </script>
+
 <script type="text/javascript" src="js/angular.min.js" ></script>
 <!--[if lte IE 8]>
     <script type="text/javascript" src="js/json3.min.js" ></script>
@@ -126,62 +113,62 @@ $(function(){
 <div class="s_main">
   
   <!--left menu-->
-  <div id="left_div_id">
-    <script>$("#left_div_id").load("/mbastu/_menu/menu_507.html");</script>
+  <div id="left_div_id" style="display: none;">
+	<script>$("#left_div_id").load("/mbastu/_menu/menu_1086.html",function(){setCurrent('通讯录');});</script>
   </div>
   
-  <div class="s_main_r" id='ng-app' ng-app='AddressBookApp'>
+  <div class="s_main_r address_qz" id='ng-app' ng-app='AddressBookApp'>
 	<div class="address" ng-controller='AddressBookController'>
-      <div class="address_tit">
-        <h2>通讯录</h2>
+      <div class="crumbs address_top">
+      	<p>
+          <a href="#" title="">首页</a>
+           > 
+          <a href="#" title="">个人中心</a>
+           > 
+          <a href="#" title="" class="crumbs_bg">通讯录</a>
+      	</p>
       </div>
       <div class="address_seach">
         <div class="address_seach_top">
         	<table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td width="52" height="36" align="center">姓名</td>
-                <td width="130">
+                <td width="101" height="36" align="right">姓名</td>
+                <td width="15">&nbsp;</td>
+                <td width="162">
                   <input type="text" name="" ng-model='filterObject.studentName' class="address_ipt">
                 </td>
-                <td width="52">&nbsp;</td>
-                <td width="82" align="center">公司名称</td>
-                <td>&nbsp;</td>
-                <td width="130">
+                <td width="137" align="right">公司名称</td>
+                <td width="15">&nbsp;</td>
+                <td width="162">
                   <input type="text" name="" ng-model="filterObject.companyName" class="address_ipt">
                 </td>
-                <td width="45">&nbsp;</td>
-                <td width="96" align="right">公司经营范围</td>
-                <td width="16">&nbsp;</td>
+                <td width="157" align="right">公司经营范围</td>
+                <td width="15">&nbsp;</td>
                 <td>
                   <input type="text" name="" ng-model="filterObject.companyScope" class="address_ipt">
                 </td>
-                <td>&nbsp;</td>
+                <td width="74">&nbsp;</td>
               </tr>
               <tr>
-                <td width="52" height="36" align="center">国籍</td>
-                <td width="130">
+                <td height="36" align="right">国籍</td>
+                <td>&nbsp;</td>
+                <td>
                   <input type="text" name="" ng-model="filterObject.nationality" class="address_ipt">
                 </td>
-                <td width="52">&nbsp;</td>
-                <td width="82" align="center">常驻城市</td>
+                
+                <td align="right">常驻城市</td>
                 <td>&nbsp;</td>
-                <td width="130">
+                <td>
                   <input type="text" name="" ng-model="filterObject.city" class="address_ipt">
                 </td>
-                <td width="45">&nbsp;</td>
-                <td width="96" align="right">公司性质</td>
+                <td align="right">公司性质</td>
                 <td width="16">&nbsp;</td>
                 <td>
                   <dl class="select">
-                    <dt id='companyNature' ng-bind='filterObject.companyNature'>下拉</dt>
-                    <dd>
-                        <ul>
-                            <li><a href>12131</a></li>
-                            <li><a href>下拉2</a></li>
-                            <li><a href>下拉3</a></li>
-                            <li><a href>下拉4</a></li>
-                            <li><a href>下拉5</a></li>
-                            <li><a href>下拉6</a></li>
+                    <dt id='companyNature' ng-bind='filterObject.companyNature' style="background-position-x: 135px;"></dt>
+                    <dd style="width: 160px;">
+                        <ul style="width: 156px;">
+                        	<li ng-repeat='natureType in natureTypeOptions' on-finish-render-filters><a href>{{natureType}}</a></li>
                         </ul>
                     </dd>
                 </dl>
@@ -195,7 +182,7 @@ $(function(){
         <div class="address_seach_ss">          
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
-              <td width="20"></td>
+              <td width="116"></td>
               <td width="112">
                 <label>
                 <input type="radio" name="RadioGroup1" value="1" ng-model='filterObject.studentType' id="RadioGroup1_0">
@@ -211,12 +198,12 @@ $(function(){
                 <input type="radio" name="RadioGroup1" value="3" ng-model='filterObject.studentType' id="RadioGroup1_2">
                 所有在校生</label>
               </td>
-              <td width="310">&nbsp;</td>
+              <td width="410">&nbsp;</td>
               <td><a href title="" class="address_seach_ss_an" ng-click='search();' >搜索</a></td>
             </tr>
           </table>
         </div>
-        <div class="address_seach_biaog">
+        <div class="address_seach_biaog" style="min-height: 300px;">
           <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr>
               <td style="width: 58px;padding: 2px;word-wrap:break-word;word-break:break-all;" height="20">姓名</td>
@@ -256,7 +243,11 @@ $(function(){
   
   
   <script>
-  		var test_local = true;
+  		var natureTypeOptions = [
+			'国有或国有控股','外商合资','外商独资','港澳台合资',
+			'港澳台独资','民营或私有控股','政府部门','事业单位','非营利机构','其他'
+		];
+  		var test_local = false;
   		var fakeObject = {
   			currentPageNumber: 1,
   			totalPageNumber: 11,
@@ -295,9 +286,21 @@ $(function(){
   				nationality: "china", city: "beijing", companyName: "Tz", department: "HR"
   			}]
   		};
-  		
+  		var loadingWidget;
+		
   		var AddressBookAppModule = angular.module('AddressBookApp', []).config(function($sceProvider) {
 			$sceProvider.enabled(false);
+		}).directive('onFinishRenderFilters', function($timeout){
+			return {
+				restrict: 'A',
+				link: function(scope, element, attr){
+					if (scope.$last === true){
+						$timeout(function(){
+							scope.$emit('ngRepeatFinished');
+						});
+					}
+				}
+			};
 		});
 		
 		AddressBookAppModule.factory('AddressBookInterface', function($http){
@@ -309,7 +312,7 @@ $(function(){
 					return;
 				}
 				
-				$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_CONLIST.FieldFormula.IScript_getConList?' + ($.param(filterObject)),{params: {}
+				$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_CONLIST.FieldFormula.IScript_getConList?' + ($.param(filterObject)),{params: {}
 				}).success(function(data,status,headers,config){
 					if (test_local ){
 						/* 测试时候的模拟 */
@@ -355,7 +358,7 @@ $(function(){
 				$scope.pageSize = 12;
 				if (test_local) $scope.pageSize = 1;
 				$scope.totalStudentNumber = 0;
-				
+				$scope.natureTypeOptions = natureTypeOptions;
 				
 				/* filter object */
 				var defaultFilterObject = {
@@ -384,23 +387,24 @@ $(function(){
 				};
 				
 				function getResultsPage(num){
-					if (!test_local) sonicLoading.play();
+					loadingWidget = layer.load('获取数据中..');
+					layer.area(loadingWidget);
 					if (num < 1) num = 1;
 					fillin();
 					$scope.filterObject.pageNumber = num;
 					/* $scope.filterObject is changed by the interface !!! And it's ok ! */
 					AddressBookInterface.getAdrressBookByPage($scope.filterObject, function(data){
-						$scope.studentList = data.studentList;
-						$scope.totalStudentNumber = data.totalPageNumber * $scope.pageSize;
-						
-						setTimeout(function(){sonicLoading.stop();},20);
+						if (data){
+							$scope.studentList = data.studentList;
+							$scope.totalStudentNumber = data.totalPageNumber * $scope.pageSize;
+						}
+						layer.closeAll();
 					});
 				};
 				
 				$scope.pageChangeHandler = function(num) {
 					if (test_local) {
 						setTimeout(function(){getResultsPage(num);},2000);
-						sonicLoading.play();
 					} else {
 						getResultsPage(num);
 					}
@@ -409,12 +413,17 @@ $(function(){
 				$scope.search = function(){
 					getResultsPage(1);
 				};
+				
+				$scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
+					fastbind();
+				});
+				
 			}
 		);
 		var moduleName = 'AddressBookApp';
   </script>
   <script type="text/javascript" src="js/dirPagination.js" ></script>
-  
+
   <div class="clear"></div>
 </div>
 

@@ -73,11 +73,22 @@
 <!--TODO : startCopy-->
 
 <script type="text/javascript" src="js/angular.min.js"></script>
+<!--[if lte IE 8]>
+    <script type="text/javascript" src="js/json3.min.js" ></script>
+    <script>
+	    document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+	</script>
+<![endif]-->
 <div class="s_main">
   
 	<!--left menu-->
   <div id="left_div_id">
-    <script>$("#left_div_id").load("/mbastu/_menu/menu_503.html");</script>
+    <script>$("#left_div_id").load("/mbastu/_menu/menu_1082.html",function(){setCurrent('培养计划');});</script>
   </div>
   
   <div class="s_main_r" id="ng-app" ng-app="TeachingProgramApp">
@@ -182,6 +193,10 @@
   <div class="clear"></div>
 </div>
 <script>
+
+	var loadingWidget = layer.load('获取数据中..');
+	layer.area(loadingWidget);
+	
 	var fakeProgram = {
 		studentId : '5090379149',
 		className : 'F0903705',
@@ -205,11 +220,10 @@
 		electivesAll : 14,
 		programRemark : '1'
 	};
-	/*old version:compulsoryGot : 10,compulsoryAll : 19, electivesGot : 9,electivesAll : 14,programRemark : '1'*/
 
 	var studentName;
 	
-	var test_local = true;
+	var test_local = false;
 	var ProgramAppModule = angular.module('TeachingProgramApp', []).filter('checkTdEmpty', function(){
 		return function(input){
 			if (angular.isString(input) && !(angular.equals(input, null) || angular.equals(input,''))){
@@ -225,8 +239,7 @@
 	ProgramAppModule.factory('ProgramInterface',function($http){
 		var _ = {};
 		_.getProgramData = function(callback){
-			/* if (test_local) {callback(fakeProgram); return ;} */
-			$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_TrainPlan',{params:{}
+			$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_TrainPlan',{params:{}
 			}).success(function(data,status,headers,config){
 				callback(data);
 				return;
@@ -269,12 +282,13 @@
 				if (data){
 					$scope.program = decoration(data);
 				}
+				layer.closeAll();
 			});
 			
 			getStudentObject(function(studentObject){
 				if (studentObject && studentObject.name){
 					studentName = studentObject.name;
-					$scope.program.displayDPI = (studentName || "") + " 培养计划";
+					$scope.program.display_studentName = (studentName || "") + " 培养计划";
 				}
 			});
 		}

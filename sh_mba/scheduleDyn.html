@@ -7,6 +7,10 @@
 <link href="css/style.css" rel="stylesheet" type="text/css" />
 <link href="css/easydialog.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
+<script src='js/jslayer.js'></script>
+<script>
+	var psc_url = '';
+</script>
 
 </head>
 <body>
@@ -98,6 +102,17 @@
 
 <script type="text/javascript" src="js/angular.min.js"></script>
 <script src="js/easydialog.min.js" language="javascript" type="text/javascript"></script>
+<!--[if lte IE 8]>
+    <script type="text/javascript" src="js/json3.min.js" ></script>
+    <script>
+	    document.createElement('ng-include');
+        document.createElement('ng-pluralize');
+        document.createElement('ng-view');
+        document.createElement('ng:include');
+        document.createElement('ng:pluralize');
+        document.createElement('ng:view');
+	</script>
+<![endif]-->
 <script>
 	function show(num){
 	 	var lis = document.getElementById('yq_xxk_kb').getElementsByTagName('li');
@@ -114,7 +129,7 @@
 	
 	<!--left menu-->
 	<div id="left_div_id">
-		<script>$("#left_div_id").load("/mbastu/_menu/menu_503.html");</script>
+		<script>$("#left_div_id").load("/mbastu/_menu/menu_1082.html",function(){setCurrent('我的课表');});</script>
 	</div>
 	
 	<div class="s_main_r" id='ng-app' ng-app='ScheduleApp'>
@@ -153,7 +168,8 @@
 							<td ng-bind-html='course.courseHours | checkTdEmpty'></td>
 							<td ng-bind-html='course.credit | checkTdEmpty'></td>
 							<td ng-bind-html='course.teacher | checkTdEmpty'></td>
-							<td ng-bind-html='course.courseTime | checkTdEmpty'></td>
+							<!--<td ng-bind-html='course.courseTime | checkTdEmpty'></td>-->
+							<td><a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseTime($index)">查看上课时间</a></td>
 							<td ng-bind-html='course.courseWeek | checkTdEmpty'></td>
 							<td ng-bind-html='course.courseSuspend | checkTdEmpty'></td>
 							<td ng-bind-html='course.courseMakeup | checkTdEmpty'></td>
@@ -241,6 +257,7 @@
 					</div>
 				</div>
 			</div>
+			
 			<div class="dialog_wdkb_two" id="imgBox_CourseReference" style="display:none;" >
 				<div class="dialog_wdkb_mar_two">
 					<div id="yq_xxk_kb">
@@ -368,51 +385,26 @@
 					</div>
 				</div>
 			</div>
+		
+			<div class="dialog_wdkb" id="imgBox_CourseTime" style="display:none;" >
+				<div class="dialog_wdkb_mar" style="padding: 20px; height: auto; width: 694px">
+					<p ng-bind-html='theCourseTime'></p>
+					<div class="dialog_wdkb_mar_fh2">
+						<a href="#" title="" id="btnClose" onclick="easyDialog.close();">返回</a>
+					</div>
+				</div>
+				
+			</div>
 		</div>
-
 
 	</div>
 	<div class="clear"></div>
 </div>
 
 <script>
-/*
-var jquery = function(){
-	return document.getElementById(arguments[0]);
-};
 
-var btnFn = function( e ){
-	alert( e.target );
-	return false;
-};
-
-jquery('demoBtn1').onclick = function(){
-	easyDialog.open({
-		container : 'imgBox',
-			yesFn : btnFn,
-			noFn : true,
-		fixed : false
-	});
-};
-jquery('demoBtn2').onclick = function(){
-	easyDialog.open({		
-		container : 'imgBox2',
-			yesFn : btnFn,
-			noFn : true,
-		fixed : false
-	});
-};
-/*jquery('demoBtn3').onclick = function(){
-	easyDialog.open({
-		container : 'imgBox',
-		autoClose : 9999999,
-		fixed :true,
-		
-	});
-};*/
-</script>
-
-<script>
+	var loadingWidget = layer.load('获取数据中..');
+	layer.area(loadingWidget);
 
 	{
 		var fakeSchedule = {
@@ -478,7 +470,7 @@ jquery('demoBtn2').onclick = function(){
 		};
 	}
 	
-	var test_local = true;
+	var test_local = false;
 	
 	var ScheduleAppModule = angular.module('ScheduleApp',[]
 	).filter('checkTdEmpty', function(){
@@ -497,21 +489,20 @@ jquery('demoBtn2').onclick = function(){
 	
 	ScheduleAppModule.factory('ScheduleInterface',function($http){
 		var _ = {};
-		_.getSchedule = function(callback){
-			/* if (test_local) { callback(fakeSchedule); return; } */			
-			$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.IScript_getXskb',{params:{}
+		_.getSchedule = function(callback){	
+			$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.IScript_getXskb',{params:{}
 			}).success(function(data,status,headers,config){
 				callback(data);
 				return;
 			}).error(function(data,status,headers,config){
+				if (test_local) callback(fakeSchedule);
 				alert('无法获取课程表！（错误码：' + status + "）" );
 				callback(null);
 				return;
 			});
 		};		
 		_.getCourseAttendanceData = function(cid, callback){
-			/* if (test_local) { callback(fakeAttendance); return; } */
-			$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_GetKq?' + $.param({coursId: cid}),{params:{}
+			$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_GetKq?' + $.param({coursId: cid}),{params:{}
 			}).success(function(data,status,headers,config){
 				callback(data);
 				return;
@@ -526,8 +517,7 @@ jquery('demoBtn2').onclick = function(){
 			;
 		};
 		_.getCourseReferenceData = function(cid, callback){
-			/* if (test_local) { callback(fakeReference); return; } */
-			$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_CourseData?' + $.param({coursId: cid}),{params:{}
+			$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_CourseData?' + $.param({coursId: cid}),{params:{}
 			}).success(function(data,status,headers,config){
 				callback(data);
 				return;
@@ -552,12 +542,14 @@ jquery('demoBtn2').onclick = function(){
 			
 			var studentSchedule = $.extend(true, {}, defaultStudentSchedule);
 			$scope.studentSchedule = studentSchedule;
+			$scope.theCourseTime = '';
 			
 			/* init Schedule */
 			ScheduleInterface.getSchedule(function(data){
 				if (data) {
 					$scope.studentSchedule = data;
 				}
+				layer.closeAll();
 			});
 			
 			/* init Easydialog */
@@ -636,6 +628,12 @@ jquery('demoBtn2').onclick = function(){
 					}
 				});
 			};
+			
+			$scope.openCourseTime = function(index){
+				var courseTimeData = $scope.studentSchedule.courseList[index].courseTime;
+				$scope.theCourseTime = courseTimeData;
+				delayOpenDialogBy10("imgBox_CourseTime");
+			}
 		}
 	);
 </script>

@@ -9,6 +9,8 @@
 		<link href="css/easydialog.css" rel="stylesheet" type="text/css" />
 		<link href="css/jquery-ui.css" rel="stylesheet" type="text/css" />
 		<script src="js/jquery-1.7.min.js" language="javascript" type="text/javascript"></script>
+		<script src='js/jslayer.js'></script>
+		<script>var psc_url = '';function setCurrent(a,b){;}</script>
 	</head>
 
 	<body>
@@ -95,8 +97,13 @@
 		<script src="js/easydialog.min.js" language="javascript" type="text/javascript"></script>
 		<script type="text/javascript" src="js/jquery-ui-datepicker.js"></script>
 		<script type="text/javascript" src="js/angular.min.js" ></script>
-		<script type='text/javascript' src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-		<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
+		<script src="js/jquery-ui-datepicker.js"></script>
+		<link rel="stylesheet" href="css/jquery-ui.css" />
+		
+		<style>
+			.remove_button_hidden{display: none;}
+			.select_family_disabled{}
+		</style>
 		<script type="text/javascript">
 			function show(num){
 			 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
@@ -109,6 +116,7 @@
 			 }
 		</script>
 
+		
 		<script type="text/javascript">
 			$(function(){
 				/*============================
@@ -116,18 +124,46 @@
 				@time:2014-02-11 18:16:09
 				@qq:3407725
 				============================*/
-				$(".select_three,.select_two,.selcect_wol,.select_family").each(function(){
+				$(".select_three,.select_two,.selcect_wol,.select_family").not('.select_family_disabled').each(function(){
 					var s=$(this);
 					var z=parseInt(s.css("z-index"));
 					var dt=$(this).children("dt");
 					var dd=$(this).children("dd");
 					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
 					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+					
 					dt.click(function(){dd.is(":hidden")?_show():_hide();});
 					dd.find("a").click(function(){dt.html($(this).html());_hide();});
-					$("body").click(function(i){ !$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
+					$("body").click(function(i){ 
+						!$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
 				})
-			})
+			});
+			
+			function fastBind(obj){
+				if (!obj){
+					$(".select_three,.select_two,.selcect_wol,.select_family").not('.select_family_disabled').each(function(){
+						var s=$(this);
+						var z=parseInt(s.css("z-index"));
+						var dt=$(this).children("dt").first();
+						var dd=$(this).children("dd").first();
+						var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+						var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+						dt.click(function(){dd.is(":hidden")?_show():_hide();});
+						dd.find("a").click(function(){dt.html($(this).html());_hide();});
+						$("body").click(function(i){ 
+							!$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
+					});
+				}else{
+					var s=$(obj);
+					var z=parseInt(s.css("z-index"));
+					var dt=s.children("dt").first();
+					var dd=s.children("dd").first();
+					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
+					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
+					dt.click(function(){dd.is(":hidden")?_show():_hide();});
+					dd.find("a").click(function(){dt.html($(this).html());_hide();});
+				}
+			}
 		</script>
 		
 		<!--[if lte IE 8]>
@@ -151,7 +187,7 @@
 		<div class="s_main" id='ng-app' ng-app='PersonalInfoApp'>
 			<!--left menu-->
 			<div id="left_div_id">
-				<script>$("#left_div_id").load("/mbastu/_menu/menu_507.html");</script>
+				<script>$("#left_div_id").load("/mbastu/_menu/menu_1086.html",function(){setCurrent('个人信息修改');});</script>
 			</div>
 			
 			<div class="s_main_r" ng-controller='PersonalInfoController'>
@@ -159,7 +195,7 @@
 					<h2>个人信息修改</h2>
 					<div class="personal_tit">
 						<div class="personal_tit_left">
-							<img src="images/personal_1.jpg" width="147" height="181">	<span><img src="images/personal_2.png" width="19" height="21"></span>
+							<img ng-src="{{PersonalInfoData.picurl}}" width="147" height="181">	<span><img src="images/personal_2.png" width="19" height="21" style="display: none;"></span>
 						</div>
 						<div class="personal_tit_right">
 							<table width="556" border="0" cellspacing="0" cellpadding="0">
@@ -178,10 +214,10 @@
 									</td>
 								</tr>
 							</table>
-
 						</div>
 					</div>
 				</div>
+				
 				<div id="yq_xxk">
 					<ul>
 						<li id="tit1" onclick="show(1)" class="current">
@@ -267,16 +303,6 @@
 							<td align="left">
 								<input type="text" name="" ng-model="PersonalInfoData.bankName" class="personal_ipt">
 								<span class="personal_mc"></span>
-								<!--
-								<dl class="select_two">
-									<dt id='bankName' ng-bind='PersonalInfoData.bankName'>下拉</dt>
-									<dd>
-										<ul>
-											<li ng-repeat='opt in bankNameOptions'><a href>{{opt}}</a></li>
-										</ul>
-									</dd>
-								</dl>
-								-->
 							</td>
 							<td>&nbsp;</td>
 							<td>&nbsp;</td>
@@ -299,9 +325,10 @@
 					</table>
 
 				</div>
-				<div id="con2" class="tem" style="display:none">
+				
+				<div id="con2" class="tem" style="display:none" ng-controller='ContactController'>
 					<div class="personal_time">
-						<table width="738" border="0" cellspacing="0" cellpadding="0">
+						<table width="738" border="0" cellspacing="0" cellpadding="0" id='addressTable'>
 							<tr>
 								<td width="10" height="30">&nbsp;</td>
 								<td width="34">主要</td>
@@ -313,101 +340,49 @@
 								<td width="84">邮编</td>
 								<td width="12">&nbsp;</td>
 								<td width="18">
-									<a href="#" title="添加" target="" class="personal_tj"></a>
+									<a href title="添加" target="" class="personal_tj" ng-click='addAddress()'></a>
 								</td>
 								<td width="20">&nbsp;</td>
 							</tr>
-							<tr>
+							
+							<tr ng-repeat='address in addressList'>
 								<td height="38">&nbsp;</td>
 								<td>
-									<input name="" type="checkbox" value="" class="edu_zhuyao">
+									<input name="address_main" class="edu_zhuyao address_main_class" type="radio">
 								</td>
 								<td>&nbsp;</td>
 								<td>
 									<dl class="select_family">
-										<dt>家庭住址</dt>
-										<dd>
-											<ul>
-												<li><a href="#">12131</a>
-												</li>
-												<li><a href="#">下拉2</a>
-												</li>
-												<li><a href="#">下拉3</a>
-												</li>
-												<li><a href="#">下拉4</a>
-												</li>
-												<li><a href="#">下拉5</a>
-												</li>
-												<li><a href="#">下拉6</a>
-												</li>
-											</ul>
-										</dd>
-									</dl>
+					                <dt ng-bind='address.address_fs' class='address_fs_class'></dt>
+					                <dd>
+					                    <ul>
+					                    	<li ng-repeat='addressType in addressTypeOptions'><a href>{{addressType}}</a></li>
+					                    </ul>
+					                </dd>
+					            </dl>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_adress">
+									<input type="text" class="edu_adress" ng-model='address.address_dz' >
 								</td>
 
 
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_yb">
+									<input type="text" class="edu_yb" ng-model='address.address_yb' >
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href="#" title="添加" target="" class="personal_sc"></a>
+									<a href title="删除" target="" class="personal_sc " ng-click='removeAddress($index)' ></a>
 								</td>
 								<td></td>
 							</tr>
-							<tr>
-								<td height="38">&nbsp;</td>
-								<td>
-									<input name="" type="checkbox" value="" class="edu_zhuyao">
-								</td>
-								<td>&nbsp;</td>
-								<td>
-									<dl class="select_family">
-										<dt>家庭住址</dt>
-										<dd>
-											<ul>
-												<li><a href="#">12131</a>
-												</li>
-												<li><a href="#">下拉2</a>
-												</li>
-												<li><a href="#">下拉3</a>
-												</li>
-												<li><a href="#">下拉4</a>
-												</li>
-												<li><a href="#">下拉5</a>
-												</li>
-												<li><a href="#">下拉6</a>
-												</li>
-											</ul>
-										</dd>
-									</dl>
-								</td>
-								<td>&nbsp;</td>
-								<td>
-									<input type="text" class="edu_adress">
-								</td>
-
-
-								<td>&nbsp;</td>
-								<td>
-									<input type="text" class="edu_yb">
-								</td>
-								<td>&nbsp;</td>
-								<td>
-									<a href="#" title="添加" target="" class="personal_sc"></a>
-								</td>
-								<td></td>
-							</tr>
+							
 						</table>
 
 					</div>
 					<div class="personal_time">
-						<table width="738" border="0" cellspacing="0" cellpadding="0">
+						<table width="738" border="0" cellspacing="0" cellpadding="0" id='phoneTable'>
 							<tr>
 								<td width="10" height="30">&nbsp;</td>
 								<td width="34">主要</td>
@@ -421,52 +396,42 @@
 								<td width="108">分机号</td>
 								<td width="12">&nbsp;</td>
 								<td width="18">
-									<a href="#" title="添加" target="" class="personal_tj"></a>
+									<a href title="添加" target="" class="personal_tj" ng-click='addPhone()'></a>
 								</td>
 								<td width="20">&nbsp;</td>
 							</tr>
-							<tr>
+							
+							<tr ng-repeat='phone in phoneList'>
 								<td height="38">&nbsp;</td>
 								<td>
-									<input name="" type="checkbox" value="" class="edu_zhuyao">
+									<input name="phone_main" type="radio" class="edu_zhuyao phone_main_class">
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family">
-										<dt>家庭住址</dt>
+									<dl class="select_family {{phone.selectDisabledClass}}">
+										<dt class='phone_fs_class' ng-bind='phone.phone_fs'></dt>
 										<dd>
 											<ul>
-												<li><a href="#">12131</a>
-												</li>
-												<li><a href="#">下拉2</a>
-												</li>
-												<li><a href="#">下拉3</a>
-												</li>
-												<li><a href="#">下拉4</a>
-												</li>
-												<li><a href="#">下拉5</a>
-												</li>
-												<li><a href="#">下拉6</a>
-												</li>
+												<li ng-repeat='phoneType in phoneTypeOptions'><a href>{{phoneType}}</a></li>
 											</ul>
 										</dd>
 									</dl>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_phone_one">
+									<input type="text" class="edu_phone_one" ng-model='phone.phone_qh' ng-disabled='!phone.editEnabled'>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_phone_two">
+									<input type="text" class="edu_phone_two" ng-model='phone.phone_dh' ng-disabled='!phone.editEnabled'>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_fjh">
+									<input type="text" class="edu_fjh" ng-model='phone.phone_fjh' ng-disabled='!phone.editEnabled'>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href="#" title="添加" target="" class="personal_sc"></a>
+									<a href title="删除" target="" class="personal_sc {{phone.removeHiddenClass}}" ng-click='removePhone($index)'></a>
 								</td>
 								<td></td>
 							</tr>
@@ -474,7 +439,7 @@
 
 					</div>
 					<div class="personal_time">
-						<table width="738" border="0" cellspacing="0" cellpadding="0">
+						<table width="738" border="0" cellspacing="0" cellpadding="0" id='emailTable'>
 							<tr>
 								<td width="10" height="30">&nbsp;</td>
 								<td width="34">主要</td>
@@ -485,44 +450,33 @@
 
 								<td width="12">&nbsp;</td>
 								<td width="18">
-									<a href="#" title="添加" target="" class="personal_tj"></a>
+									<a href title="添加" target="" class="personal_tj" ng-click='addEmail()'></a>
 								</td>
 								<td width="20">&nbsp;</td>
 							</tr>
-							<tr>
+							<tr ng-repeat='email in emailList'>
 								<td height="38">&nbsp;</td>
 								<td>
-									<input name="" type="checkbox" value="" class="edu_zhuyao">
+									<input name="email_main" type="radio" class="edu_zhuyao email_main_class">
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family">
-										<dt>工作</dt>
+									<dl class="select_family {{email.selectDisabledClass}}">
+										<dt class='email_lx_class' ng-bind='email.email_lx'></dt>
 										<dd>
 											<ul>
-												<li><a href="#">12131</a>
-												</li>
-												<li><a href="#">下拉2</a>
-												</li>
-												<li><a href="#">下拉3</a>
-												</li>
-												<li><a href="#">下拉4</a>
-												</li>
-												<li><a href="#">下拉5</a>
-												</li>
-												<li><a href="#">下拉6</a>
-												</li>
+												<li ng-repeat='emailType in emailTypeOptions'><a href>{{emailType}}</a></li>
 											</ul>
 										</dd>
 									</dl>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_work">
+									<input type="text" class="edu_work" ng-model='email.email_dz' ng-disabled='!email.editEnabled'>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href="#" title="添加" target="" class="personal_sc"></a>
+									<a href title="删除" target="" class="personal_sc {{email.removeHiddenClass}}" ng-click='removeEmail($index)'></a>
 								</td>
 								<td></td>
 							</tr>
@@ -531,10 +485,10 @@
 
 					</div>
 					<div class="personal_time">
-						<table width="738" border="0" cellspacing="0" cellpadding="0">
+						<table width="738" border="0" cellspacing="0" cellpadding="0" id='snsTable'>
 							<tr>
 								<td width="10" height="30">&nbsp;</td>
-								<td width="34">主要</td>
+								<td width="34"></td>
 								<td width="17">&nbsp;</td>
 								<td width="135">SNS类型</td>
 								<td width="10">&nbsp;</td>
@@ -542,44 +496,31 @@
 
 								<td width="12">&nbsp;</td>
 								<td width="18">
-									<a href="#" title="添加" target="" class="personal_tj"></a>
+									<a href title="添加" target="" class="personal_tj" ng-click='addSns()'></a>
 								</td>
 								<td width="20">&nbsp;</td>
 							</tr>
-							<tr>
+							<tr ng-repeat='sns in snsList'>
 								<td height="38">&nbsp;</td>
-								<td>
-									<input name="" type="checkbox" value="" class="edu_zhuyao">
-								</td>
+								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family">
-										<dt>工作</dt>
+									<dl class="select_family {{sns.selectDisabledClass}}">
+										<dt class='sns_lx_class' ng-bind='sns.sns_lx'></dt>
 										<dd>
 											<ul>
-												<li><a href="#">12131</a>
-												</li>
-												<li><a href="#">下拉2</a>
-												</li>
-												<li><a href="#">下拉3</a>
-												</li>
-												<li><a href="#">下拉4</a>
-												</li>
-												<li><a href="#">下拉5</a>
-												</li>
-												<li><a href="#">下拉6</a>
-												</li>
+												<li ng-repeat='snsType in snsTypeOptions'><a href>{{snsType}}</a></li>
 											</ul>
 										</dd>
 									</dl>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_work">
+									<input type="text" class="edu_work" ng-model='sns.sns_xx' ng-disabled='!sns.editEnabled'>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href="#" title="添加" target="" class="personal_sc"></a>
+									<a href title="删除" target="" class="personal_sc {{sns.removeHiddenClass}}" ng-click='removeSns($index)' ></a>
 								</td>
 								<td></td>
 							</tr>
@@ -588,9 +529,10 @@
 
 					</div>
 					<div class="tel_an">
-						<a href="#" title="" target="">保存</a>
+						<a href title="" target="" ng-click='saveContact()'>保存</a>
 					</div>
 				</div>
+				
 				<div id="con3" class="tem" style="display:none;" ng-controller='EducationController'>
 					<div class="personal_time">
 						<table id="educationTable" width="738" border="0" cellspacing="0" cellpadding="0">
@@ -610,7 +552,7 @@
 								<td width="76">获得学位</td>
 								<td width="12">&nbsp;</td>
 								<td width="18">
-									<a href title="添加" target="" class="personal_tj" ng-click='addLine()'>addLine When No Image</a>
+									<a href title="添加" target="" class="personal_tj" ng-click='addEducation()'></a>
 								</td>
 								<td width="16">&nbsp;</td>
 							</tr>
@@ -634,15 +576,29 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_xl" ng-disabled='!eduBg.editEnabled' ng-model='eduBg.edu_hdxl' style="font-family: 'microsoft yahei';">
+									<dl class="select_family {{eduBg.selectDisabledClass}}">
+										<dt class='edu_hdxl_class' ng-bind='eduBg.edu_hdxl' style="width: 74px;background-position-x: 86px;"></dt>
+										<dd>
+											<ul>
+												<li ng-repeat='diplomaType in diplomaTypeOptions'><a href>{{diplomaType}}</a></li>
+											</ul>
+										</dd>
+									</dl>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_xl" ng-disabled='!eduBg.editEnabled' ng-model='eduBg.edu_hdxw' style="font-family: 'microsoft yahei';">
+									<dl class="select_family {{eduBg.selectDisabledClass}}">
+										<dt class='edu_hdxw_class' ng-bind='eduBg.edu_hdxw' style="width: 74px;background-position-x: 86px;"></dt>
+										<dd>
+											<ul>
+												<li ng-repeat='degreeType in degreeTypeOptions'><a href>{{degreeType}}</a></li>
+											</ul>
+										</dd>
+									</dl>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href title="删除" ng-disabled='!eduBg.editEnabled' ng-show='eduBg.editEnabled' target="" class="personal_sc deleteLineClass" ng-click='remove($index)'>remove When No Image</a>
+									<a href title="删除" ng-disabled='!eduBg.editEnabled' ng-show='eduBg.editEnabled' target="" class="personal_sc deleteLineClass" ng-click='remove($index)'></a>
 								</td>
 								<td>&nbsp;</td>
 							</tr>
@@ -653,294 +609,183 @@
 						<a href title="" target="" ng-click='saveEduBg()'>保存</a>
 					</div>
 				</div>
-				<div id="con4" class="tem" style="display:none;">
+				
+				<div id="con4" class="tem" style="display:none;" ng-controller='WorkController'>
 					<div class="works">
 						<h2>提示：不允许在线修改过往工作经历，如需调整，请到MBA办公室申请调整。</h2>
-						<div class="works_one">
+						<div class="works_one" ng-repeat='work in workList'>
 							<div class="works_one_tit">
-								<h2>工作经历一</h2>
+								<h2>工作经历 {{$index+1}}</h2>
 							</div>
 							<div class="works_one_list">
 								<div class="wol_lite">
 									<span>工作开始日期：</span>
-									<p>20140506</p>
+									<p ng-bind='work.work_kssj'></p>
 								</div>
 								<div class="wol_lite wol_lite_right">
 									<span>工作部门中文：</span>
-									<p>商务部</p>
+									<p ng-bind='work.work_bmzw'></p>
 								</div>
 								<div class="wol_lite">
 									<span>工作结束日期：</span>
-									<p>20150304</p>
+									<p ng-bind='work.work_jssj'></p>
 								</div>
 								<div class="wol_lite wol_lite_right">
 									<span>工作部门英文：</span>
-									<p>held in Los Angeles on
-										<br>Sunday night, ADELE's Skyfall\</p>
+									<p ng-bind='work.work_bmyw'></p>
 								</div>
 								<div class="wol_lite">
 									<span>公司中文名：</span>
-									<p>上海XX国际股份有限公司</p>
+									<p ng-bind='work.work_zwm'></p>
 								</div>
 								<div class="wol_lite wol_lite_right">
 									<span>担任职务中文：</span>
-									<p>一二三</p>
+									<p ng-bind='work.work_zwzw'></p>
 								</div>
 								<div class="wol_lite">
 									<span>公司英文名：</span>
-									<p>held in Los Angeles on Sunday
-										<br>night
-									</p>
+									<p ng-bind='work.work_ywm'></p>
 								</div>
 								<div class="wol_lite wol_lite_right">
 									<span>担任职务英文：</span>
-									<p>held in Los</p>
+									<p ng-bind='work.work_zwyw'></p>
 								</div>
 								<div class="wol_lite">
 									<span>公司经营范围中文：</span>
-									<p>商务贸易</p>
+									<p ng-bind='work.work_fwzw'></p>
 								</div>
 								<div class="wol_lite wol_lite_right">
 									<span>公司行业：</span>
-									<p>重金属</p>
+									<p ng-bind-html='work.work_hy'></p>
 								</div>
 								<div class="wol_lite">
 									<span>公司经营范围英文：</span>
-									<p>held in Los Angeles on Sunday
-										<br>night, ADELE's Skyfall won the</p>
+									<p ng-bind='work.work_fwyw'></p>
 								</div>
 								<div class="wol_lite wol_lite_right">
 									<span>公司性质：</span>
-									<p>国企</p>
+									<p ng-bind='work.work_xz'></p>
 								</div>
 								<div class="wol_lite wol_lite_big">
 									<span>工作内容：</span>
-									<p>有限责任公司。有限责任公司是依照《中华人民共和国公司法》设立，股东以其出资为限对公司承担责任，公司以其全部财产对公司债务承担责任的企业法人。</p>
+									<p ng-bind='work.work_nr'></p>
 								</div>
 							</div>
 							<div class="clear"></div>
 						</div>
-						<div class="works_one">
-							<div class="works_one_tit">
-								<h2>工作经历一</h2>
-							</div>
-							<div class="works_one_list">
-								<div class="wol_lite">
-									<span>工作开始日期：</span>
-									<p>20140506</p>
-								</div>
-								<div class="wol_lite wol_lite_right">
-									<span>工作部门中文：</span>
-									<p>商务部</p>
-								</div>
-								<div class="wol_lite">
-									<span>工作结束日期：</span>
-									<p>20150304</p>
-								</div>
-								<div class="wol_lite wol_lite_right">
-									<span>工作部门英文：</span>
-									<p>held in Los Angeles on
-										<br>Sunday night, ADELE's Skyfall\</p>
-								</div>
-								<div class="wol_lite">
-									<span>公司中文名：</span>
-									<p>上海XX国际股份有限公司</p>
-								</div>
-								<div class="wol_lite wol_lite_right">
-									<span>担任职务中文：</span>
-									<p>一二三</p>
-								</div>
-								<div class="wol_lite">
-									<span>公司英文名：</span>
-									<p>held in Los Angeles on Sunday
-										<br>night
-									</p>
-								</div>
-								<div class="wol_lite wol_lite_right">
-									<span>担任职务英文：</span>
-									<p>held in Los</p>
-								</div>
-								<div class="wol_lite">
-									<span>公司经营范围中文：</span>
-									<p>商务贸易</p>
-								</div>
-								<div class="wol_lite wol_lite_right">
-									<span>公司行业：</span>
-									<p>重金属</p>
-								</div>
-								<div class="wol_lite">
-									<span>公司经营范围英文：</span>
-									<p>held in Los Angeles on Sunday
-										<br>night, ADELE's Skyfall won the</p>
-								</div>
-								<div class="wol_lite wol_lite_right">
-									<span>公司性质：</span>
-									<p>国企</p>
-								</div>
-								<div class="wol_lite wol_lite_big">
-									<span>工作内容：</span>
-									<p>有限责任公司。有限责任公司是依照《中华人民共和国公司法》设立，股东以其出资为限对公司承担责任，公司以其全部财产对公司债务承担责任的企业法人。</p>
-								</div>
-							</div>
-							<div class="clear"></div>
-						</div>
-
+						
 						<div class="wol_an">
-							<a href="javascript:void(0)" title="" target="" id="demoBtn1">继续添加</a>
+							<a href title="" target="" ng-click='saveWork()'>保存</a>
+							<span style="width: 15px;float: right;">&nbsp;</span>
+							<a href title="" target="" ng-click='openAddDialog()'>继续添加</a>
 						</div>
 					</div>
+			
+			
+			
+					<div class="dialog_wdkb" id="imgBox_WorkBackground" style="display:none;">
+						<div class="dialog_wol_mar">
+							<h2><a href="#" title="关闭" onclick="easyDialog.close();"><img src="images/close.png" width="20" height="20"></a></h2>
+			
+			
+							<table width="695" border="0" cellspacing="0" cellpadding="0" class="dialog_wol_nr">
+								<tr>
+									<td height="46" width="130">工作开始日期</td>
+									<td width="228">
+										<input type="text" name="" ng-model='editWork.work_kssj' class="wol_ipt">
+									</td>
+									<td width="109">工作部门中文</td>
+									<td width="228">
+										<input type="text" name="" ng-model='editWork.work_bmzw' class="wol_ipt">
+									</td>
+								</tr>
+								<tr>
+									<td height="46">工作结束日期</td>
+									<td>
+										<input type="text" name="" ng-model='editWork.work_jssj' class="wol_ipt">
+									</td>
+									<td>工作部门英文</td>
+									<td>
+										<input type="text" name="" ng-model='editWork.work_bmyw' class="wol_ipt">
+									</td>
+								</tr>
+								<tr>
+									<td height="46">公司中文名</td>
+									<td>
+										<input type="text" name="" ng-model='editWork.work_zwm' class="wol_ipt">
+									</td>
+									<td>担任职务中文</td>
+									<td>
+										<input type="text" name="" ng-model='editWork.work_zwzw' class="wol_ipt">
+									</td>
+								</tr>
+								<tr>
+									<td height="46">公司英文名</td>
+									<td>
+										<input type="text" name="" ng-model='editWork.work_ywm' class="wol_ipt">
+									</td>
+									<td>担任职务英文</td>
+									<td>
+										<input type="text" name="" ng-model='editWork.work_zwyw' class="wol_ipt">
+									</td>
+								</tr>
+			
+								<tr>
+									<td height="46">公司经营范围中文</td>
+									<td>
+										<input type="text" name="" ng-model='editWork.work_fwzw' class="wol_ipt">
+									</td>
+									<td>公司行业</td>
+									<td>
+										<dl class="selcect_wol select_family_disabled">
+											<dt class="industry_class" ng-bind='editWork.work_hy'></dt>
+											<dd>
+												<ul>
+													<li ng-repeat='industryType in industryTypeOptions'><a href>{{industryType}}</a></li>
+												</ul>
+											</dd>
+										</dl>
+									</td>
+								</tr>
+								<tr>
+									<td height="46">公司经营范围英文</td>
+									<td>
+										<input type="text" name="" ng-bind='editWork.work_fwyw' class="wol_ipt">
+									</td>
+									<td>公司性质</td>
+									<td>
+										<dl class="selcect_wol select_family_disabled">
+											<dt class='nature_class' ng-bind='editWork.work_xz'></dt>
+											<dd>
+												<ul>
+													<li ng-repeat='natureType in natureTypeOptions'><a href>{{natureType}}</a></li>
+												</ul>
+											</dd>
+										</dl>
+									</td>
+								</tr>
+								<tr>
+									<td height="50">工作内容</td>
+									<td colspan="3" rowspan="2" valign="middle">
+										<textarea type="text" name="" ng-model='editWork.work_nr' class="wol_ipt_big"></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td height="30">&nbsp;</td>
+								</tr>
+							</table>
+							<div class="wol_pop_an">
+								<a href title="" id="btnClose" ng-click="addWork();">添加</a>
+							</div>
+						</div>
+					</div>
+		
+					
 				</div>
-
 
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="dialog_wdkb" id="imgBox" style="display:none;">
-			<div class="dialog_wol_mar">
-				<h2><a href="#" title="关闭" onclick="easyDialog.close();"><img src="images/close.png" width="20" height="20"></a></h2>
-
-
-				<table width="695" border="0" cellspacing="0" cellpadding="0" class="dialog_wol_nr">
-					<tr>
-						<td height="46" width="130">工作开始日期</td>
-						<td width="228">
-							<input type="text" name="" value="2012/12/12" class="wol_ipt">
-						</td>
-						<td width="109">工作部门中文</td>
-						<td width="228">
-							<input type="text" name="" value="2012/12/12" class="wol_ipt">
-						</td>
-					</tr>
-					<tr>
-						<td height="46">工作结束日期</td>
-						<td>
-							<input type="text" name="" value="2012/12/12" class="wol_ipt">
-						</td>
-						<td>工作部门英文</td>
-						<td>
-							<input type="text" name="" value="2012/12/12" class="wol_ipt">
-						</td>
-					</tr>
-					<tr>
-						<td height="46">公司中文名</td>
-						<td>
-							<input type="text" name="" value="2012/12/12" class="wol_ipt">
-						</td>
-						<td>担任职务中文</td>
-						<td>
-							<input type="text" name="" value="2012/12/12" class="wol_ipt">
-						</td>
-					</tr>
-					<tr>
-						<td height="46">公司英文名</td>
-						<td>
-							<input type="text" name="" value="" class="wol_ipt">
-						</td>
-						<td>担任职务英文</td>
-						<td>
-							<input type="text" name="" value="" class="wol_ipt">
-						</td>
-					</tr>
-
-					<tr>
-						<td height="46">公司经营范围中文</td>
-						<td>
-							<input type="text" name="" value="" class="wol_ipt">
-						</td>
-						<td>公司行业</td>
-						<td>
-							<dl class="selcect_wol">
-								<dt>实木</dt>
-								<dd>
-									<ul>
-										<li><a href="#">12131</a>
-										</li>
-										<li><a href="#">下拉2</a>
-										</li>
-										<li><a href="#">下拉3</a>
-										</li>
-										<li><a href="#">下拉4</a>
-										</li>
-										<li><a href="#">下拉5</a>
-										</li>
-										<li><a href="#">下拉6</a>
-										</li>
-									</ul>
-								</dd>
-							</dl>
-						</td>
-					</tr>
-					<tr>
-						<td height="46">公司经营范围英文</td>
-						<td>
-							<input type="text" name="" value="" class="wol_ipt">
-						</td>
-						<td>公司性质</td>
-						<td>
-							<dl class="selcect_wol">
-								<dt>私企</dt>
-								<dd>
-									<ul>
-										<li><a href="#">12131</a>
-										</li>
-										<li><a href="#">下拉2</a>
-										</li>
-										<li><a href="#">下拉3</a>
-										</li>
-										<li><a href="#">下拉4</a>
-										</li>
-										<li><a href="#">下拉5</a>
-										</li>
-										<li><a href="#">下拉6</a>
-										</li>
-									</ul>
-								</dd>
-							</dl>
-						</td>
-					</tr>
-					<tr>
-						<td height="50">工作内容</td>
-						<td colspan="3" rowspan="2" valign="middle">
-							<textarea type="text" name="" value="" class="wol_ipt_big"></textarea>
-						</td>
-					</tr>
-					<tr>
-						<td height="30">&nbsp;</td>
-					</tr>
-				</table>
-				<div class="wol_pop_an">
-					<a href="#" title="" id="btnClose" onclick="easyDialog.close();">添加</a>
-				</div>
-			</div>
-		</div>
-
-		<script>
-			var btnFn = function( e ){
-				alert( e.target );
-				return false;
-			};
-			/*
-			jquery('demoBtn1').onclick = function(){
-				easyDialog.open({
-					container : 'imgBox',
-						yesFn : btnFn,
-						noFn : true,
-					fixed : false
-				});
-			};*/
-		</script>
-		<script type="text/javascript">
-			$(function(){
-				/*
-				$(".edu_rx").datepicker({
-					dateFormat: 'yy-mm-dd'
-				});
-				$("#date_1").datepicker();
-				$("#date_2").datepicker({
-					dateFormat: 'yy-mm-dd'
-				});*/
-			});
-		</script>
 		
 		<script>
 			var sexMtoNan = {"M":"男","F":"女"};
@@ -951,21 +796,26 @@
 			var addressTypeOptions = ['工作','家庭地址','现居地址','户籍','其他'];
 			var phoneTypeOptions = ['手机','工作','公司电话','住宅','传真','其他'];
 			var emailTypeOptions = ['工作','次要','个人','其他'];
-			var snsTypeOptions = ['QQ','微博','微信','个人主页','个人博客','Facebook','MSN','其他'];
-			var diplomaOptions = ['博士研究生','硕士研究生','本科','大专','高中','中专/技校','其他'];
-			var degreeOptions = ['博士','硕士','学士','其他'];
-			var industryOption = [
+			var snsTypeOptions = ['QQ','个人微博','微信','个人主页','个人博客','Facebook','MSN','其他'];
+			var diplomaTypeOptions = ['博士研究生','硕士研究生','本科','大专','高中','中专/技校','其他'];
+			var degreeTypeOptions = ['博士','硕士','学士','其他'];
+			var industryTypeOptions = [
 				'快速消费品（食品/饮料/化妆品）','耐用消费品（服装/纺织/家具/家电）','专业服务（咨询/法律）',
 				'金融服务（银行/证劵/保险/投资/基金等）','零售/贸易','交通物流','IT/网络',
 				'房地产/建筑/装潢设计','通信','电子/半导体','保健/医药/生化/医疗设备/医院',
 				'能源/精细化工','媒体/广告/公关','政府/非盈利机构','教育/培训','其他','工业品/设备','汽车/摩托车'
 			];
-			var natureOption = [
+			var natureTypeOptions = [
 				'国有或国有控股','外商合资','外商独资','港澳台合资',
 				'港澳台独资','民营或私有控股','政府部门','事业单位','非营利机构','其他'
 			];
 			
-			/*  构造的假数据 测试用 */
+			var btnFn = function( e ){
+				alert( e.target );
+				return false;
+			};
+			
+			/* TODO : fake Object Sign */
 			var fakeObject = {
 				person_id: '67687',
 				studentId: 'L1071676',
@@ -981,12 +831,18 @@
 				bankName: 'Bank Of China',
 				bankNameScope: '其他人不可见',
 				
-				contact: [
+				address: [
 					{
-						contact_main : 'Y',
-						contact_fs: "A",
-						contact_dz: "中国北京",
-						contact_yb: "123456"
+						address_main : 'Y',
+						address_fs: "工作",
+						address_dz: "中国北京",
+						address_yb: "123456"
+					},
+					{
+						address_main : 'N',
+						address_fs: "工作",
+						address_dz: "中国上海",
+						address_yb: "123456"
 					}
 				],
 				
@@ -1053,9 +909,68 @@
 				]
 			};
 			
-			var test_local = true;
+			var test_local = false;
 			var show_visibility_options = false;
+			
+			var loadingWidget = layer.load('获取数据中..');
+			layer.area(loadingWidget);
 
+			/* TODO : Common Functions Sign */
+			{	
+				function noOperation(){;}
+				
+				/* we get data : address_main : Y/N . set checked */
+				function InitRadioButtonChecked(tableName, objectList, field){
+					for (var i = 0; i < objectList.length; i++){
+						var checkedTr = $("#" + tableName + " tr")[i+1];
+						if (yesOrNo(objectList[i][field])){
+							$(checkedTr).find("input[name='" + field + "']").attr('checked', true);
+							break;
+						}
+					}
+				}
+				
+				function delayBy100(func){
+					setTimeout(func, 100);
+				}
+				
+				function delayBy200(func){
+					setTimeout(func, 200);
+				}
+				
+				/* translate between Y/N - true/false */
+				function yesOrNo(yn){
+					switch (yn){
+						case 'Y':
+						case 'y':
+							return true;
+						case 'N':
+						case 'n':
+							return false;
+						case true:
+						case "checked":
+							return 'Y';
+						case false:
+							return 'N';
+						/* undefined makes N*/
+						default:
+							return 'N';
+					}
+				}
+				
+				/* cannot edit / remove saved object ! */
+				function Disable_And_HideRemoveButton(objectList){
+					if (!objectList || !(objectList.length) || objectList.length == 0) return;
+					
+					/* on saved object : disable input , hide remove button , disable select */
+					for (var i = 0; i < objectList.length; i++){
+						objectList[i].editEnabled = false;
+						objectList[i].removeHiddenClass = "remove_button_hidden";
+						objectList[i].selectDisabledClass = 'select_family_disabled';
+					}
+				}
+			}
+			
 			var PersonalInfoAppModule = angular.module('PersonalInfoApp', []
 			).config(
 				function($sceProvider) {
@@ -1097,7 +1012,7 @@
 				};
 			});
 
-
+			/* TODO : factory Sign */
 			PersonalInfoAppModule.factory('PersonalInfoInterface',
 				function ($http){
 					var _ = {};
@@ -1105,7 +1020,7 @@
 						var PersonalInfoData = undefined;
 						/* 返回promise对象 */
 						/* return $http.post('/psc/ACEMTST/....',{params:{}}); */
-						$http.post('/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBA_STU.TZ_MBA_STU_HOME.FieldFormula.Iscript_getStudentInfo',{params:{}
+						$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_GRXX.FieldFormula.Iscript_getGrxx',{params:{}
 						}).success(function(data,status,headers,config){
 							if (test_local){
 								callback(fakeObject);
@@ -1126,8 +1041,28 @@
 					_.updateBasicInfo = function(postData, callback){
 						$.ajax({
 							type:"post",
-							url:"/psc/ACEMTST/EMPLOYEE/CRM/s/WEBLIB_MBAXKE.TZ_MBAXKE_ISCRIPT.FieldFormula.Iscript_save_jbxx",
+							url:psc_url + "WEBLIB_MBA_STU.TZ_MBA_STU_GRXX.FieldFormula.Iscript_save_jbxx",
 							async:true,
+							data: postData,
+							success:function(data){
+								if (data == 'success'){
+									alert('保存成功');
+								} else {
+									alert('保存失败');
+								}
+							},
+							error: function(XMLHttpRequest, textStatus, errorThrown){
+								alert('无法保存！（错误码：' + XMLHttpRequest.status + "）");
+							}
+						});
+					};
+					
+					_.updateContactInfo = function(postData, callback){
+						$.ajax({
+							type:"post",
+							url:psc_url + "WEBLIB_MBA_STU.TZ_MBA_STU_GRXX.FieldFormula.Iscript_save_lxxx",
+							async:true,
+							data:postData,
 							success:function(data){
 								if (data == 'success'){
 									alert('保存成功');
@@ -1144,7 +1079,7 @@
 					_.updateEducationBackground = function(postData,callback){
 						$.ajax({
 							type:"post",
-							url:"/",
+							url:psc_url + "WEBLIB_MBA_STU.TZ_MBA_STU_GRXX.FieldFormula.Iscript_save_jyxx",
 							async:true,
 							data : postData,
 							success: function(data){
@@ -1159,6 +1094,26 @@
 	                   		}
 						});
 					};
+					
+					_.updateWorkBackground = function(postData,callback){
+						$.ajax({
+							type:"post",
+							url:psc_url + "WEBLIB_MBA_STU.TZ_MBA_STU_GRXX.FieldFormula.Iscript_save_gzjl",
+							async:true,
+							data : postData,
+							success: function(data){
+								if (data == 'success'){
+									alert('保存成功');
+								} else {
+									alert('保存失败');
+								}
+							},
+							error: function(XMLHttpRequest, textStatus, errorThrown){
+	                    		alert('无法保存！（错误码：' + XMLHttpRequest.status + "）");
+	                   		}
+						});
+					};
+					
 					return _;
 				}
 			);
@@ -1166,15 +1121,25 @@
 			PersonalInfoAppModule.controller(
 				'PersonalInfoController',
 				function ($scope, PersonalInfoInterface){
+					function isPersonalInfoDataValid(obj){
+						return obj && obj.person_id != '';
+					}
+					
 					/* 不显示 隐私设置  */
 					$scope.show_visibility_options = show_visibility_options;
+					
 					PersonalInfoInterface.getPersonalInfo(function(data){
 						if (data){
-							$scope.PersonalInfoData = data;
+							if (isPersonalInfoDataValid(data)){
+								$scope.PersonalInfoData = data;
+							}
+							else
+								alert('无法获取个人信息！请重新登录再尝试。');
 						}
 						
 						/* 无论是否正常地获取到数据，都广播下 */
 						$scope.$broadcast('dataReady');
+						layer.closeAll();
 					});
 				}
 			);
@@ -1183,8 +1148,6 @@
 				'BasicInfoController',
 				function ($scope, PersonalInfoInterface){
 					$scope.saveBasic = function(){
-						fillin();
-						
 						var postData = {};
 						postData.bankAccountNo = $scope.PersonalInfoData.bankAccountNo;
 						postData.bankName = $scope.PersonalInfoData.bankName;
@@ -1192,14 +1155,331 @@
 						/* post */
 						PersonalInfoInterface.updateBasicInfo(postData, function(){;});
 					};
-					
-					function fillin(){
-						;/* $scope.PersonalInfoData.bankName = $("#bankName").text(); */
-					}
-					
 				}
 			);
 			
+			/* TODO : Contact Controller Sign */
+			PersonalInfoAppModule.controller(
+				'ContactController',
+				function($scope, PersonalInfoInterface){
+					var baseData = {
+						editEnabled: true,
+						removeHiddenClass: '',
+						selectDisabledClass: ''
+					};
+					
+					var defaultAddressData = $.extend({
+						address_main: false,
+						address_fs: addressTypeOptions[0],
+						address_dz: '',
+						address_yb: ''
+					}, $.extend(true, {}, baseData));
+					
+					var defaultPhoneData = $.extend({
+						phone_main: false,
+						phone_fs: phoneTypeOptions[0],
+						phone_qh: '',
+						phone_dh: '',
+						phone_fjh: ''
+					}, $.extend(true, {}, baseData));
+					
+					var defaultEmailData = $.extend({
+						email_main: false,
+						email_lx: emailTypeOptions[0],
+						email_dz: ''
+					}, $.extend(true, {}, baseData));
+					
+					var defaultSnsData = $.extend({
+						sns_lx: snsTypeOptions[0],
+						sns_xx: ''
+					}, $.extend(true, {}, baseData));
+					
+					var addressList = [];
+					$scope.addressList = addressList;
+					$scope.addressTypeOptions = addressTypeOptions;
+					
+					var phoneList = [];
+					$scope.phoneList= phoneList;
+					$scope.phoneTypeOptions = phoneTypeOptions;
+					
+					var emailList = [];
+					$scope.emailList = emailList;
+					$scope.emailTypeOptions = emailTypeOptions;
+					
+					var snsList = [];
+					$scope.snsList = snsList;
+					$scope.snsTypeOptions = snsTypeOptions;
+					
+					$scope.dataReady = false;
+					
+					/* bind click function to new line's select element */
+					function addNewLineByType(type){
+						var emptyLine;
+						switch (type){
+							case 'address':
+								emptyLine = $.extend(true, {}, defaultAddressData);
+								$scope.addressList.push(emptyLine);
+						
+								delayBy100(function(){
+									var newObject = $("#addressTable tr").last().find("dl")[0];
+									fastBind(newObject);
+								});
+								break;
+							case 'phone':
+								emptyLine = $.extend(true, {}, defaultPhoneData);
+								$scope.phoneList.push(emptyLine);
+						
+								delayBy100(function(){
+									var newObject = $("#phoneTable tr").last().find("dl")[0];
+									fastBind(newObject);
+								});
+								break;
+							case 'email':
+								emptyLine = $.extend(true, {}, defaultEmailData);
+								$scope.emailList.push(emptyLine);
+						
+								delayBy100(function(){
+									var newObject = $("#emailTable tr").last().find("dl")[0];
+									fastBind(newObject);
+								});
+								break;
+							case 'sns':
+								emptyLine = $.extend(true, {}, defaultSnsData);
+								$scope.snsList.push(emptyLine);
+						
+								delayBy100(function(){
+									var newObject = $("#snsTable tr").last().find("dl")[0];
+									fastBind(newObject);
+								});
+								break;
+							default:
+								return;
+						}
+					}
+					$scope.addAddress = function(){
+						addNewLineByType('address');
+					};
+					
+					$scope.addPhone = function(){
+						addNewLineByType('phone');
+					};
+					
+					$scope.addEmail = function(){
+						addNewLineByType('email');
+					};
+					
+					$scope.addSns = function(){
+						addNewLineByType('sns');
+					};
+					
+					$scope.removeAddress = function(index){
+						$scope.addressList.splice(index,1);
+					};
+					
+					$scope.removePhone = function(index){
+						$scope.phoneList.splice(index,1);
+					};
+					
+					$scope.removeEmail = function(index){
+						$scope.emailList.splice(index,1);
+					};
+					
+					$scope.removeSns = function(index){
+						$scope.snsList.splice(index,1);
+					};
+					
+					function isObjectValid(){
+						return false;
+					}
+					
+					$scope.$on('dataReady', function(){
+						if ($scope.PersonalInfoData){
+							if ($scope.PersonalInfoData.address){
+								addressList = $scope.PersonalInfoData.address;
+								$scope.addressList = addressList;
+								
+								delayBy100(function(){
+									InitRadioButtonChecked("addressTable", addressList, "address_main");
+								});
+							}
+							if ($scope.PersonalInfoData.phone){
+								phoneList = $scope.PersonalInfoData.phone;
+								$scope.phoneList = phoneList;
+								
+								delayBy100(function(){
+									InitRadioButtonChecked("phoneTable", phoneList, "phone_main");
+								});
+							}
+							if ($scope.PersonalInfoData.email){
+								emailList = $scope.PersonalInfoData.email;
+								$scope.emailList = emailList;
+								
+								delayBy100(function(){
+									InitRadioButtonChecked("emailTable", emailList, "email_main");
+								});
+							}
+							if ($scope.PersonalInfoData.sns){
+								snsList = $scope.PersonalInfoData.sns;
+								$scope.snsList = snsList;
+							}
+						}
+						/* cannot save before we've load all data */
+						$scope.dataReady = true;
+						delayBy200(function(){fastBind();});
+					});
+					
+					/* TODO : saveContact Sign */
+					$scope.saveContact = function(){
+						/* pre : fillin() && required initialization */
+						fillin();
+						var postData = {};
+						postData["NUMBER_DZ"] = 0;
+						postData["NUMBER_DH"] = 0;
+						postData["NUMBER_YX"] = 0;
+						postData["NUMBER_SNS"] = 0;
+						
+						
+						/* process : ;*/
+						var _addressList = $.extend(true, {}, $scope.addressList);
+						var _phoneList = $.extend(true, {}, $scope.phoneList);
+						var _emaiList = $.extend(true, {}, $scope.emailList);
+						var _snsList = $.extend(true, {}, $scope.snsList);
+						
+						var count = 0;
+						var index = 0;
+						while(_addressList[index]) count += packUp(postData,_addressList[index],++index,'address');
+						postData["NUMBER_DZ"]=count;
+						
+						count = 0;
+						index = 0;
+						while(_phoneList[index]) count += packUp(postData,_phoneList[index],++index,'phone');
+						postData["NUMBER_DH"]=count;
+						
+						count = 0;
+						index = 0;
+						while(_emaiList[index]) count += packUp(postData,_emaiList[index],++index,'email');
+						postData["NUMBER_YX"]=count;
+						
+						count = 0;
+						index = 0;
+						while(_snsList[index]) count += packUp(postData,_snsList[index],++index,'sns');
+						postData["NUMBER_SNS"]=count;
+						
+						PersonalInfoInterface.updateContactInfo(postData,function(){;});
+					};
+					
+					function fillin(){
+						for (var i = 0; i < $scope.addressList.length; i++){
+							$scope.addressList[i].address_main = yesOrNo($(".address_main_class").eq(i).attr('checked'));
+							$scope.addressList[i].address_fs = $(".address_fs_class").eq(i).text();
+						}
+						
+						for (var i = 0; i < $scope.phoneList.length; i++){
+							$scope.phoneList[i].phone_main = yesOrNo($(".phone_main_class").eq(i).attr('checked'));
+							$scope.phoneList[i].phone_fs = $(".phone_fs_class").eq(i).text();
+						}
+						
+						for (var i = 0; i < $scope.emailList.length; i++){
+							$scope.emailList[i].email_main = yesOrNo($(".email_main_class").eq(i).attr('checked'));
+							$scope.emailList[i].email_lx = $(".email_lx_class").eq(i).text();
+						}
+						
+						for (var i = 0; i < $scope.snsList.length; i++){
+							$scope.snsList[i].sns_lx = $(".sns_lx_class").eq(i).text();
+						}
+					}
+					
+					function isValidObject(obj, type){
+						switch (type){
+							case 'address':
+							{
+								if ((!obj.address_fs || obj.address_dz == '') &&
+									(!obj.address_fs || obj.address_yb == '')){
+									return false;
+								}
+							}
+							break;
+							
+							case 'phone':
+							{
+								if ((!obj.phone_dh || obj.phone_dh == '') &&
+									(!obj.phone_qh || obj.phone_qh == '') &&
+									(!obj.phone_fjh || obj.phone_fjh == '')){
+									return false;
+								}
+							}
+							break;
+							
+							case 'email':
+							{
+								if ((!obj.email_dz || obj.email_dz == '')){
+									return false;
+								}
+							}
+							break;
+							
+							case 'sns':
+							{
+								if ((!obj.sns_xx || obj.sns_xx == '')){
+									return false;
+								}
+							}
+							break;
+						}
+						
+						return true;
+					}
+					
+					function packUp(packedUp, currentObj, num, type){
+						
+						if (!isValidObject(currentObj,type)) return 0;
+						
+						switch (type) {
+							case 'address':
+							{
+								packedUp["TZ_MAINADDR_FLG_" + num] = yesOrNo($(":radio[name='address_main']").eq(num-1).attr('checked'));
+								packedUp["TZ_DZ_LX_" + num] = currentObj.address_fs;
+								packedUp["TZ_LX_ADDR_" + num] = currentObj.address_dz;
+								packedUp["TZ_POSTAL_" + num] = currentObj.address_yb;
+							}
+							break;
+							
+							case 'phone':
+							{
+								packedUp["TZ_MAINPHONE_FLG_" + num] = yesOrNo($(":radio[name='phone_main']").eq(num-1).attr('checked'));
+								packedUp["TZ_DH_LX_" + num] = currentObj.phone_fs;
+								packedUp["TZ_PHONE_" + num] = currentObj.phone_dh;
+								packedUp["TZ_COUNTRY_CODE_" + num] = currentObj.phone_qh;
+								packedUp["TZ_EXTENSION_" + num] = currentObj.phone_fjh;
+							}
+							break;
+							
+							case 'email':
+							{
+								packedUp["TZ_MAINEML_FLG_" + num] = yesOrNo($(":radio[name='email_main']").eq(num-1).attr('checked'));
+								packedUp["TZ_YJ_LX_" + num] = currentObj.email_lx;
+								packedUp["TZ_EMAIL_ADDR_" + num] = currentObj.email_dz;
+							}
+							break;
+							
+							case 'sns':
+							{
+								packedUp["TZ_INTNTT_YPE_" + num] = currentObj.sns_lx;
+								packedUp["TZ_INTNT_INFO_" + num] = currentObj.sns_xx;
+							}
+							break;
+							
+							default:
+							break;
+						}
+						
+						return 1;
+						
+					}
+				}
+			);
+			
+			/* TODO : Education Controller Sign */
 			PersonalInfoAppModule.controller(
 				'EducationController',
 				function($scope, PersonalInfoInterface){
@@ -1217,24 +1497,34 @@
 					var eduBgLst = [];
 					$scope.eduBgLst = eduBgLst;
 					$scope.dataReady = false;
-					
+					$scope.diplomaTypeOptions = diplomaTypeOptions;
+					$scope.degreeTypeOptions = degreeTypeOptions;
 					
 					function fillin(){
-						;
+						for (var i = 0; i < $scope.eduBgLst.length; i++){
+							$scope.eduBgLst[i].edu_hdxl = $(".edu_hdxl_class").eq(i).text();
+							$scope.eduBgLst[i].edu_hdxw = $(".edu_hdxw_class").eq(i).text();
+						}
 					}
 					
 					function packUp(packedUp, currentObj, num){
-						packedUp["TZ_ADMISSN_DT_"+num] = currentObj.edu_rxsj + "/01";
-						packedUp["TZ_UDRGRD_DT_"+num] = currentObj.edu_bysj + "/01";
+						packedUp["TZ_ADMISSN_DT_"+num] = currentObj.edu_rxsj;
+						packedUp["TZ_UDRGRD_DT_"+num] = currentObj.edu_bysj;
 						packedUp["TZ_SCH_CNAME_"+num] = currentObj.edu_byxx;
 						packedUp["TZ_SPECIALTY_"+num] = currentObj.edu_xxzy;
 						packedUp["TZ_OBT_EDUC_"+num] = currentObj.edu_hdxl;
 						packedUp["TZ_OBT_DEGR_"+num] = currentObj.edu_hdxw;
 					}
 					
-					$scope.addLine = function(){
+					$scope.addEducation = function(){
 						var emptyNewLine = $.extend(true, {}, defaultData);
 						$scope.eduBgLst.push(emptyNewLine);
+				
+						delayBy100(function(){
+							var newObject = $("#educationTable tr").last().find("dl");
+							for (var i = 0; i < newObject.length; i ++)
+								fastBind(newObject[i]);
+						});
 					};
 					
 					$scope.remove = function(index){
@@ -1245,10 +1535,14 @@
 					};
 					
 					$scope.saveEduBg = function(){
-						var edus = $.extend(true, {}, $scope.eduBgLst);
+						fillin();
 						var postData = {};
+						postData["NUMBER_EDU"]=0;
+						
+						var edus = $.extend(true, {}, $scope.eduBgLst);
 						var count = 0;
 						while(edus[count]) packUp(postData,edus[count],++count);
+						postData["NUMBER_EDU"]=count;
 
 						/* post */
 						PersonalInfoInterface.updateEducationBackground(postData, function(){;});
@@ -1258,19 +1552,7 @@
 					$scope.$on('dataReady', function(){
 						if ($scope.PersonalInfoData && $scope.PersonalInfoData.education){
 							eduBgLst = $scope.PersonalInfoData.education;
-							
-							/* hide edit button */
-							for (var i = 0; i < eduBgLst.length; i++){
-								eduBgLst[i].editEnabled = false;
-							}
-							
 							$scope.eduBgLst = eduBgLst;
-							
-							/* IE7 Fix */
-							var trs = $("#educationTable tr");
-							for (var i = 1; i < trs.length; i ++){
-								trs[i].style.display = "none"
-							}
 						}
 						$scope.dataReady = true;
 					});
@@ -1278,6 +1560,107 @@
 				}
 			);
 			
+			PersonalInfoAppModule.controller(
+				'WorkController',
+				function($scope, PersonalInfoInterface){
+					var defaultData = {
+						work_kssj: '',
+						work_jssj: '',
+						work_zwm: '',
+						work_ywm: '',
+						work_fwzw: '',
+						work_fwyw: '',
+						work_zwzw: '',
+						work_zwyw: '',
+						work_bmzw: '',
+						work_bmyw: '',
+						work_hy: '',
+						work_xz: '',
+						work_nr: ''
+					};
+					
+					var workList = [];
+					$scope.workList = workList;
+					$scope.editWork = $.extend(true, {}, defaultData);
+					$scope.industryTypeOptions = industryTypeOptions;
+					$scope.natureTypeOptions = natureTypeOptions;
+					
+					function fillin(){
+						$scope.editWork.work_xz = $(".nature_class").text();
+						$scope.editWork.work_hy = $(".industry_class").text();
+					}
+					
+					$scope.$on('dataReady', function(){
+						if ($scope.PersonalInfoData && $scope.PersonalInfoData.work){
+							workList = $scope.PersonalInfoData.work;
+							Disable_And_HideRemoveButton(workList);
+							$scope.workList = workList;
+							$scope.savedNumber = workList.length;
+						}
+						$scope.dataReady = true;
+					});
+					
+					$scope.addWork = function(){
+						fillin();
+						$scope.workList.push($.extend(true, {}, $scope.editWork));
+						$scope.editWork = $.extend(true, {}, defaultData);
+						
+						easyDialog.close();
+					};
+					
+					function packUp(packedUp, currentObj, num){
+						packedUp["TZ_STA_DT_"+num] = currentObj.work_kssj;
+						packedUp["TZ_END_DT_"+num] = currentObj.work_jssj;
+						packedUp["TZ_COMP_CNAME_"+num] = currentObj.work_zwm;
+						packedUp["TZ_COMP_ENAME_"+num] = currentObj.work_ywm;
+						packedUp["TZ_BLT_DEPT_"+num] = currentObj.work_bmzw;
+						packedUp["TZ_BLT_DEPT_EN_"+num] = currentObj.work_bmyw;
+						packedUp["TZ_JOB_POSITION_"+num] = currentObj.work_zwzw;
+						packedUp["TZ_JOB_POSITION_EN_"+num] = currentObj.work_zwyw;
+						packedUp["TZ_BLT_INDUSTRY_"+num] = currentObj.work_hy;
+						packedUp["TZ_COMP_JYFW_"+num] = currentObj.work_fwzw;
+						packedUp["TZ_COMP_JYFW_ENG_"+num] = currentObj.work_fwyw;
+						packedUp["TZ_COMP_NATURE_"+num] = currentObj.work_xz;
+						packedUp["TZ_WORK_CONT_"+num] = currentObj.work_nr;
+					}
+					
+					$scope.saveWork = function(){
+						var postData = {};
+						postData["NUMBER_WORK"]=0;
+						
+						var works = $.extend(true, {}, $scope.workList);
+						var count = $scope.savedNumber;
+						while(works[count]) packUp(postData,works[count],++count);
+						postData["NUMBER_WORK"]=count - $scope.savedNumber;
+
+						/* post */
+						PersonalInfoInterface.updateWorkBackground(postData, function(){;});
+					};
+					
+					$scope.openAddDialog = function(){
+						fastBind($(".industry_class").parent());
+						fastBind($(".nature_class").parent());
+						
+						delayOpenDialogBy10('imgBox_WorkBackground');
+					};
+					
+					function openDialog(name){
+						easyDialog.open({
+							container : name,
+							yesFn : btnFn,
+							noFn : true,
+							fixed : false
+						});
+					}
+					
+					function delayOpenDialogBy10(name){
+						setTimeout(function(){
+							openDialog(name);
+						}, 10);
+					}
+					
+				}
+			);
 		</script>
 		
 		<!--TODO : CopyEnd-->
