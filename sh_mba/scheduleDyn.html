@@ -149,7 +149,7 @@
 							<td width="38">学时</td>
 							<td width="38">学分</td>
 							<td width="65">任课教师</td>
-							<td width="130">上课日期</td>
+							<td width="100">上课日期</td>
 							<td width="66">起止周</td>
 							<td width="90">停课及原因</td>
 							<td width="104">补课时间
@@ -231,15 +231,20 @@
 				<div class="dialog_wdkb_mar">
 					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_bt">
 						<tr>
-							<td height="32">课程号： <span ng-bind='unEvaluation.courseId'></span>
+							<td height="32" style="text-align: left; padding: 5px 20px;">课程号： <span ng-bind='unEvaluation.courseID'></span>
 							</td>
-							<td>课程名： <span ng-bind='unEvaluation.courseName'></span>
+							<td style="text-align: left; padding: 5px 20px;">课程名： <span ng-bind='unEvaluation.courseName'></span>
 							</td>
-							<td>授课教师： <span ng-bind='unEvaluation.teacher'></span>
+							<td ng-if='unEvaluation.teacherList.length <= 1'  style="text-align: left; padding: 5px 20px;">授课教师： <span>{{unEvaluation.teacherList[0]}}</span>
+							</td>
+						</tr>
+						<tr ng-if='unEvaluation.teacherList.length > 1'>
+							<td style="text-align: left; padding: 5px 20px;">
+								授课教师： <span ng-repeat='teacher in unEvaluation.teacherList'>{{($index == 0 ? '':',') + teacher}}</span>
 							</td>
 						</tr>
 					</table>
-
+					<br />
 					<table width="670" border="0" cellspacing="0" cellpadding="0" class="dialog_wdkb_nr">
 						<tr>
 							<td height="32" width="184">学号</td>
@@ -387,9 +392,9 @@
 			</div>
 		
 			<div class="dialog_wdkb" id="imgBox_CourseTime" style="display:none;" >
-				<div class="dialog_wdkb_mar" style="padding: 20px; height: auto; width: 694px">
-					<p ng-bind-html='theCourseTime'></p>
-					<div class="dialog_wdkb_mar_fh2">
+				<div class="dialog_wdkb_mar" style="padding: 20px; height: auto; width: 450px">
+					<p ng-bind-html='theCourseTime' style="font-size:13px; line-height: 200%; padding: 15px;padding-left: 25px"></p>
+					<div class="dialog_wdkb_mar_fh2" style="width: inherit;">
 						<a href="#" title="" id="btnClose" onclick="easyDialog.close();">返回</a>
 					</div>
 				</div>
@@ -422,9 +427,9 @@
 		};
 		
 		var fakeUnevaluation = {
-			courseId : 'courseId123',
+			courseID : 'courseId123',
 			courseName : 'courseName345',
-			teacher : 'teacherMr.C',
+			teacherList : ['teacherMr.C'],
 			studentList : [
 			{studentId : "id123", studentName : 'student456', className : 'class789'},
 			{studentId : "id321", studentName : 'student654', className : 'class987'},
@@ -513,8 +518,16 @@
 			});
 		};
 		_.getUnevaluatedStudentList = function(cid, callback){
-			if (test_local) { callback(fakeUnevaluation); return; }
-			;
+			$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_KCPG.FieldFormula.Iscript_getPgsut?' + $.param({coursId: cid}),{params:{}
+			}).success(function(data,status,headers,config){
+				callback(data);
+				return;
+			}).error(function(data,status,headers,config){
+				alert('无法获取数据！（错误码：' + status + "）" );
+				if (test_local) {callback(fakeUnevaluation); return;}
+				callback(null);
+				return;
+			});
 		};
 		_.getCourseReferenceData = function(cid, callback){
 			$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_COURSE.FieldFormula.Iscript_CourseData?' + $.param({coursId: cid}),{params:{}
@@ -633,6 +646,9 @@
 				var courseTimeData = $scope.studentSchedule.courseList[index].courseTime;
 				$scope.theCourseTime = courseTimeData;
 				delayOpenDialogBy10("imgBox_CourseTime");
+				setTimeout(function(){
+					$("#imgBox_CourseTime").parent().css("margin-left","-240px");
+				},30);
 			}
 		}
 	);

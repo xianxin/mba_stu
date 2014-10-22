@@ -124,7 +124,7 @@
 				@time:2014-02-11 18:16:09
 				@qq:3407725
 				============================*/
-				$(".select_three,.select_two,.selcect_wol,.select_family").not('.select_family_disabled').each(function(){
+				/*$(".select_three,.select_two,.selcect_wol,.select_family").not('.select_family_disabled').each(function(){
 					var s=$(this);
 					var z=parseInt(s.css("z-index"));
 					var dt=$(this).children("dt");
@@ -136,7 +136,7 @@
 					dd.find("a").click(function(){dt.html($(this).html());_hide();});
 					$("body").click(function(i){ 
 						!$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
-				})
+				})*/
 			});
 			
 			function fastBind(obj){
@@ -162,6 +162,8 @@
 					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
 					dt.click(function(){dd.is(":hidden")?_show():_hide();});
 					dd.find("a").click(function(){dt.html($(this).html());_hide();});
+					$("body").click(function(i){ 
+							!$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
 				}
 			}
 		</script>
@@ -408,7 +410,7 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family {{phone.selectDisabledClass}}">
+									<dl class="select_family ">
 										<dt class='phone_fs_class' ng-bind='phone.phone_fs'></dt>
 										<dd>
 											<ul>
@@ -419,19 +421,19 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_phone_one" ng-model='phone.phone_qh' ng-disabled='!phone.editEnabled'>
+									<input type="text" class="edu_phone_one" ng-model='phone.phone_qh' >
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_phone_two" ng-model='phone.phone_dh' ng-disabled='!phone.editEnabled'>
+									<input type="text" class="edu_phone_two" ng-model='phone.phone_dh'>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_fjh" ng-model='phone.phone_fjh' ng-disabled='!phone.editEnabled'>
+									<input type="text" class="edu_fjh" ng-model='phone.phone_fjh' >
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href title="删除" target="" class="personal_sc {{phone.removeHiddenClass}}" ng-click='removePhone($index)'></a>
+									<a href title="删除" target="" class="personal_sc " ng-click='removePhone($index)'></a>
 								</td>
 								<td></td>
 							</tr>
@@ -461,7 +463,7 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family {{email.selectDisabledClass}}">
+									<dl class="select_family ">
 										<dt class='email_lx_class' ng-bind='email.email_lx'></dt>
 										<dd>
 											<ul>
@@ -472,11 +474,11 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_work" ng-model='email.email_dz' ng-disabled='!email.editEnabled'>
+									<input type="text" class="edu_work" ng-model='email.email_dz' >
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href title="删除" target="" class="personal_sc {{email.removeHiddenClass}}" ng-click='removeEmail($index)'></a>
+									<a href title="删除" target="" class="personal_sc " ng-click='removeEmail($index)'></a>
 								</td>
 								<td></td>
 							</tr>
@@ -505,7 +507,7 @@
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family {{sns.selectDisabledClass}}">
+									<dl class="select_family ">
 										<dt class='sns_lx_class' ng-bind='sns.sns_lx'></dt>
 										<dd>
 											<ul>
@@ -516,11 +518,11 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_work" ng-model='sns.sns_xx' ng-disabled='!sns.editEnabled'>
+									<input type="text" class="edu_work" ng-model='sns.sns_xx' >
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href title="删除" target="" class="personal_sc {{sns.removeHiddenClass}}" ng-click='removeSns($index)' ></a>
+									<a href title="删除" target="" class="personal_sc " ng-click='removeSns($index)' ></a>
 								</td>
 								<td></td>
 							</tr>
@@ -560,26 +562,26 @@
 								<td height="38">&nbsp;</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" datepicker class="edu_rx" ng-model='eduBg.edu_rxsj' ng-disabled='!eduBg.editEnabled' style="font-family: 'microsoft yahei';">
+									<input type="text" datepicker class="edu_rx" ng-model='eduBg.edu_rxsj'  style="font-family: 'microsoft yahei';">
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" datepicker class="edu_rx" ng-model='eduBg.edu_bysj' ng-disabled='!eduBg.editEnabled' style="font-family: 'microsoft yahei';">
+									<input type="text" datepicker class="edu_rx" ng-model='eduBg.edu_bysj'  style="font-family: 'microsoft yahei';">
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_yx" ng-disabled='!eduBg.editEnabled'  ng-model='eduBg.edu_byxx' style="font-family: 'microsoft yahei';">
+									<input type="text" class="edu_yx"   ng-model='eduBg.edu_byxx' style="font-family: 'microsoft yahei';">
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<input type="text" class="edu_zy" ng-disabled='!eduBg.editEnabled' ng-model='eduBg.edu_xxzy' style="font-family: 'microsoft yahei';">
+									<input type="text" class="edu_zy"  ng-model='eduBg.edu_xxzy' style="font-family: 'microsoft yahei';">
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family {{eduBg.selectDisabledClass}}">
+									<dl class="select_family ">
 										<dt class='edu_hdxl_class' ng-bind='eduBg.edu_hdxl' style="width: 74px;background-position-x: 86px;"></dt>
-										<dd>
-											<ul>
+										<dd style="width: 104px;">
+											<ul style="width: 100px;">
 												<li ng-repeat='diplomaType in diplomaTypeOptions'><a href>{{diplomaType}}</a></li>
 											</ul>
 										</dd>
@@ -587,10 +589,10 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family {{eduBg.selectDisabledClass}}">
+									<dl class="select_family ">
 										<dt class='edu_hdxw_class' ng-bind='eduBg.edu_hdxw' style="width: 74px;background-position-x: 86px;"></dt>
-										<dd>
-											<ul>
+										<dd style="width: 104px;">
+											<ul style="width: 100px;">
 												<li ng-repeat='degreeType in degreeTypeOptions'><a href>{{degreeType}}</a></li>
 											</ul>
 										</dd>
@@ -598,7 +600,7 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<a href title="删除" ng-disabled='!eduBg.editEnabled' ng-show='eduBg.editEnabled' target="" class="personal_sc deleteLineClass" ng-click='remove($index)'></a>
+									<a href title="删除"  target="" class="personal_sc deleteLineClass" ng-click='remove($index)'></a>
 								</td>
 								<td>&nbsp;</td>
 							</tr>
@@ -620,7 +622,7 @@
 							<div class="works_one_list">
 								<div class="wol_lite">
 									<span>工作开始日期：</span>
-									<p ng-bind='work.work_kssj'></p>
+									<p ng-bind='work.work_kssj' ></p>
 								</div>
 								<div class="wol_lite wol_lite_right">
 									<span>工作部门中文：</span>
@@ -692,7 +694,7 @@
 								<tr>
 									<td height="46" width="130">工作开始日期</td>
 									<td width="228">
-										<input type="text" name="" ng-model='editWork.work_kssj' class="wol_ipt">
+										<input type="text" name="" ng-model='editWork.work_kssj' datepicker class="wol_ipt">
 									</td>
 									<td width="109">工作部门中文</td>
 									<td width="228">
@@ -702,7 +704,7 @@
 								<tr>
 									<td height="46">工作结束日期</td>
 									<td>
-										<input type="text" name="" ng-model='editWork.work_jssj' class="wol_ipt">
+										<input type="text" name="" ng-model='editWork.work_jssj' datepicker class="wol_ipt">
 									</td>
 									<td>工作部门英文</td>
 									<td>
@@ -750,7 +752,7 @@
 								<tr>
 									<td height="46">公司经营范围英文</td>
 									<td>
-										<input type="text" name="" ng-bind='editWork.work_fwyw' class="wol_ipt">
+										<input type="text" name="" ng-model='editWork.work_fwyw' class="wol_ipt">
 									</td>
 									<td>公司性质</td>
 									<td>
@@ -1490,8 +1492,7 @@
 						edu_byxx: '',
 						edu_xxzy: '',
 						edu_hdxl: '',
-						edu_hdxw: '',
-						editEnabled: true
+						edu_hdxw: ''
 					};
 					
 					var eduBgLst = [];
@@ -1528,10 +1529,7 @@
 					};
 					
 					$scope.remove = function(index){
-						if ($scope.eduBgLst &&
-						$scope.eduBgLst[index] &&
-						$scope.eduBgLst[index].editEnabled)
-							$scope.eduBgLst.splice(index,1);
+						$scope.eduBgLst.splice(index,1);
 					};
 					
 					$scope.saveEduBg = function(){
@@ -1608,20 +1606,20 @@
 						easyDialog.close();
 					};
 					
-					function packUp(packedUp, currentObj, num){
-						packedUp["TZ_STA_DT_"+num] = currentObj.work_kssj;
-						packedUp["TZ_END_DT_"+num] = currentObj.work_jssj;
-						packedUp["TZ_COMP_CNAME_"+num] = currentObj.work_zwm;
-						packedUp["TZ_COMP_ENAME_"+num] = currentObj.work_ywm;
-						packedUp["TZ_BLT_DEPT_"+num] = currentObj.work_bmzw;
-						packedUp["TZ_BLT_DEPT_EN_"+num] = currentObj.work_bmyw;
-						packedUp["TZ_JOB_POSITION_"+num] = currentObj.work_zwzw;
-						packedUp["TZ_JOB_POSITION_EN_"+num] = currentObj.work_zwyw;
-						packedUp["TZ_BLT_INDUSTRY_"+num] = currentObj.work_hy;
-						packedUp["TZ_COMP_JYFW_"+num] = currentObj.work_fwzw;
-						packedUp["TZ_COMP_JYFW_ENG_"+num] = currentObj.work_fwyw;
-						packedUp["TZ_COMP_NATURE_"+num] = currentObj.work_xz;
-						packedUp["TZ_WORK_CONT_"+num] = currentObj.work_nr;
+					function packUp(packedUp, currentObj, num, startFrom){
+						packedUp["TZ_STA_DT_"+(num-startFrom)] = currentObj.work_kssj;
+						packedUp["TZ_END_DT_"+(num-startFrom)] = currentObj.work_jssj;
+						packedUp["TZ_COMP_CNAME_"+(num-startFrom)] = currentObj.work_zwm;
+						packedUp["TZ_COMP_ENAME_"+(num-startFrom)] = currentObj.work_ywm;
+						packedUp["TZ_BLT_DEPT_"+(num-startFrom)] = currentObj.work_bmzw;
+						packedUp["TZ_BLT_DEPT_EN_"+(num-startFrom)] = currentObj.work_bmyw;
+						packedUp["TZ_JOB_POSITION_"+(num-startFrom)] = currentObj.work_zwzw;
+						packedUp["TZ_JOB_POSITION_EN_"+(num-startFrom)] = currentObj.work_zwyw;
+						packedUp["TZ_MBABLT_INDUSTRY_"+(num-startFrom)] = currentObj.work_hy;
+						packedUp["TZ_COMP_JYFW_"+(num-startFrom)] = currentObj.work_fwzw;
+						packedUp["TZ_COMP_JYFW_ENG_"+(num-startFrom)] = currentObj.work_fwyw;
+						packedUp["TZ_COMP_NATURE_"+(num-startFrom)] = currentObj.work_xz;
+						packedUp["TZ_WORK_CONT_"+(num-startFrom)] = currentObj.work_nr;
 					}
 					
 					$scope.saveWork = function(){
@@ -1629,8 +1627,9 @@
 						postData["NUMBER_WORK"]=0;
 						
 						var works = $.extend(true, {}, $scope.workList);
+						var startFrom = $scope.savedNumber;
 						var count = $scope.savedNumber;
-						while(works[count]) packUp(postData,works[count],++count);
+						while(works[count]) packUp(postData,works[count],++count, startFrom);
 						postData["NUMBER_WORK"]=count - $scope.savedNumber;
 
 						/* post */
@@ -1638,11 +1637,16 @@
 					};
 					
 					$scope.openAddDialog = function(){
-						fastBind($(".industry_class").parent());
-						fastBind($(".nature_class").parent());
-						
-						delayOpenDialogBy10('imgBox_WorkBackground');
+						delayOpenDialogBy100('imgBox_WorkBackground');
 					};
+					
+					function delayOpenDialogBy100(name){
+						setTimeout(function(){
+							fastBind($(".industry_class").parent());
+							fastBind($(".nature_class").parent());
+							openDialog(name);
+						}, 100);
+					}
 					
 					function openDialog(name){
 						easyDialog.open({
@@ -1651,12 +1655,6 @@
 							noFn : true,
 							fixed : false
 						});
-					}
-					
-					function delayOpenDialogBy10(name){
-						setTimeout(function(){
-							openDialog(name);
-						}, 10);
 					}
 					
 				}
