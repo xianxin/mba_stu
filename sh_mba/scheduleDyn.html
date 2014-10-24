@@ -132,6 +132,10 @@
 	.schedule_cont_pop table td {
 		padding: 2px;
 	}
+	#imgBox_CourseAttendance .dialog_wdkb_bt td{
+		padding-left: 20px; padding-right: 5px;
+		text-align: left;
+	}
 </style>
 <div class="s_main">
 	
@@ -180,7 +184,7 @@
 							<td><a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseTime($index)">查看上课时间</a></td>
 							<td ng-bind-html='course.courseWeek | checkTdEmpty'></td>
 							<td ng-bind-html='course.courseSuspend | checkTdEmpty'></td>
-							<td ng-bind-html='course.courseMakeup | checkTdEmpty'></td>
+							<td ng-bind-html='course.courseMarkup | checkTdEmpty'></td>
 							<td ng-if="course.IsOpen == 'N'">待定</td>
 							<td ng-if="course.IsOpen == 'Y' && course.IsPlan == 'TRUE'" ng-bind-html='course.examPlan | checkTdEmpty'></td>
 							<td ng-if="course.IsOpen == 'Y' && course.IsPlan == 'FALSE'">&nbsp;课程评估率＜95%
@@ -203,15 +207,13 @@
 							</td>
 							<td>学期： <span ng-bind='courseAttendance.term'></span>
 							</td>
-							<td>课程名称： <span ng-bind='courseAttendance.courseName'></span>
-							</td>
+							<td>考勤导入日期： <span ng-bind='courseAttendance.importTime'></span></td>
 						</tr>
 						<tr>
 							<td height="32">授课教师： <span ng-bind='courseAttendance.teacher'></span>
 							</td>
-							<td >考勤导入日期： <span ng-bind='courseAttendance.importTime'></span>
+							<td colspan="2">课程名称： <span ng-bind='courseAttendance.courseName'></span>
 							</td>
-							<td>&nbsp;</td>
 						</tr>
 					</table>
 
@@ -290,7 +292,7 @@
 					<div id="tab_con1" class="tem" style="display:block;">
 						<div class="tab_top">
 							<table width="704" border="0" cellspacing="0" cellpadding="0">
-								<tr>
+								<tr style="display: none;">
 									<td width="256" height="34">学年：<span ng-bind='courseReference.year'></span>
 									</td>
 									<td width="36">&nbsp;</td>
@@ -307,7 +309,7 @@
 									<td>授课教师：<span ng-bind='courseReference.teacher'></span>
 									</td>
 									<td>&nbsp;</td>
-									<td>上课班级：<span ng-bind='courseReference.className'></span>
+									<td style="display: none;">上课班级：<span ng-bind='courseReference.className'></span>
 									</td>
 								</tr>
 							</table>
@@ -362,7 +364,7 @@
 					<div id="tab_con2" class="tem">
 						<div class="tab_top tab_top_two">
 							<table width="704" border="0" cellspacing="0" cellpadding="0">
-								<tr>
+								<tr style="display: none;">
 									<td width="256" height="34">学年：<span ng-bind='courseReference.year'></span>
 									</td>
 									<td width="36">&nbsp;</td>
@@ -379,7 +381,7 @@
 									<td>授课教师：<span ng-bind='courseReference.teacher'></span>
 									</td>
 									<td>&nbsp;</td>
-									<td>上课班级：<span ng-bind='courseReference.className'></span>
+									<td style="display: none;">上课班级：<span ng-bind='courseReference.className'></span>
 									</td>
 								</tr>
 							</table>
@@ -389,7 +391,7 @@
 									<td width="188">类型</td>
 								</tr>
 								<tr ng-repeat='handout in courseReference.handoutList'>
-									<td height="35"><a ng-href='handout.url' target="_blank" title="" name="" class="">&nbsp;{{handout.title}}&nbsp;</a>
+									<td height="35"><a ng-href='{{handout.url}}' target="_blank" title="" name="" class="">&nbsp;{{handout.title}}&nbsp;</a>
 									</td>
 									<td>&nbsp;{{handout.type}}&nbsp;</td>
 								</tr>
@@ -429,11 +431,11 @@
 			graDate : '2011-01-01',
 			courseList : [
 			{courseID : 'cid1', courseName : 'cn1', courseHours : 'ch1', credit : 'c1', teacher : 't1', 
-			courseTime : 'ct1<br>ct11<br>ct111', courseWeek : 'cw1', courseSuspend : 'cs1', courseMakeup : 'cm1', examPlan : 'ep1', IsPlan : 'FALSE', IsOpen : 'Y'},
+			courseTime : 'ct1<br>ct11<br>ct111', courseWeek : 'cw1', courseSuspend : 'cs1', courseMarkup : 'cm1', examPlan : 'ep1', IsPlan : 'FALSE', IsOpen : 'Y'},
 			{courseID : 'cid2', courseName : 'cn2', courseHours : 'ch2', credit : 'c2', teacher : 't2', 
-			courseTime : 'ct2', courseWeek : 'cw2', courseSuspend : 'cs2', courseMakeup : 'cm2', examPlan : 'ep2', IsPlan : 'FALSE'},
+			courseTime : 'ct2', courseWeek : 'cw2', courseSuspend : 'cs2', courseMarkup : 'cm2', examPlan : 'ep2', IsPlan : 'FALSE'},
 			{courseID : 'cid3', courseName : 'cn3', courseHours : 'ch3', credit : 'c3', teacher : 't3', 
-			courseTime : 'ct3', courseWeek : 'cw3', courseSuspend : 'cs3', courseMakeup : 'cm3', examPlan : 'ep3', IsPlan : 'FALSE'}
+			courseTime : 'ct3', courseWeek : 'cw3', courseSuspend : 'cs3', courseMarkup : 'cm3', examPlan : 'ep3', IsPlan : 'FALSE'}
 			]
 		};
 		
@@ -524,7 +526,7 @@
 				callback(data);
 				return;
 			}).error(function(data,status,headers,config){
-				if (test_local) callback(fakeSchedule);
+				if (test_local) {callback(fakeSchedule); return;}
 				alert('无法获取课程表！（错误码：' + status + "）" );
 				callback(null);
 				return;
@@ -536,6 +538,7 @@
 				callback(data);
 				return;
 			}).error(function(data,status,headers,config){
+				if (test_local) {callback(fakeAttendance); return;}
 				alert('无法获取考勤记录！（错误码：' + status + "）" );
 				callback(null);
 				return;
@@ -547,8 +550,8 @@
 				callback(data);
 				return;
 			}).error(function(data,status,headers,config){
-				alert('无法获取数据！（错误码：' + status + "）" );
 				if (test_local) {callback(fakeUnevaluation); return;}
+				alert('无法获取数据！（错误码：' + status + "）" );
 				callback(null);
 				return;
 			});
@@ -559,7 +562,8 @@
 				callback(data);
 				return;
 			}).error(function(data,status,headers,config){
-				alert('无法获取考勤记录！（错误码：' + status + "）" );
+				if (test_local) {callback(fakeReference); return;}
+				alert('无法获取课程资料！（错误码：' + status + "）" );
 				callback(null);
 				return;
 			});

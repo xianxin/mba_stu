@@ -150,8 +150,8 @@
             	
             	<td>{{courseCompulsory.SJTerm}}</td>
             	<td>{{courseCompulsory.courseRank}}</td>
-            	<td ng-bind-html='courseCompulsory.courseRank | checkTdEmpty'></td>
-            	<td ng-bind-html='courseCompulsory.changeRemark | checkTdEmpty'></td>
+            	<td ng-bind-html='courseCompulsory.courseRemark | checkTdEmpty'></td>
+            	<td ng-bind-html='courseCompulsory.changRemark | checkTdEmpty'></td>
             </tr>
           </table>
         </div>
@@ -177,15 +177,15 @@
             	<td>{{courseElectives.credit}}</td>
             	<td>{{courseElectives.SJTerm}}</td>
             	<td>{{courseElectives.courseRank}}</td>
-            	<td ng-bind-html='courseElectives.courseRank | checkTdEmpty'></td>
-            	<td ng-bind-html='courseElectives.changeRemark | checkTdEmpty'></td>
+            	<td ng-bind-html='courseElectives.courseRemark | checkTdEmpty'></td>
+            	<td ng-bind-html='courseElectives.changRemark | checkTdEmpty'></td>
             </tr>
             
           </table>
         </div>
-        <div class="pyjh_box">
+        <div class="pyjh_box" style="height: auto;">
           <h2>培养计划备注信息</h2>
-          <p>{{program.programRemark}}</p>
+          <p style="padding: 15px; font-size: 14px; line-height: 175%" ng-bind-html='program.programRemark'></p>
         </div>
       </div>
     </div>
@@ -202,17 +202,17 @@
 		className : 'F0903705',
 		graDate : '2013-09-09',
 		compulsory : [
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 1, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 2, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 3, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 3, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 1, SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''}
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 1, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 2, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 3, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 3, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 1, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''}
 		],
 		electives : [
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '1', SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '3', SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '4', SJTerm : 2, courseRank : 2, courseRemark : '', changeRemark : ''}
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '1', SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '3', SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
+		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '4', SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''}
 		],
 		compulsoryGot : 10,
 		compulsoryAll : 19,
