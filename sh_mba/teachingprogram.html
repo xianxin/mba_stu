@@ -73,6 +73,7 @@
 <!--TODO : startCopy-->
 
 <script type="text/javascript" src="js/angular.min.js"></script>
+<script src="js/public2.js" ></script>
 <!--[if lte IE 8]>
     <script type="text/javascript" src="js/json3.min.js" ></script>
     <script>
@@ -194,47 +195,18 @@
 </div>
 <script>
 
+	var test_local = false;
+	
 	var loadingWidget = layer.load('获取数据中..');
 	layer.area(loadingWidget);
 	
-	var fakeProgram = {
-		studentId : '5090379149',
-		className : 'F0903705',
-		graDate : '2013-09-09',
-		compulsory : [
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 1, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 2, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 3, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 3, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', YJTerm : 1, SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''}
-		],
-		electives : [
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '1', SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '2', SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '3', SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''},
-		{courseName : "SE", courseNature : 'Com', courseHours : '24', credit : '4', SJTerm : 2, courseRank : 2, courseRemark : '', changRemark : ''}
-		],
-		compulsoryGot : 10,
-		compulsoryAll : 19,
-		electivesGot : 9,
-		electivesAll : 14,
-		programRemark : '1'
-	};
-
-	var studentName;
+	var nowStudentName;
 	
-	var test_local = false;
-	var ProgramAppModule = angular.module('TeachingProgramApp', []).filter('checkTdEmpty', function(){
-		return function(input){
-			if (angular.isString(input) && !(angular.equals(input, null) || angular.equals(input,''))){
-				return input;
-			} else {
-				return '&nbsp;';
-			}
-		};
-	}).filter('to_trusted',['$sce',function($sce){
-		return function(text){return $sce.trustAsHtml(text);};
-	}]).config(function($sceProvider){$sceProvider.enabled(false);});
+	var ProgramAppModule = angular.module('TeachingProgramApp', []).config(function($sceProvider){
+		$sceProvider.enabled(false);
+	});
+	moduleDirective_checkTdEmpty(ProgramAppModule);
+	moduleDirective_trustHtml(ProgramAppModule);
 	
 	ProgramAppModule.factory('ProgramInterface',function($http){
 		var _ = {};
@@ -244,6 +216,7 @@
 				callback(data);
 				return;
 			}).error(function(data,status,headers,config){
+				if (test_local) { callback(fakeProgramObject); return; }
 				alert('无法获取培养计划！（错误码：' + status + "）" );
 				callback(null);
 				return;
@@ -269,12 +242,13 @@
 			};
 			
 			function decoration(obj){
-				obj.display_studentName = (studentName || "") + " 培养计划";
+				obj.display_studentName = (nowStudentName || "") + " 培养计划";
 				obj.display_compulsoryCreditStatus = "必修课列表，要求必修课总学分" + obj.compulsoryAll + "，已修必修课总学分" + obj.compulsoryGot;
 				obj.display_electivesCreditStatus = "选修课列表，要求选修课总学分" + obj.electivesAll + "，已修选修课总学分" + obj.electivesGot;
 				
 				return obj;
 			}
+			
 			var program = $.extend(true, {}, defaultProgram);
 			$scope.program = decoration(program);
 			
@@ -287,8 +261,8 @@
 			
 			getStudentObject(function(studentObject){
 				if (studentObject && studentObject.name){
-					studentName = studentObject.name;
-					$scope.program.display_studentName = (studentName || "") + " 培养计划";
+					nowStudentName = studentObject.name;
+					$scope.program.display_studentName = (nowStudentName || "") + " 培养计划";
 				}
 			});
 		}

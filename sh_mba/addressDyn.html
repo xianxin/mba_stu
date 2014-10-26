@@ -79,25 +79,8 @@
 
 <!--TODO : startCopy-->
 
-<script type="text/javascript">
-
-	function fastbind(){
-	  	$(".select").each(function(){
-			var s=$(this);
-			var z=parseInt(s.css("z-index"));
-			var dt=$(this).children("dt");
-			var dd=$(this).children("dd");
-			var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-			var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-			dt.click(function(){dd.is(":hidden")?_show():_hide();});
-			dd.find("a").click(function(){dt.html($(this).html());_hide();});
-			$("body").click(function(i){ !$(i.target).parents(".select").first().is(s) ? _hide():"";});
-		});
-	}
-	
-</script>
-
 <script type="text/javascript" src="js/angular.min.js" ></script>
+<script src="js/public2.js"></script> 
 <!--[if lte IE 8]>
     <script type="text/javascript" src="js/json3.min.js" ></script>
     <script>
@@ -119,8 +102,8 @@
   
   <div class="s_main_r address_qz" id='ng-app' ng-app='AddressBookApp'>
 	<div class="address" ng-controller='AddressBookController'>
-      <div class="crumbs address_top">
-      	<p>
+      <div class="crumbs address_top" style="padding-bottom: 10px;">
+      	<p style="line-height: normal;">
           <a href="#" title="">首页</a>
            > 
           <a href="#" title="">个人中心</a>
@@ -168,7 +151,7 @@
                     <dt id='companyNature' ng-bind='filterObject.companyNature' style="background-position-x: 135px;"></dt>
                     <dd style="width: 160px;">
                         <ul style="width: 156px;">
-                        	<li ng-repeat='natureType in natureTypeOptions' on-finish-render-filters><a href>{{natureType}}</a></li>
+                        	<li ng-repeat='natureType in natureTypeOptions_Search' on-finish-render-filters><a href>{{natureType}}</a></li>
                         </ul>
                     </dd>
                 </dl>
@@ -199,7 +182,7 @@
                 所有在校生</label>
               </td>
               <td width="410">&nbsp;</td>
-              <td><a href title="" class="address_seach_ss_an" ng-click='search();' >搜索</a></td>
+              <td><a href='javascript:void(0)' title="" class="address_seach_ss_an" ng-click='search();' >搜索</a></td>
             </tr>
           </table>
         </div>
@@ -248,81 +231,22 @@
     </div>
   </div>
   
-  
+  <script src="js/fakeObjects.js"></script>
   <script>
-  		var natureTypeOptions = [
-			'国有或国有控股','外商合资','外商独资','港澳台合资',
-			'港澳台独资','民营或私有控股','政府部门','事业单位','非营利机构','其他'
-		];
   		var test_local = false;
-  		var fakeObject = {
-  			currentPageNumber: 1,
-  			totalPageNumber: 11,
-  			studentList: [{
-  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
-  			},{
-  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
-  			},{
-  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
-  			},{
-  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
-  			},{
-  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
-  			},{
-  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
-  			},{
-  				studentName: "Liu Zhe", className: "Xue Qian Ban(Zhong Ban)", phone: 12333333333, email: "liuzhe@tz.com",
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Front"
-  			},{
-  				studentName: "Liu She", className: "Xue Qian Ban(Xiao Ban)", phone: 12333333333, email: "liuzhe@tz.com",
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Waiter", job: "Ku Bi"
-  			},{
-  				studentName: "Liu Te", className: "Xue Qian Ban(Da Ban)", phone: 12333333333, email: "liuzhe@tz.com", 
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "Tech.", job: "Niu Bi", companyNature: "Limited Cop."
-  			},{
-  				studentName: "Liu Re", className: "Xue Qian Ban(Chao Ren Ban)", phone: 12333333333, email: "liuzhe@tz.com", 
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "IT", job: "Dou Bi", companyNature: "UnLimited", companyScope: "ITITs"
-  			},{
-  				studentName: "Liu Me", className: "Xue Qian Ban(Xiao Er Ban)", phone: 12333333333, email: "liuzhe@tz.com", 
-  				nationality: "china", city: "beijing", companyName: "Tz", department: "HR"
-  			}]
-  		};
+  		
   		var loadingWidget;
 		
-  		var AddressBookAppModule = angular.module('AddressBookApp', []).filter('checkTdEmpty', function(){
-		return function(input){
-			if (angular.isString(input) && !(angular.equals(input, null) || angular.equals(input,''))){
-				return input;
-			} else {
-				return '&nbsp;';
-			}
-		};
-	}).filter('to_trusted',['$sce',function($sce){
-		return function(text){return $sce.trustAsHtml(text);};
-	}]).config(function($sceProvider) {
+  		var AddressBookAppModule = angular.module('AddressBookApp', []).config(function($sceProvider) {
 			$sceProvider.enabled(false);
-		}).directive('onFinishRenderFilters', function($timeout){
-			return {
-				restrict: 'A',
-				link: function(scope, element, attr){
-					if (scope.$last === true){
-						$timeout(function(){
-							scope.$emit('ngRepeatFinished');
-						});
-					}
-				}
-			};
 		});
+		moduleDirective_checkTdEmpty(AddressBookAppModule);
+		moduleDirective_trustHtml(AddressBookAppModule);
+		moduleDirective_afterRenderFinish(AddressBookAppModule);
 		
 		AddressBookAppModule.factory('AddressBookInterface', function($http){
 			var _ = {};
-			/* filterObject should have studentPerPage, pageNumber, orderBy */
+			
 			_.getAdrressBookByPage = function(filterObject, callback){
 				if (!isValidParameter(filterObject)) {
 					callback(null);
@@ -331,29 +255,25 @@
 				
 				$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_CONLIST.FieldFormula.IScript_getConList?' + ($.param(filterObject)),{params: {}
 				}).success(function(data,status,headers,config){
-					if (test_local ){
-						/* 测试时候的模拟 */
-						var fo = $.extend(true, {}, fakeObject);
-						var pn = filterObject.pageNumber;
-						if (!pn || pn <= 0) pn = 1;
-						fo.studentList = fo.studentList.slice(pn-1,pn);
-						callback(fo);
-					} else {
-						callback(data);
-					}
+					callback(data);
 				}).error(function(data,status,headers,config){
-					if (test_local ){
-						/* 测试时候的模拟 */
-						var fo = $.extend(true, {}, fakeObject);
-						var pn = filterObject.pageNumber;
-						if (!pn || pn <= 0) pn = 1;
-						fo.studentList = fo.studentList.slice(pn-1,pn);
-						callback(fo);
+					if (test_local){
+						callback(simulateAddressBook(filterObject));
+						return;
 					} else {
 						callback(null);
 					}
 				});
 			};
+			
+			function simulateAddressBook(filterObject){
+				var fo = $.extend(true, {}, fakeAddressBookObject);
+				var pn = filterObject.pageNumber;
+				if (!pn || pn <= 0) pn = 1;
+				fo.studentList = fo.studentList.slice(pn-1,pn);
+				return fo;
+			}
+			
 			function isValidParameter(filterObject){
 				var valid = true;
 				if (!filterObject) return false;
@@ -375,10 +295,10 @@
 				$scope.pageSize = 12;
 				if (test_local) $scope.pageSize = 1;
 				$scope.totalStudentNumber = 0;
-				$scope.natureTypeOptions = natureTypeOptions;
+				$scope.natureTypeOptions_Search = natureTypeOptions_Search;
 				
-				/* filter object */
-				var defaultFilterObject = {
+				/* filter object 查询条件 */
+				var defaultAddressBookFilterObject = {
 					studentName : '',
 					companyName : '',
 					companyScope : '',
@@ -391,14 +311,13 @@
 					orderBy : 0
 				};
 				
-				var filterObject = $.extend(true, {}, defaultFilterObject);
+				var filterObject = $.extend(true, {}, defaultAddressBookFilterObject);
 				$scope.filterObject = filterObject;
 				
-				/* by default : studentList is empty */
 				var studentList = [];
 				$scope.studentList = studentList;
 				
-				
+				/* for dl-dt-dd selections */
 				function fillin(){
 					$scope.filterObject.companyNature = $("#companyNature").text();
 				};
@@ -406,21 +325,29 @@
 				function getResultsPage(num){
 					loadingWidget = layer.load('获取数据中..');
 					layer.area(loadingWidget);
+					
 					if (num < 1) num = 1;
 					fillin();
 					$scope.filterObject.pageNumber = num;
+					
 					/* $scope.filterObject is changed by the interface !!! And it's ok ! */
 					AddressBookInterface.getAdrressBookByPage($scope.filterObject, function(data){
 						if (data){
+							$scope.expire = getExpireBySearchInterval();
+							$scope.currentPage = num;
 							$scope.studentList = data.studentList;
 							$scope.totalStudentNumber = data.totalPageNumber * $scope.pageSize;
 						}
+						
 						layer.closeAll();
 						$("#addressResultTable").css("display","inline-table");
 					});
 				};
 				
+				/* 翻页控制 */
 				$scope.pageChangeHandler = function(num) {
+					if (!okWithSearchInterval($scope.expire)) return;
+					
 					if (test_local) {
 						setTimeout(function(){getResultsPage(num);},2000);
 					} else {
@@ -433,9 +360,8 @@
 				};
 				
 				$scope.$on('ngRepeatFinished', function (ngRepeatFinishedEvent) {
-					fastbind();
+					fastbind('.select');
 				});
-				
 			}
 		);
 		var moduleName = 'AddressBookApp';

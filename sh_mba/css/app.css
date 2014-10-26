@@ -59,7 +59,7 @@ a.event:hover{color: #eee;}
 .cal-day-outmonth span[data-cal-date] {
     opacity: 0.5;
 }
-.cal-row-head{border:1px solid #e1e1e1;border-bottom: 0;}
+.cal-row-head{border:1px solid #e1e1e1;border-bottom: 0; width:998px;}
 .week-title{border-right: 1px solid #e1e1e1 !important;}
 .week-title:last-child{border-right: 0 !important;}
 .week-day-title{font-size: 24px;}
@@ -75,10 +75,5 @@ a.event:hover{color: #eee;}
 }
 
 .cal-cell-hover{
-    background:#FFF url(../img/cal-cell-bg.png) top right no-repeat !important;
-    border-right:2px solid #fa7f00 !important;
-    border-bottom: 3px solid #fa7f00 !important;
-}
-.cal-cell-hover span[data-cal-date]{
-    color: #fff;
+     background:#FFF;
 }

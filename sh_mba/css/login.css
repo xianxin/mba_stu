@@ -5,32 +5,49 @@ ul,ol,li{list-style-type:none; line-height:24px;}
 h1,h2,h3,h4,h5,h6{font-size:12px; font-weight:normal}
 .hidden{display:none;}
 a{outline-style:none;color:#666666;text-decoration:none;}
-a:hover{color:#F03E34; text-decoration:none;}
+a:hover{
+	text-decoration:none;
+}
 .clear{ clear:both}
 .fl{ float:left}
 .fr{ float:right}
 img{ border:0px;}
 
-.header{ width:100%; height:100px; padding-top:40px;}
+.header{ width:100%; height:100px; padding-top:25px;}
 .login_head{ width:621px; height:72px; margin:0 auto; overflow:hidden;}
-.cont{ width:1000px; height:667px; font-size:1px; border-top:4px solid #ea6c24; margin:0 auto; position:relative;}
+.cont{
+	width:1000px;
+	height:667px;
+	font-size:1px;
+	border-top:4px solid #ea6c24;
+	border-bottom:2px solid #ea6c24;
+	margin:0 auto;;
+	position: relative;
+	box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+	background-color: #333333;
+}
 
 .cont .cont_bg{ width:1000px; font-size:1px; border:0; margin:0 auto; padding:0;}
 .cont_bg img{ border:0; font-size:1px; margin:0; padding:0; display:block;}
 
-.cont_dlk{ width:443px; height:370px; background:#FFF; border-top:3px solid #ea6c24; position:absolute; left:282px; top:110px;}
+.cont_dlk{ width:443px; height:370px; background:#FFF; border-top:3px solid #ea6c24; position:absolute; right:282px; top:100px;}
 .cont_tab{ width:300px; margin:20px auto 0;}
-.cont_tab .cont_tab_ipt1{ width:240px; border:1px solid #cccccc; background:url(../images/login_3.jpg) no-repeat 9px center; padding:16px 10px 16px 50px; font-size:14px; color:#cccccc;}
-.cont_tab .cont_tab_ipt2{ width:240px; border:1px solid #cccccc; background:url(../images/login_2.jpg) no-repeat 9px center; padding:16px 10px 16px 50px; font-size:14px; color:#cccccc;}
-.cont_tab .cont_tab_yzm{ width:140px; border:1px solid #cccccc; padding:16px 10px 16px 5px; font-size:14px; color:#cccccc; float:left; display:inline;}
-.cont_tab_yzmtp{ margin-left:30px; padding-top:6px;  float:left; display:inline;}
-.cont_tab_dl{ width:302px; height:47px; background:#fa7f00; border-top:1px solid #fcb266; line-height:47px; font-size:18px; text-align:center;  font-family:"微软雅黑";}
+.cont_tab .cont_tab_ipt1{ width:240px; border:1px solid #cccccc; background:url(../images/login_3.jpg) no-repeat 9px center; padding:16px 10px 16px 50px; font-size:16px; font-family:Arial; color:#666666;letter-spacing:1px;}
+.cont_tab .cont_tab_ipt2{ width:240px; border:1px solid #cccccc; background:url(../images/login_2.jpg) no-repeat 9px center; padding:16px 10px 16px 50px; font-size:16px; font-family:Arial; color:#666666;letter-spacing:1px;}
+.cont_tab .cont_tab_yzm{ width:140px; border:1px solid #cccccc; padding:16px 10px 16px 15px; font-size:16px; font-family:Arial; color:#666666;letter-spacing:1px; float:left; display:inline;}
+.user_span{position:absolute; font-size:16px; top:45px; left:125px;color:#666666; }
+.user_span1{position:absolute; font-size:16px; top:115px; left:125px;color:#666666; }
+.user_span2{position:absolute; font-size:16px; top:185px; left:80px;color:#666666; }
+.cont_tab_yzmtp{ margin-left:20px; padding-top:6px;  float:left; display:inline;}
+.cont_tab_dl{ width:302px; height:47px; background:#fa7e00; border-top:1px solid #fcb266; line-height:47px; font-size:18px; text-align:center;  font-family:"微软雅黑";}
+.cont_tab_dl:hover{  background:#df7100;}
 .cont_tab_dl a{ color:#FFF; display:block; letter-spacing:1em;}
-.cont_tab_dl a:hover{ background:#de7100; color:#FFF;}
-.cont_tab_ts{ color:#000; font-size:14px; color:#fa7f00;}
+.error_td{ display:none;}
+.cont_tab_ts{ color:#000; font-size:14px; color:red;}
 .wjmm_box{ width:300px; float:left;}
 .wjmm{ color:#5a5a5a; display:block;  font-size:14px; border-bottom:1px solid #5a5a5a; display:block;}
-.footer{ width:100%; height:214px; background:#eeeeee; border-top:2px solid #ea6c24;}
+.wjmm:hover{ color:#fa7e00; border-bottom:1px solid #fa7e00; }
+.footer{ width:100%; height:214px; background:#eeeeee;}
 .ft_box{ width:1000px; margin:0 auto;}
 .ft_box_l{ width:1000px; padding-top:20px; float:left;}
 .ft_box_l h2{ height:40px; line-height:40px; font-size:12px; font-family:"微软雅黑"; font-weight:700;}
@@ -44,6 +61,3 @@ img{ border:0px;}
 .ft_list li{ float:left; background:url(../images/login_6.jpg) no-repeat right center; color:#5a5a5a; font-size:12px; font-family:"微软雅黑"; padding:0 2px; padding:0 8px; }
 .bqsy{color:#5a5a5a; font-size:12px; font-family:"微软雅黑";}
 .ft_box_r{ width:270px; float:right; padding-top:6px;}
-
-
-

@@ -104,6 +104,7 @@
 <!--TODO : startCopy-->
 
 <script type="text/javascript" src="js/angular.min.js"></script>
+<script src="js/public2.js" ></script>
 <script src="js/easydialog.min.js" language="javascript" type="text/javascript"></script>
 <!--[if lte IE 8]>
     <script type="text/javascript" src="js/json3.min.js" ></script>
@@ -116,18 +117,6 @@
         document.createElement('ng:view');
 	</script>
 <![endif]-->
-<script>
-	function show(num){
-	 	var lis = document.getElementById('yq_xxk_kb').getElementsByTagName('li');
-		for(i=0;i<lis.length;i++){
-			lis[i].className = '';
-			document.getElementById('tab_con'+(i+1)).style.display = 'none';
-		}
-		
-		document.getElementById('tit'+num).className = 'current';
-		document.getElementById('tab_con'+num).style.display = 'block';
-	 }
-</script>
 <style>
 	.schedule_cont_pop table td {
 		padding: 2px;
@@ -180,7 +169,6 @@
 							<td ng-bind-html='course.courseHours | checkTdEmpty'></td>
 							<td ng-bind-html='course.credit | checkTdEmpty'></td>
 							<td ng-bind-html='course.teacher | checkTdEmpty'></td>
-							<!--<td ng-bind-html='course.courseTime | checkTdEmpty'></td>-->
 							<td><a href='javascript:void(0)' title="" class="scp_kczl" ng-click="openCourseTime($index)">查看上课时间</a></td>
 							<td ng-bind-html='course.courseWeek | checkTdEmpty'></td>
 							<td ng-bind-html='course.courseSuspend | checkTdEmpty'></td>
@@ -246,14 +234,7 @@
 							</td>
 							<td style="text-align: center; padding: 5px 20px;">课程名： <span ng-bind='unEvaluation.courseName'></span>
 							</td>
-							<!--<td ng-if='unEvaluation.teacherList.length <= 1'  style="text-align: left; padding: 5px 20px;">授课教师： <span>{{unEvaluation.teacherList[0]}}</span>
-							</td>-->
 						</tr>
-						<!--<tr ng-if='unEvaluation.teacherList.length > 1'>
-							<td style="text-align: left; padding: 5px 20px;">
-								授课教师： <span ng-repeat='teacher in unEvaluation.teacherList'>{{($index == 0 ? '':',') + teacher}}</span>
-							</td>
-						</tr>-->
 					</table>
 					<br />
 					<div class='dialog_wdkb_nr_wrapper'>
@@ -280,10 +261,10 @@
 				<div class="dialog_wdkb_mar_two">
 					<div id="yq_xxk_kb">
 						<ul>
-							<li id="tit1" onclick="show(1)" class="current">
+							<li id="tit1" onclick="showTab('yq_xxk_kb','tab_con','tit',1)" class="current">
 								<div class="xxk_kb">教材信息</div>
 							</li>
-							<li id="tit2" onclick="show(2)">
+							<li id="tit2" onclick="showTab('yq_xxk_kb','tab_con','tit',2)">
 								<div class="xxk_kb">讲义下载</div>
 							</li>
 							<div class="clear"></div>
@@ -421,102 +402,15 @@
 
 <script>
 
+	var test_local = false;
 	var loadingWidget = layer.load('获取数据中..');
 	layer.area(loadingWidget);
-
-	{
-		var fakeSchedule = {
-			studentId : 'studentId123',
-			className : 'className456',
-			graDate : '2011-01-01',
-			courseList : [
-			{courseID : 'cid1', courseName : 'cn1', courseHours : 'ch1', credit : 'c1', teacher : 't1', 
-			courseTime : 'ct1<br>ct11<br>ct111', courseWeek : 'cw1', courseSuspend : 'cs1', courseMarkup : 'cm1', examPlan : 'ep1', IsPlan : 'FALSE', IsOpen : 'Y'},
-			{courseID : 'cid2', courseName : 'cn2', courseHours : 'ch2', credit : 'c2', teacher : 't2', 
-			courseTime : 'ct2', courseWeek : 'cw2', courseSuspend : 'cs2', courseMarkup : 'cm2', examPlan : 'ep2', IsPlan : 'FALSE'},
-			{courseID : 'cid3', courseName : 'cn3', courseHours : 'ch3', credit : 'c3', teacher : 't3', 
-			courseTime : 'ct3', courseWeek : 'cw3', courseSuspend : 'cs3', courseMarkup : 'cm3', examPlan : 'ep3', IsPlan : 'FALSE'}
-			]
-		};
-		
-		var fakeUnevaluation = {
-			courseID : 'courseId123',
-			courseName : 'courseName345',
-			teacherList : [{
-				teacher: 'teacherMr.C',
-				
-				studentList : [
-				{studentID : "id123", studentName : 'student456', className : 'class789'},
-				{studentID : "id321", studentName : 'student654', className : 'class987'},
-				{studentID : "id321", studentName : 'student654', className : 'class987'},
-				{studentID : "id321", studentName : 'student654', className : 'class987'},
-				{studentID : "id321", studentName : 'student654', className : 'class987'},
-				{studentID : "id321", studentName : 'student654', className : 'class987'},
-				{studentID : "id321", studentName : 'student654', className : 'class987'}
-				]
-			},
-			{
-				teacher: 'teacherMr.Dg',
-				
-				studentList: [
-				{studentID : "aaaid123", studentName : 'aaastudent456', className : 'class789'},
-				{studentID : "aaaid321", studentName : 'aaastudent654', className : 'class987'},
-				{studentID : "aaaid321", studentName : 'aaastudent654', className : 'class987'}
-				]
-			}]
-		};
-		
-		var fakeAttendance = {
-			year : '2040',
-			term : '2',
-			courseName : 'cn',
-			teacher : 't',
-			importTime : '2014年09月13日',
-			KQList : [
-			{KQDate : '2014年10月13日', startTime : '8:00', endTime : '16:00', clockTime : '7:55', status : '正常'},
-			{KQDate : '2014年10月14日', startTime : '8:00', endTime : '16:00', clockTime : '8:25', status : '迟到'},
-			{KQDate : '2014年10月15日', startTime : '8:00', endTime : '16:00', clockTime : '', status : '缺课'}
-			]
-		};
-		
-		var fakeReference = {
-			year : '2050',
-			term : '1',
-			courseID : 'cid',
-			courseName : 'cn',
-			teacher : 't',
-			className : 'class',
-			bookList : [
-			{bookId : 'bid1', bookName : 'bn1', author : 'a1', publisher : 'p1', pubNo : 'pn1', price : 'pr1'},
-			{bookId : 'bid2', bookName : 'bn2', author : 'a2', publisher : 'p2', pubNo : 'pn2', price : 'pr2'},
-			{bookId : 'bid3', bookName : 'bn3', author : 'a3', publisher : 'p3', pubNo : 'pn3', price : 'pr3'},
-			{bookId : 'bid4', bookName : 'bn4', author : 'a4', publisher : 'p4', pubNo : 'pn4', price : 'pr4'}
-			],
-			handoutList : [
-			{title : 'title1', type : 'type1', url : 'url1'},
-			{title : 'title2', type : 'type2', url : 'url2'},
-			{title : 'title3', type : 'type3', url : 'url3'}
-			]
-		};
-	}
 	
-	var test_local = false;
-	var loadingWidget;
-	
-	var ScheduleAppModule = angular.module('ScheduleApp',[]
-	).filter('checkTdEmpty', function(){
-		return function(input){
-			if (angular.isString(input) && !(angular.equals(input, null) || angular.equals(input,''))){
-				return input;
-			} else {
-				return '&nbsp;';
-			}
-		};
-	}).filter('to_trusted',['$sce',function($sce){
-		return function(text){return $sce.trustAsHtml(text);};
-	}]).config(function($sceProvider){
+	var ScheduleAppModule = angular.module('ScheduleApp',[]).config(function($sceProvider){
 		$sceProvider.enabled(false);
 	});
+	moduleDirective_checkTdEmpty(ScheduleAppModule);
+	moduleDirective_trustHtml(ScheduleAppModule);
 	
 	ScheduleAppModule.factory('ScheduleInterface',function($http){
 		var _ = {};
@@ -526,7 +420,7 @@
 				callback(data);
 				return;
 			}).error(function(data,status,headers,config){
-				if (test_local) {callback(fakeSchedule); return;}
+				if (test_local) {callback(fakeScheduleObject); return;}
 				alert('无法获取课程表！（错误码：' + status + "）" );
 				callback(null);
 				return;
@@ -593,25 +487,6 @@
 				layer.closeAll();
 			});
 			
-			/* init Easydialog */
-			var btnFn = function( e ){
-				alert( e.target );
-				return false;
-			};
-			function openDialog(name){
-				easyDialog.open({
-					container : name,
-					yesFn : btnFn,
-					noFn : true,
-					fixed : false
-				});
-			}
-			function delayOpenDialogBy10(name){
-				setTimeout(function(){
-					openDialog(name);
-				}, 10);
-			}
-			
 			/* init unEvaluation */
 			var emptyUnEvaluation = {
 				courseId : '',
@@ -623,9 +498,11 @@
 			$scope.openUnevaluatedStudentList = function (cid){
 				loadingWidget = layer.load('获取数据中..');
 				layer.area(loadingWidget);
+				
 				ScheduleInterface.getUnevaluatedStudentList(cid, function(data){
 					if (data && data.teacherList){
 						var studentList = [];
+						/* i tried ng-repeat='student in studentList in teacherList' , which doesn't work  */
 						for (var i = 0; i < data.teacherList.length; i ++){
 							if (!data.teacherList[i].studentList.length) continue;
 							for (var j = 0; j < data.teacherList[i].studentList.length; j ++){
@@ -634,7 +511,8 @@
 						}
 						data.studentList = studentList;
 						$scope.unEvaluation = data;
-						delayOpenDialogBy10("imgBox_UnevaluatedStudentList");
+						
+						delayOpenDialogBy100("imgBox_UnevaluatedStudentList");
 						setTimeout(function(){
 							$("#imgBox_UnevaluatedStudentList .dialog_wdkb_nr_wrapper").css("max-height","500px");
 							$("#imgBox_UnevaluatedStudentList .dialog_wdkb_nr_wrapper").css("overflow-y","scroll");
@@ -663,7 +541,7 @@
 				ScheduleInterface.getCourseReferenceData(cid, function(data){
 					if (data){
 						$scope.courseReference = data;
-						delayOpenDialogBy10("imgBox_CourseReference");
+						delayOpenDialogBy100("imgBox_CourseReference");
 					}
 					layer.closeAll();
 				});
@@ -686,7 +564,7 @@
 					layer.area(loadingWidget);
 					if (data){
 						$scope.courseAttendance = data;
-						delayOpenDialogBy10("imgBox_CourseAttendance");
+						delayOpenDialogBy100("imgBox_CourseAttendance");
 					}
 					layer.closeAll();
 				});

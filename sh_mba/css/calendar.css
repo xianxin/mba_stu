@@ -4,7 +4,6 @@
     min-height: 1px;
 }
 .cal-row-fluid {
-    width: 100%;
     *zoom: 1;
 }
 .cal-row-fluid:before,
@@ -114,11 +113,14 @@
 .cal-row-fluid [class*="cal-cell"].pull-right {
     float: right;
 }
+.pull-right{float: right;
+	font-size:14px;}
 .cal-row-head [class*="cal-cell"]:first-child,
 .cal-row-head [class*="cal-cell"] {
     min-height: auto;
     overflow: hidden;
     text-overflow: ellipsis;
+	font-size:14px;
 }
 .cal-events-num {
     margin-top: 20px;
@@ -447,13 +449,15 @@ span[data-cal-date]:hover {
     cursor: default;
 }
 .cal-day-today {
-    background-color: #e8fde7;
+     background:#FFF url(../img/cal-cell-bg.png) top right no-repeat !important;
+    border-right:2px solid #fa7f00 !important;
+    border-bottom: 3px solid #fa7f00 !important;
 }
 .cal-day-today span[data-cal-date] {
-    color: darkgreen;
+    color: #FFF;
 }
 .cal-month-box .cal-day-today span[data-cal-date] {
-    font-size: 1.9em;
+    font-size: 18px;
 }
 .cal-day-holiday span[data-cal-date] {
     color: #800080;
@@ -513,3 +517,8 @@ a.cal-event-week {
 .badge-important {
     background-color: #b94a48;
 }
+.col-md-4-title{width:180px;float:left;}
+.col-md-5-title{width:600px;;float:left}
+.col-md-6-title{width:180px;;float:right}
+.col-md-9-title{width:100%}
+.hr_div{ border-top:1px solid #E9ECF0; margin-top:30px; height:20px;}

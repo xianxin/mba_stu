@@ -1,0 +1,26 @@
+@charset "utf-8";
+#img_box{width:700px;margin:0 auto;overflow:hidden;}
+/* bigPic */
+.bigPic{margin:0px auto;overflow:hidden;width:650px;position:relative}
+.bigPic a.btnleft{margin-top:-42px;display:block;background:url(../images/btnLeft1_1.png);left:35px;overflow:hidden;width:24px;position:absolute;top:55%;height:43px}
+.bigPic a.btnleft:hover{margin-top:-42px;display:block;background:url(../images/btnLeft1.png);left:35px;overflow:hidden;width:24px;position:absolute;top:55%;height:43px}
+.bigPic a.btnright{margin-top:-42px;display:block;right:35px;background:url(../images/btnRight1_1.png);overflow:hidden;width:24px;position:absolute;top:55%;height:43px}
+.bigPic a.btnright:hover{margin-top:-42px;display:block;right:35px;background:url(../images/btnRight1.png);overflow:hidden;width:24px;position:absolute;top:55%;height:43px}
+.load_pic{margin-top:-42px;display:none;left:50%;background:url(../images/load2.gif);overflow:hidden;width:32px;position:absolute;top:55%;height:32px}
+.show_bg_pic{margin-top:-42px;display:block;right:35px;top:50px;background:url(../images/show_bg1.png);overflow:hidden;width:26px;position:absolute;height:22px}
+.show_bg_pic:hover{background:url(../images/show_bg2.png);}
+.bigPic .info{overflow:hidden;width:650px;height:auto}
+.bigPic .info div{overflow:hidden;width:650px;text-align:center; background:url(../images/load2.gif) no-repeat center}
+.bigPic .info div img{width:600px}
+/* sPic */
+.img_title{margin:0px auto;overflow:hidden;width:650px; font-size:14px;  text-align:center; line-height:40px;}
+.sPic{margin:0px auto;overflow:hidden;width:650px;position:relative}
+.sPic a.btnleft{display:block;background:url(../images/left.png) no-repeat center center;left:2px;overflow:hidden;width:15px;position:absolute;top:10px;height:69px}
+.sPic a.btnright{display:block;right:2px;background:url(../images/right.png) no-repeat center center;overflow:hidden;width:15px;position:absolute;top:10px;height:69px}
+.sPic .info{margin:0px auto;overflow:hidden;width:615px}
+.sPic .info div{overflow:hidden;width:123px;cursor:pointer;height:91px;text-align:center}
+.sPic .info div{border:0;}
+.sPic .info div img{margin:11px 0px 0px;width:100px;height:69px; border:0px}
+.sPic .info div  a{width:100px;height:69px;}
+.sPic .info div  a:hover img{opacity:0.8;filter:alpha(opacity=80); }
+.sPic .info td.current div{background:url(../images/spbg1.jpg)}

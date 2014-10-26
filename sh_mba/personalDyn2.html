@@ -98,75 +98,13 @@
 		<script type="text/javascript" src="js/jquery-ui-datepicker.js"></script>
 		<script type="text/javascript" src="js/angular.min.js" ></script>
 		<script src="js/jquery-ui-datepicker.js"></script>
+		<script src="js/public2.js"></script> 
 		<link rel="stylesheet" href="css/jquery-ui.css" />
 		
 		<style>
 			.remove_button_hidden{display: none;}
 			.select_family_disabled{}
 		</style>
-		<script type="text/javascript">
-			function show(num){
-			 	var lis = document.getElementById('yq_xxk').getElementsByTagName('li');
-				for(i=0;i<lis.length;i++){
-					lis[i].className = '';
-					document.getElementById('con'+(i+1)).style.display = 'none';
-				}
-				document.getElementById('tit'+num).className = 'current';
-				document.getElementById('con'+num).style.display = 'block';
-			 }
-		</script>
-
-		
-		<script type="text/javascript">
-			$(function(){
-				/*============================
-				@author:flc
-				@time:2014-02-11 18:16:09
-				@qq:3407725
-				============================*/
-				/*$(".select_three,.select_two,.selcect_wol,.select_family").not('.select_family_disabled').each(function(){
-					var s=$(this);
-					var z=parseInt(s.css("z-index"));
-					var dt=$(this).children("dt");
-					var dd=$(this).children("dd");
-					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-					
-					dt.click(function(){dd.is(":hidden")?_show():_hide();});
-					dd.find("a").click(function(){dt.html($(this).html());_hide();});
-					$("body").click(function(i){ 
-						!$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
-				})*/
-			});
-			
-			function fastBind(obj){
-				if (!obj){
-					$(".select_three,.select_two,.selcect_wol,.select_family").not('.select_family_disabled').each(function(){
-						var s=$(this);
-						var z=parseInt(s.css("z-index"));
-						var dt=$(this).children("dt").first();
-						var dd=$(this).children("dd").first();
-						var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-						var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-						dt.click(function(){dd.is(":hidden")?_show():_hide();});
-						dd.find("a").click(function(){dt.html($(this).html());_hide();});
-						$("body").click(function(i){ 
-							!$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
-					});
-				}else{
-					var s=$(obj);
-					var z=parseInt(s.css("z-index"));
-					var dt=s.children("dt").first();
-					var dd=s.children("dd").first();
-					var _show=function(){dd.slideDown(200);dt.addClass("cur");s.css("z-index",z+1);};
-					var _hide=function(){dd.slideUp(200);dt.removeClass("cur");s.css("z-index",z);};
-					dt.click(function(){dd.is(":hidden")?_show():_hide();});
-					dd.find("a").click(function(){dt.html($(this).html());_hide();});
-					$("body").click(function(i){ 
-							!$(i.target).parents(".select_three,.select_two,.selcect_wol,.select_family").first().is(s) ? _hide():"";});
-				}
-			}
-		</script>
 		
 		<!--[if lte IE 8]>
 		    <script type="text/javascript" src="js/json3.min.js" ></script>
@@ -222,16 +160,16 @@
 				
 				<div id="yq_xxk">
 					<ul>
-						<li id="tit1" onclick="show(1)" class="current">
+						<li id="tit1" onclick="showTab('yq_xxk','con','tit',1)" class="current">
 							<div class="xxk1">基本信息</div>
 						</li>
-						<li id="tit2" onclick="show(2)">
+						<li id="tit2" onclick="showTab('yq_xxk','con','tit',2)">
 							<div class="xxk2">联系信息</div>
 						</li>
-						<li id="tit3" onclick="show(3)">
+						<li id="tit3" onclick="showTab('yq_xxk','con','tit',3)">
 							<div class="xxk2">教育背景</div>
 						</li>
-						<li id="tit4" onclick="show(4)">
+						<li id="tit4" onclick="showTab('yq_xxk','con','tit',4)">
 							<div class="xxk2">工作经历</div>
 						</li>
 						<div class="clear"></div>
@@ -358,7 +296,7 @@
 					                <dt ng-bind='address.address_fs' class='address_fs_class'></dt>
 					                <dd>
 					                    <ul>
-					                    	<li ng-repeat='addressType in addressTypeOptions'><a href>{{addressType}}</a></li>
+					                    	<li ng-repeat='addressType in addressTypeOptions'  fast-bind-select='{{$index+1}}' olength="{{addressTypeOptions.length}}"><a href>{{addressType}}</a></li>
 					                    </ul>
 					                </dd>
 					            </dl>
@@ -410,11 +348,11 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family ">
+									<dl class="select_family " >
 										<dt class='phone_fs_class' ng-bind='phone.phone_fs'></dt>
 										<dd>
 											<ul>
-												<li ng-repeat='phoneType in phoneTypeOptions'><a href>{{phoneType}}</a></li>
+												<li ng-repeat='phoneType in phoneTypeOptions' fast-bind-select='{{$index+1}}' olength="{{phoneTypeOptions.length}}"><a href>{{phoneType}}</a></li>
 											</ul>
 										</dd>
 									</dl>
@@ -456,18 +394,18 @@
 								</td>
 								<td width="20">&nbsp;</td>
 							</tr>
-							<tr ng-repeat='email in emailList'>
+							<tr ng-repeat='email in emailList' on-finish-render-filters>
 								<td height="38">&nbsp;</td>
 								<td>
 									<input name="email_main" type="radio" class="edu_zhuyao email_main_class">
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family ">
+									<dl class="select_family " >
 										<dt class='email_lx_class' ng-bind='email.email_lx'></dt>
 										<dd>
 											<ul>
-												<li ng-repeat='emailType in emailTypeOptions'><a href>{{emailType}}</a></li>
+												<li ng-repeat='emailType in emailTypeOptions' fast-bind-select='{{$index+1}}' olength="{{emailTypeOptions.length}}"><a href>{{emailType}}</a></li>
 											</ul>
 										</dd>
 									</dl>
@@ -507,11 +445,11 @@
 								<td>&nbsp;</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family ">
+									<dl class="select_family " >
 										<dt class='sns_lx_class' ng-bind='sns.sns_lx'></dt>
 										<dd>
 											<ul>
-												<li ng-repeat='snsType in snsTypeOptions'><a href>{{snsType}}</a></li>
+												<li ng-repeat='snsType in snsTypeOptions'  fast-bind-select='{{$index+1}}' olength="{{snsTypeOptions.length}}"><a href>{{snsType}}</a></li>
 											</ul>
 										</dd>
 									</dl>
@@ -578,22 +516,22 @@
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family ">
+									<dl class="select_family " >
 										<dt class='edu_hdxl_class' ng-bind='eduBg.edu_hdxl' style="width: 74px;background-position-x: 86px;"></dt>
 										<dd style="width: 104px;">
 											<ul style="width: 100px;">
-												<li ng-repeat='diplomaType in diplomaTypeOptions'><a href>{{diplomaType}}</a></li>
+												<li ng-repeat='diplomaType in diplomaTypeOptions' fast-bind-select='{{$index+1}}' olength="{{diplomaTypeOptions.length}}"><a href>{{diplomaType}}</a></li>
 											</ul>
 										</dd>
 									</dl>
 								</td>
 								<td>&nbsp;</td>
 								<td>
-									<dl class="select_family ">
+									<dl class="select_family " fast-bind-select='education'>
 										<dt class='edu_hdxw_class' ng-bind='eduBg.edu_hdxw' style="width: 74px;background-position-x: 86px;"></dt>
 										<dd style="width: 104px;">
 											<ul style="width: 100px;">
-												<li ng-repeat='degreeType in degreeTypeOptions'><a href>{{degreeType}}</a></li>
+												<li ng-repeat='degreeType in degreeTypeOptions' fast-bind-select='{{$index+1}}' olength="{{degreeTypeOptions.length}}"><a href>{{degreeType}}</a></li>
 											</ul>
 										</dd>
 									</dl>
@@ -612,7 +550,7 @@
 					</div>
 				</div>
 				
-				<div id="con4" class="tem" style="display:none;" ng-controller='WorkController'>
+				<div id="con4" class="tem" style="" ng-controller='WorkController'>
 					<div class="works">
 						<h2>提示：不允许在线修改过往工作经历，如需调整，请到MBA办公室申请调整。</h2>
 						<div class="works_one" ng-repeat='work in workList'>
@@ -668,9 +606,9 @@
 									<span>公司性质：</span>
 									<p ng-bind='work.work_xz'></p>
 								</div>
-								<div class="wol_lite wol_lite_big">
+								<div class="wol_lite wol_lite_big"  on-finish-load-work>
 									<span>工作内容：</span>
-									<p ng-bind='work.work_nr'></p>
+									<p ng-bind='work.work_nr' style="padding: 15px;height: auto; word-break: break-all; word-wrap: break-word;line-height: 175%;margin-left: 135px;padding-top: 0;"></p>
 								</div>
 							</div>
 							<div class="clear"></div>
@@ -739,11 +677,11 @@
 									</td>
 									<td>公司行业</td>
 									<td>
-										<dl class="selcect_wol select_family_disabled">
+										<dl class="selcect_wol ">
 											<dt class="industry_class" ng-bind='editWork.work_hy'></dt>
 											<dd>
 												<ul>
-													<li ng-repeat='industryType in industryTypeOptions'><a href>{{industryType}}</a></li>
+													<li ng-repeat='industryType in industryTypeOptions' fast-bind-select='{{$index+1}}' olength="{{industryTypeOptions.length}}"><a href>{{industryType}}</a></li>
 												</ul>
 											</dd>
 										</dl>
@@ -756,11 +694,11 @@
 									</td>
 									<td>公司性质</td>
 									<td>
-										<dl class="selcect_wol select_family_disabled">
+										<dl class="selcect_wol " fast-bind-select=''>
 											<dt class='nature_class' ng-bind='editWork.work_xz'></dt>
 											<dd>
 												<ul>
-													<li ng-repeat='natureType in natureTypeOptions'><a href>{{natureType}}</a></li>
+													<li ng-repeat='natureType in natureTypeOptions' fast-bind-select='{{$index+1}}' olength="{{natureTypeOptions.length}}"><a href>{{natureType}}</a></li>
 												</ul>
 											</dd>
 										</dl>
@@ -789,129 +727,10 @@
 			<div class="clear"></div>
 		</div>
 		
+		<script src="js/fakeObjects.js"></script> 
 		<script>
-			var sexMtoNan = {"M":"男","F":"女"};
-			var sexNanToM = {"男":"M","女":"F"};
 			
-			var bankNameOptions = ['bank 1', 'bank 2', 'bank 3'];
-			
-			var addressTypeOptions = ['工作','家庭地址','现居地址','户籍','其他'];
-			var phoneTypeOptions = ['手机','工作','公司电话','住宅','传真','其他'];
-			var emailTypeOptions = ['工作','次要','个人','其他'];
-			var snsTypeOptions = ['QQ','个人微博','微信','个人主页','个人博客','Facebook','MSN','其他'];
-			var diplomaTypeOptions = ['博士研究生','硕士研究生','本科','大专','高中','中专/技校','其他'];
-			var degreeTypeOptions = ['博士','硕士','学士','其他'];
-			var industryTypeOptions = [
-				'快速消费品（食品/饮料/化妆品）','耐用消费品（服装/纺织/家具/家电）','专业服务（咨询/法律）',
-				'金融服务（银行/证劵/保险/投资/基金等）','零售/贸易','交通物流','IT/网络',
-				'房地产/建筑/装潢设计','通信','电子/半导体','保健/医药/生化/医疗设备/医院',
-				'能源/精细化工','媒体/广告/公关','政府/非盈利机构','教育/培训','其他','工业品/设备','汽车/摩托车'
-			];
-			var natureTypeOptions = [
-				'国有或国有控股','外商合资','外商独资','港澳台合资',
-				'港澳台独资','民营或私有控股','政府部门','事业单位','非营利机构','其他'
-			];
-			
-			var btnFn = function( e ){
-				alert( e.target );
-				return false;
-			};
-			
-			/* TODO : fake Object Sign */
-			var fakeObject = {
-				person_id: '67687',
-				studentId: 'L1071676',
-				studentName: 'xian xing',
-				className: 'ruan gong wu ban',
-				picurl: '/enrollImage/20141016/676872014-10-16-09.58.21.000000.jpg',
-				sex: 'M',
-				nationality: '中国',
-				identityNo: '5090379149',
-				identityNoScope: '其他人不可见',
-				bankAccountNo: '123456',
-				bankAccountNoScope: '其他人不可见',
-				bankName: 'Bank Of China',
-				bankNameScope: '其他人不可见',
-				
-				address: [
-					{
-						address_main : 'Y',
-						address_fs: "工作",
-						address_dz: "中国北京",
-						address_yb: "123456"
-					},
-					{
-						address_main : 'N',
-						address_fs: "工作",
-						address_dz: "中国上海",
-						address_yb: "123456"
-					}
-				],
-				
-				phone: [
-					{
-						phone_main: 'Y',
-						phone_fs: 'A',
-						phone_qh: '1',
-						phone_dh: '13284958374',
-						phone_fjh: '2'
-					}
-				],
-				
-				email: [
-					{
-						email_main: 'Y',
-						email_lx: 'A',
-						email_dz: 'LIU@163.com'
-					}
-				],
-				
-				sns: [
-					{
-						sns_lx: 'C',
-						sns_xx: '1111'
-					}
-				],
-				
-				education: [
-					{
-						edu_rxsj:'2005-09-10',
-						edu_bysj:'2006-09-10',
-						edu_byxx:'北京交通大学',
-						edu_xxzy:'Computer Science',
-						edu_hdxl:'本科',
-						edu_hdxw:'学士学位'
-					},
-					{
-						edu_rxsj:'2005-09-01',
-						edu_bysj:'2007-09-01',
-						edu_byxx:'上海交通大学',
-						edu_xxzy:'Software Engineering',
-						edu_hdxl:'本科',
-						edu_hdxw:'学士学位'
-					}
-				],
-				
-				work: [
-					{
-						work_kssj: '2014-10-01',
-						work_jssj: '2014-10-08',
-						work_zwm: '上海交大',
-						work_ywm: 'SJTU',
-						work_fwzw: '范围',
-						work_fwyw: 'scope',
-						work_zwzw: '职位',
-						work_zwyw: 'job',
-						work_bmzw: '部门',
-						work_bmyw: 'department',
-						work_hy: 'hangye',
-						work_xz: 'xingzhi',
-						work_nr: 'neirong'
-					}
-				]
-			};
-			
-			var test_local = false;
+			var test_local = true;
 			var show_visibility_options = false;
 			
 			var loadingWidget = layer.load('获取数据中..');
@@ -919,7 +738,6 @@
 
 			/* TODO : Common Functions Sign */
 			{	
-				function noOperation(){;}
 				
 				/* we get data : address_main : Y/N . set checked */
 				function InitRadioButtonChecked(tableName, objectList, field){
@@ -930,14 +748,6 @@
 							break;
 						}
 					}
-				}
-				
-				function delayBy100(func){
-					setTimeout(func, 100);
-				}
-				
-				function delayBy200(func){
-					setTimeout(func, 200);
 				}
 				
 				/* translate between Y/N - true/false */
@@ -973,43 +783,21 @@
 				}
 			}
 			
-			var PersonalInfoAppModule = angular.module('PersonalInfoApp', []
-			).config(
-				function($sceProvider) {
-					$sceProvider.enabled(false);
-				}
-			).directive('datepicker', function() {
+			var PersonalInfoAppModule = angular.module('PersonalInfoApp', []).config(function($sceProvider) {
+				$sceProvider.enabled(false);
+			});
+			moduleDirective_datePicker(PersonalInfoAppModule);
+			moduleDirective_fastBind(PersonalInfoAppModule);
+		    moduleDirective_afterRenderFinish(PersonalInfoAppModule);
+		    PersonalInfoAppModule.directive('onFinishLoadWork', function($timeout){
 				return {
 					restrict: 'A',
-					replace: true,
-					require: '?ngModel',
-					scope: {
-						select: '&'
-					},
-					link: function(scope, element, attrs, ngModel) {
-						if (!ngModel) return;
-						var optionsObj = {};
-						optionsObj.dateFormat = 'yy-mm-dd';
-						var updateModel = function(dateTxt) {
-							scope.$apply(function() {
-								ngModel.$setViewValue(dateTxt);
+					link: function(scope, element, attr){
+						if (scope.$last === true){
+							$timeout(function(){
+								scope.$emit("newWorkLoaded");
 							});
-						};
-						optionsObj.onSelect = function(dateTxt,
-							picker) {
-							updateModel(dateTxt);
-							if (scope.select) {
-								scope.$apply(function() {
-									scope.select({
-										date: dateTxt
-									});
-								});
-							}
-						};
-						ngModel.$render = function() {
-							element.datepicker('setDate', ngModel.$viewValue || '');
-						};
-						element.datepicker(optionsObj);
+						}
 					}
 				};
 			});
@@ -1019,20 +807,12 @@
 				function ($http){
 					var _ = {};
 					_.getPersonalInfo = function(callback){
-						var PersonalInfoData = undefined;
-						/* 返回promise对象 */
-						/* return $http.post('/psc/ACEMTST/....',{params:{}}); */
 						$http.post(psc_url + 'WEBLIB_MBA_STU.TZ_MBA_STU_GRXX.FieldFormula.Iscript_getGrxx',{params:{}
 						}).success(function(data,status,headers,config){
-							if (test_local){
-								callback(fakeObject);
-							}
-							else {
-								callback(data);
-							}
+							callback(data);
 						}).error(function(data,status,headers,config){
 							if (test_local){
-								callback(fakeObject);
+								callback(fakePersonalInfoObject);
 							} else {
 								alert('无法获取个人信息！（错误码：'+status+')');
 								callback(null);
@@ -1164,37 +944,31 @@
 			PersonalInfoAppModule.controller(
 				'ContactController',
 				function($scope, PersonalInfoInterface){
-					var baseData = {
-						editEnabled: true,
-						removeHiddenClass: '',
-						selectDisabledClass: ''
-					};
-					
-					var defaultAddressData = $.extend({
+					var defaultAddressData = {
 						address_main: false,
 						address_fs: addressTypeOptions[0],
 						address_dz: '',
 						address_yb: ''
-					}, $.extend(true, {}, baseData));
+					};
 					
-					var defaultPhoneData = $.extend({
+					var defaultPhoneData = {
 						phone_main: false,
 						phone_fs: phoneTypeOptions[0],
 						phone_qh: '',
 						phone_dh: '',
 						phone_fjh: ''
-					}, $.extend(true, {}, baseData));
+					};
 					
-					var defaultEmailData = $.extend({
+					var defaultEmailData = {
 						email_main: false,
 						email_lx: emailTypeOptions[0],
 						email_dz: ''
-					}, $.extend(true, {}, baseData));
+					};
 					
-					var defaultSnsData = $.extend({
+					var defaultSnsData = {
 						sns_lx: snsTypeOptions[0],
 						sns_xx: ''
-					}, $.extend(true, {}, baseData));
+					};
 					
 					var addressList = [];
 					$scope.addressList = addressList;
@@ -1214,64 +988,24 @@
 					
 					$scope.dataReady = false;
 					
-					/* bind click function to new line's select element */
-					function addNewLineByType(type){
-						var emptyLine;
-						switch (type){
-							case 'address':
-								emptyLine = $.extend(true, {}, defaultAddressData);
-								$scope.addressList.push(emptyLine);
-						
-								delayBy100(function(){
-									var newObject = $("#addressTable tr").last().find("dl")[0];
-									fastBind(newObject);
-								});
-								break;
-							case 'phone':
-								emptyLine = $.extend(true, {}, defaultPhoneData);
-								$scope.phoneList.push(emptyLine);
-						
-								delayBy100(function(){
-									var newObject = $("#phoneTable tr").last().find("dl")[0];
-									fastBind(newObject);
-								});
-								break;
-							case 'email':
-								emptyLine = $.extend(true, {}, defaultEmailData);
-								$scope.emailList.push(emptyLine);
-						
-								delayBy100(function(){
-									var newObject = $("#emailTable tr").last().find("dl")[0];
-									fastBind(newObject);
-								});
-								break;
-							case 'sns':
-								emptyLine = $.extend(true, {}, defaultSnsData);
-								$scope.snsList.push(emptyLine);
-						
-								delayBy100(function(){
-									var newObject = $("#snsTable tr").last().find("dl")[0];
-									fastBind(newObject);
-								});
-								break;
-							default:
-								return;
-						}
-					}
 					$scope.addAddress = function(){
-						addNewLineByType('address');
+						emptyLine = $.extend(true, {}, defaultAddressData);
+						$scope.addressList.push(emptyLine);
 					};
 					
 					$scope.addPhone = function(){
-						addNewLineByType('phone');
+						emptyLine = $.extend(true, {}, defaultPhoneData);
+						$scope.phoneList.push(emptyLine);
 					};
 					
 					$scope.addEmail = function(){
-						addNewLineByType('email');
+						emptyLine = $.extend(true, {}, defaultEmailData);
+						$scope.emailList.push(emptyLine);
 					};
 					
 					$scope.addSns = function(){
-						addNewLineByType('sns');
+						emptyLine = $.extend(true, {}, defaultSnsData);
+						$scope.snsList.push(emptyLine);
 					};
 					
 					$scope.removeAddress = function(index){
@@ -1299,26 +1033,14 @@
 							if ($scope.PersonalInfoData.address){
 								addressList = $scope.PersonalInfoData.address;
 								$scope.addressList = addressList;
-								
-								delayBy100(function(){
-									InitRadioButtonChecked("addressTable", addressList, "address_main");
-								});
 							}
 							if ($scope.PersonalInfoData.phone){
 								phoneList = $scope.PersonalInfoData.phone;
 								$scope.phoneList = phoneList;
-								
-								delayBy100(function(){
-									InitRadioButtonChecked("phoneTable", phoneList, "phone_main");
-								});
 							}
 							if ($scope.PersonalInfoData.email){
 								emailList = $scope.PersonalInfoData.email;
 								$scope.emailList = emailList;
-								
-								delayBy100(function(){
-									InitRadioButtonChecked("emailTable", emailList, "email_main");
-								});
 							}
 							if ($scope.PersonalInfoData.sns){
 								snsList = $scope.PersonalInfoData.sns;
@@ -1327,11 +1049,21 @@
 						}
 						/* cannot save before we've load all data */
 						$scope.dataReady = true;
-						delayBy200(function(){fastBind();});
+					});
+					
+					$scope.$on('ngRepeatFinished', function(){
+						InitRadioButtonChecked("addressTable", addressList, "address_main");
+						InitRadioButtonChecked("phoneTable", phoneList, "phone_main");
+						InitRadioButtonChecked("emailTable", emailList, "email_main");
 					});
 					
 					/* TODO : saveContact Sign */
 					$scope.saveContact = function(){
+						if (!$scope.dataReady) {
+							alert('请等待数据加载完成之后再保存');
+							return;
+						}
+						
 						/* pre : fillin() && required initialization */
 						fillin();
 						var postData = {};
@@ -1347,21 +1079,25 @@
 						var _emaiList = $.extend(true, {}, $scope.emailList);
 						var _snsList = $.extend(true, {}, $scope.snsList);
 						
+						/* address */
 						var count = 0;
 						var index = 0;
 						while(_addressList[index]) count += packUp(postData,_addressList[index],++index,'address');
 						postData["NUMBER_DZ"]=count;
 						
+						/* phone */
 						count = 0;
 						index = 0;
 						while(_phoneList[index]) count += packUp(postData,_phoneList[index],++index,'phone');
 						postData["NUMBER_DH"]=count;
 						
+						/* email */
 						count = 0;
 						index = 0;
 						while(_emaiList[index]) count += packUp(postData,_emaiList[index],++index,'email');
 						postData["NUMBER_YX"]=count;
 						
+						/* sns */
 						count = 0;
 						index = 0;
 						while(_snsList[index]) count += packUp(postData,_snsList[index],++index,'sns');
@@ -1371,21 +1107,25 @@
 					};
 					
 					function fillin(){
+						/* address */
 						for (var i = 0; i < $scope.addressList.length; i++){
 							$scope.addressList[i].address_main = yesOrNo($(".address_main_class").eq(i).attr('checked'));
 							$scope.addressList[i].address_fs = $(".address_fs_class").eq(i).text();
 						}
 						
+						/* phone */
 						for (var i = 0; i < $scope.phoneList.length; i++){
 							$scope.phoneList[i].phone_main = yesOrNo($(".phone_main_class").eq(i).attr('checked'));
 							$scope.phoneList[i].phone_fs = $(".phone_fs_class").eq(i).text();
 						}
 						
+						/* email */
 						for (var i = 0; i < $scope.emailList.length; i++){
 							$scope.emailList[i].email_main = yesOrNo($(".email_main_class").eq(i).attr('checked'));
 							$scope.emailList[i].email_lx = $(".email_lx_class").eq(i).text();
 						}
 						
+						/* sns */
 						for (var i = 0; i < $scope.snsList.length; i++){
 							$scope.snsList[i].sns_lx = $(".sns_lx_class").eq(i).text();
 						}
@@ -1520,12 +1260,6 @@
 					$scope.addEducation = function(){
 						var emptyNewLine = $.extend(true, {}, defaultData);
 						$scope.eduBgLst.push(emptyNewLine);
-				
-						delayBy100(function(){
-							var newObject = $("#educationTable tr").last().find("dl");
-							for (var i = 0; i < newObject.length; i ++)
-								fastBind(newObject[i]);
-						});
 					};
 					
 					$scope.remove = function(index){
@@ -1533,6 +1267,11 @@
 					};
 					
 					$scope.saveEduBg = function(){
+						if (!$scope.dataReady) {
+							alert('请等待数据加载完成之后再保存');
+							return;
+						}
+						
 						fillin();
 						var postData = {};
 						postData["NUMBER_EDU"]=0;
@@ -1580,8 +1319,10 @@
 					var workList = [];
 					$scope.workList = workList;
 					$scope.editWork = $.extend(true, {}, defaultData);
+					$scope.dataReady = false;
 					$scope.industryTypeOptions = industryTypeOptions;
 					$scope.natureTypeOptions = natureTypeOptions;
+					$scope.heightFixedOnInit = false;
 					
 					function fillin(){
 						$scope.editWork.work_xz = $(".nature_class").text();
@@ -1592,9 +1333,13 @@
 						if ($scope.PersonalInfoData && $scope.PersonalInfoData.work){
 							workList = $scope.PersonalInfoData.work;
 							Disable_And_HideRemoveButton(workList);
+							for (var i = 0; i < workList.length; i++) workList[i]["heightFixed"] = false;
 							$scope.workList = workList;
 							$scope.savedNumber = workList.length;
 						}
+						/* no need */
+						if ($scope.workList.length == 0) $scope.heightFixedOnInit = true;
+						
 						$scope.dataReady = true;
 					});
 					
@@ -1606,31 +1351,36 @@
 						easyDialog.close();
 					};
 					
-					function packUp(packedUp, currentObj, num, startFrom){
-						packedUp["TZ_STA_DT_"+(num-startFrom)] = currentObj.work_kssj;
-						packedUp["TZ_END_DT_"+(num-startFrom)] = currentObj.work_jssj;
-						packedUp["TZ_COMP_CNAME_"+(num-startFrom)] = currentObj.work_zwm;
-						packedUp["TZ_COMP_ENAME_"+(num-startFrom)] = currentObj.work_ywm;
-						packedUp["TZ_BLT_DEPT_"+(num-startFrom)] = currentObj.work_bmzw;
-						packedUp["TZ_BLT_DEPT_EN_"+(num-startFrom)] = currentObj.work_bmyw;
-						packedUp["TZ_JOB_POSITION_"+(num-startFrom)] = currentObj.work_zwzw;
-						packedUp["TZ_JOB_POSITION_EN_"+(num-startFrom)] = currentObj.work_zwyw;
-						packedUp["TZ_MBABLT_INDUSTRY_"+(num-startFrom)] = currentObj.work_hy;
-						packedUp["TZ_COMP_JYFW_"+(num-startFrom)] = currentObj.work_fwzw;
-						packedUp["TZ_COMP_JYFW_ENG_"+(num-startFrom)] = currentObj.work_fwyw;
-						packedUp["TZ_COMP_NATURE_"+(num-startFrom)] = currentObj.work_xz;
-						packedUp["TZ_WORK_CONT_"+(num-startFrom)] = currentObj.work_nr;
+					function packUp(packedUp, currentObj, num){
+						packedUp["TZ_STA_DT_"+num] = currentObj.work_kssj;
+						packedUp["TZ_END_DT_"+num] = currentObj.work_jssj;
+						packedUp["TZ_COMP_CNAME_"+num] = currentObj.work_zwm;
+						packedUp["TZ_COMP_ENAME_"+num] = currentObj.work_ywm;
+						packedUp["TZ_BLT_DEPT_"+num] = currentObj.work_bmzw;
+						packedUp["TZ_BLT_DEPT_EN_"+num] = currentObj.work_bmyw;
+						packedUp["TZ_JOB_POSITION_"+num] = currentObj.work_zwzw;
+						packedUp["TZ_JOB_POSITION_EN_"+num] = currentObj.work_zwyw;
+						packedUp["TZ_MBABLT_INDUSTRY_"+num] = currentObj.work_hy;
+						packedUp["TZ_COMP_JYFW_"+num] = currentObj.work_fwzw;
+						packedUp["TZ_COMP_JYFW_ENG_"+num] = currentObj.work_fwyw;
+						packedUp["TZ_COMP_NATURE_"+num] = currentObj.work_xz;
+						packedUp["TZ_WORK_CONT_"+num] = currentObj.work_nr;
 					}
 					
 					$scope.saveWork = function(){
+						if (!$scope.dataReady) {
+							alert('请等待数据加载完成之后再保存');
+							return;
+						}
+						
 						var postData = {};
 						postData["NUMBER_WORK"]=0;
 						
 						var works = $.extend(true, {}, $scope.workList);
 						var startFrom = $scope.savedNumber;
-						var count = $scope.savedNumber;
-						while(works[count]) packUp(postData,works[count],++count, startFrom);
-						postData["NUMBER_WORK"]=count - $scope.savedNumber;
+						var count = 0;
+						while(works[count + startFrom]) packUp(postData,works[count + startFrom],++count);
+						postData["NUMBER_WORK"]=count;
 
 						/* post */
 						PersonalInfoInterface.updateWorkBackground(postData, function(){;});
@@ -1640,22 +1390,33 @@
 						delayOpenDialogBy100('imgBox_WorkBackground');
 					};
 					
-					function delayOpenDialogBy100(name){
-						setTimeout(function(){
-							fastBind($(".industry_class").parent());
-							fastBind($(".nature_class").parent());
-							openDialog(name);
-						}, 100);
-					}
-					
-					function openDialog(name){
-						easyDialog.open({
-							container : name,
-							yesFn : btnFn,
-							noFn : true,
-							fixed : false
-						});
-					}
+					$scope.$on('newWorkLoaded', function(){
+						var wl = $scope.workList;
+						/* why we do this ? because the browser is so smart than it will not render tab4 until use want to see it, so we just get the p.height of 0 !!! */
+						showTab('yq_xxk','con','tit',4);
+						for (var i = wl.length-1; i >= 0; i--){
+							if (wl[i]["heightFixed"]) break;
+							
+							/* compare the same line , use bigger height */
+							$(".works_one_list").eq(i).find(".wol_lite_right").each(function(i){
+								var prevSib = $(this).prev(".wol_lite");
+								var hr = $(this).find("p").height();
+								var hl = prevSib.find("p").height();
+								if (hr < hl){
+									$(this).css("height", (hl + 10) + "px");
+									prevSib.css("height", (hl + 10) + "px");
+								} else if (hr > hl){
+									$(this).css("height", (hr + 10) + "px");
+									prevSib.css("height", (hr + 10) + "px");
+								}
+							});
+							$scope.workList[i].heightFixed = true;
+						}
+						if (!$scope.heightFixedOnInit){
+							showTab('yq_xxk','con','tit',1);
+							$scope.heightFixedOnInit = true;
+						}
+					});
 					
 				}
 			);
