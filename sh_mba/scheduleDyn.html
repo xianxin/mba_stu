@@ -573,10 +573,10 @@
 			$scope.openCourseTime = function(index){
 				var courseTimeData = $scope.studentSchedule.courseList[index].courseTime;
 				$scope.theCourseTime = courseTimeData;
-				delayOpenDialogBy10("imgBox_CourseTime");
+				delayOpenDialogBy100("imgBox_CourseTime");
 				setTimeout(function(){
 					$("#imgBox_CourseTime").parent().css("margin-left","-240px");
-				},30);
+				},130);
 			}
 		}
 	);
